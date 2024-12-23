@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Questions pour démarrer la journée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-btn {
+            background-color: #4b0082;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .question-btn:focus {
+            outline: none;
+        }
+
+        /* Modal (boîte de dialogue) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        .modal-content {
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            margin: 15px 0;
+            word-wrap: break-word;
+        }
+
+        .modal-content button {
+            background-color: #9b4bcd;
+            color: white;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #4b0082;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Message de copie */
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-btn {
+                padding: 14px;
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>100 questions pour la faire tomber amoureuse de toi</h1>
+
+    <div class="question-container">
+        <!-- List of questions -->
+        <button class="question-btn" onclick="showModal('question1')">Qu'est-ce qui te fait sourire immédiatement, même après une longue journée ? </button>
+        <button class="question-btn" onclick="showModal('question2')">Quel est le plus beau compliment que l'on puisse te faire, à part sur ton apparence ? </button>
+        <button class="question-btn" onclick="showModal('question3')">Si tu pouvais passer une journée avec une personne que tu admires, qui serait-ce et pourquoi ? </button>
+        <button class="question-btn" onclick="showModal('question4')">Quel est ton plus grand rêve, celui que tu n'oses peut-être pas dire à voix haute ? </button>
+        <button class="question-btn" onclick="showModal('question5')">Quand tu penses à ton futur, comment tu t’imagines dans 5 ou 10 ans ? </button>
+        <button class="question-btn" onclick="showModal('question6')">Est-ce que tu crois à l'âme sœur ? Si oui, qu'est-ce que cela signifie pour toi ? </button>
+        <button class="question-btn" onclick="showModal('question7')">Qu’est-ce qui te fait te sentir aimée et appréciée dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question8')">Quel est le geste romantique le plus beau que l’on puisse faire pour toi ? </button>
+        <button class="question-btn" onclick="showModal('question9')">Qu'est-ce qui te ferait tomber sous le charme d’un homme ? </button>
+        <button class="question-btn" onclick="showModal('question10')">Si tu devais choisir un endroit magique pour passer du temps en amoureux, où irais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question11')">Qu'est-ce que tu aimerais qu’on fasse ensemble dans un an ? </button>
+        <button class="question-btn" onclick="showModal('question12')">Quand tu penses à l’amour, quelle est la première image qui te vient à l’esprit ? </button>
+        <button class="question-btn" onclick="showModal('question13')">Quelle est la chose la plus importante pour toi dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question14')">Est-ce que tu préfères vivre des aventures imprévues ou avoir un futur bien planifié ? </button>
+        <button class="question-btn" onclick="showModal('question15')">Quand tu te sens proche de quelqu’un, qu’est-ce qui te fait vraiment t'ouvrir à lui ? </button>
+        <button class="question-btn" onclick="showModal('question16')">Quelle est ta plus belle expérience amoureuse jusqu’à maintenant ? </button>
+        <button class="question-btn" onclick="showModal('question17')">Qu’est-ce que tu recherches vraiment chez un partenaire, au-delà de l’attirance physique ? </button>
+        <button class="question-btn" onclick="showModal('question18')">Comment tu vois l’amour dans une relation à long terme ? Qu’est-ce qui selon toi est essentiel pour la maintenir ? </button>
+        <button class="question-btn" onclick="showModal('question19')">Quelle est ta vision d'un couple parfait ? </button>
+        <button class="question-btn" onclick="showModal('question20')">Comment un homme peut-il vraiment te faire sentir spéciale, au-delà des mots ? </button>
+        <button class="question-btn" onclick="showModal('question21')">Qu’est-ce qui te fait vraiment fondre chez un homme, même si c’est juste un petit détail ? </button>
+        <button class="question-btn" onclick="showModal('question22')">Qu'est-ce que tu aimerais qu'un homme fasse pour te montrer qu’il tient à toi ? </button>
+        <button class="question-btn" onclick="showModal('question23')">Comment réagis-tu quand tu rencontres quelqu'un de vraiment spécial ? </button>
+        <button class="question-btn" onclick="showModal('question24')">Qu’est-ce que tu penses qu’il faut pour que deux personnes restent amoureuses, même après des années ? </button>
+        <button class="question-btn" onclick="showModal('question25')">Quelle est ta plus grande peur par rapport à une relation amoureuse ? </button>
+        <button class="question-btn" onclick="showModal('question26')">Est-ce que tu as déjà ressenti une connexion instantanée avec quelqu'un ? </button>
+        <button class="question-btn" onclick="showModal('question27')">Qu'est-ce qui te fait sentir en confiance avec quelqu'un ? </button>
+        <button class="question-btn" onclick="showModal('question28')">Si tu pouvais vivre une expérience romantique de film, comment elle se déroulerait ? </button>
+        <button class="question-btn" onclick="showModal('question29')">Qu’est-ce qui fait, selon toi, qu’une relation devient vraiment profonde et significative ? </button>
+        <button class="question-btn" onclick="showModal('question30')">Qu'est-ce qui te ferait te sentir incroyablement spéciale dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question31')">Qu'est-ce qui est important pour toi lors de tes premières rencontres avec quelqu’un ? </button>
+        <button class="question-btn" onclick="showModal('question32')">Si tu devais me dire ce que tu ressens, comment me le dirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question33')">Qu'est-ce qui te ferait hésiter à t'engager dans une relation sérieuse ? </button>
+        <button class="question-btn" onclick="showModal('question34')">Comment tu te vois dans une relation à long terme, et qu’est-ce que tu voudrais apporter à celle-ci ? </button>
+        <button class="question-btn" onclick="showModal('question35')">Qu’est-ce qui est selon toi le plus important à construire avec quelqu’un avant de se dire "je t’aime" ? </button>
+        <button class="question-btn" onclick="showModal('question36')">Est-ce que tu crois que l’amour peut vraiment changer une personne ? </button>
+        <button class="question-btn" onclick="showModal('question37')">Si tu devais décrire ton amour idéal, comment tu le décrirais ? </button>
+        <button class="question-btn" onclick="showModal('question38')">Est-ce que tu préfères les surprises ou avoir une idée claire de ce que l’on va faire ensemble ? </button>
+        <button class="question-btn" onclick="showModal('question39')">Quel genre de moments te fait te sentir le plus proche de quelqu'un ? </button>
+        <button class="question-btn" onclick="showModal('question40')">Quelle est la chose la plus importante que tu recherches dans une personne pour que tu veuilles passer toute ta vie avec elle ? </button>
+        <button class="question-btn" onclick="showModal('question41')">Qu’est-ce qui t'attire le plus chez quelqu’un au-delà de l’apparence ? </button>
+        <button class="question-btn" onclick="showModal('question42')">Est-ce que tu penses que l'amour peut commencer par une simple conversation ? </button>
+        <button class="question-btn" onclick="showModal('question43')">Qu’est-ce qui te fait te sentir protégée et en sécurité dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question44')">Si tu devais définir ce qui te rendrait heureuse dans une relation, qu'est-ce que ce serait ? </button>
+        <button class="question-btn" onclick="showModal('question45')">Si tu étais amoureuse, comment tu voudrais qu’on montre cet amour au quotidien ? </button>
+        <button class="question-btn" onclick="showModal('question46')">Qu’est-ce qui, selon toi, est la plus belle façon de dire "je t’aime" ? </button>
+        <button class="question-btn" onclick="showModal('question47')">Quand tu penses à l'avenir, avec qui aimerais-tu le partager ? </button>
+        <button class="question-btn" onclick="showModal('question48')">Quel est ton plus grand désir quand tu te projettes dans l’avenir ? </button>
+        <button class="question-btn" onclick="showModal('question49')">Qu’est-ce qui te fait croire qu’une relation pourrait vraiment durer pour toujours ? </button>
+        <button class="question-btn" onclick="showModal('question50')">Quelles petites attentions te touchent le plus dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question51')">Est-ce que tu te vois dans une relation sérieuse, et quel genre de partenaire imagines-tu avoir ? </button>
+        <button class="question-btn" onclick="showModal('question52')">Qu’est-ce qui fait selon toi que l’on sait que l’on est amoureux ? </button>
+        <button class="question-btn" onclick="showModal('question53')">Si tu pouvais passer toute ta vie à explorer une seule chose, ce serait quoi ? </button>
+        <button class="question-btn" onclick="showModal('question54')">Qu’est-ce qui te rend heureuse dans une relation même dans les petits moments du quotidien ? </button>
+        <button class="question-btn" onclick="showModal('question55')">Quand tu te laisses aller à la rêverie, quel genre de futur imagines-tu pour toi et une personne spéciale ? </button>
+        <button class="question-btn" onclick="showModal('question56')">Qu’est-ce que tu aimerais que quelqu’un sache avant de te connaître plus profondément ? </button>
+        <button class="question-btn" onclick="showModal('question57')">Si tu devais partager une passion avec quelqu’un de spécial, qu’est-ce que ce serait ? </button>
+        <button class="question-btn" onclick="showModal('question58')">Qu’est-ce qui te ferait te sentir incroyablement valorisée et aimée dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question59')">Quelle est la chose qui te fait perdre ton cœur, même sans t’en rendre compte ? </button>
+        <button class="question-btn" onclick="showModal('question60')">Qu’est-ce qui, selon toi, fait qu’une relation peut devenir le "meilleur voyage de toute une vie" ? </button>
+        <button class="question-btn" onclick="showModal('question61')">Est-ce que tu crois qu’on peut savoir immédiatement quand quelqu’un est fait pour toi ? </button>
+        <button class="question-btn" onclick="showModal('question62')">Si tu pouvais décrire ton amour idéal, ce serait une aventure ou une stabilité confortable ? </button>
+        <button class="question-btn" onclick="showModal('question63')">Quel est le souvenir qui te réchauffe le cœur à chaque fois que tu y penses ? </button>
+        <button class="question-btn" onclick="showModal('question64')">Quelle est la chose que tu aimerais faire avec un partenaire que tu n’as jamais faite ? </button>
+        <button class="question-btn" onclick="showModal('question65')">Comment définirais-tu la complicité dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question66')">Quelle est la chose que tu veux absolument faire avec quelqu’un qui te fait vibrer ? </button>
+        <button class="question-btn" onclick="showModal('question67')">Qu’est-ce qui, selon toi, définit un amour profond et inébranlable ? </button>
+        <button class="question-btn" onclick="showModal('question68')">Quel est ton plus grand rêve d’amour que tu n’as jamais osé dire ? </button>
+        <button class="question-btn" onclick="showModal('question69')">Quand tu penses à ton avenir, quelle est la chose la plus importante pour toi ? </button>
+        <button class="question-btn" onclick="showModal('question70')">Si tu avais la possibilité de vivre ta meilleure vie amoureuse, à quoi cela ressemblerait-il ? </button>
+        <button class="question-btn" onclick="showModal('question71')">Qu’est-ce que tu crois qu'il faut pour vraiment faire durer l’amour ? </button>
+        <button class="question-btn" onclick="showModal('question72')">Est-ce que tu imagines déjà ton mariage, ou tu préfères que cela vienne naturellement ? </button>
+        <button class="question-btn" onclick="showModal('question73')">Quelle serait ta réaction si je te disais que j'aimerais être celui qui t’accompagne à travers tous tes rêves ? </button>
+        <button class="question-btn" onclick="showModal('question74')">Qu’est-ce qui te fait sourire même quand tu te sens un peu perdue ? </button>
+        <button class="question-btn" onclick="showModal('question75')">Qu'est-ce qui te ferait te sentir vraiment comprise et aimée dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question76')">Quelle est la qualité que tu recherches en premier chez un homme que tu aimerais rendre heureux ? </button>
+        <button class="question-btn" onclick="showModal('question77')">Qu’est-ce qui te ferait fondre en un clin d'œil, même si tu es dure à impressionner ? </button>
+        <button class="question-btn" onclick="showModal('question78')">Si tu devais choisir une qualité parfaite chez un partenaire, laquelle serait-ce ? </button>
+        <button class="question-btn" onclick="showModal('question79')">Qu’est-ce qui te fait vraiment te sentir proche de quelqu’un ? </button>
+        <button class="question-btn" onclick="showModal('question80')">Quand tu penses à ton partenaire idéal, qu’est-ce qu’il devrait absolument avoir ? </button>
+        <button class="question-btn" onclick="showModal('question81')">Quel type d’amour te semble le plus sincère et authentique pour toi ? </button>
+        <button class="question-btn" onclick="showModal('question82')">Quand tu es amoureuse, comment te comportes-tu ? </button>
+        <button class="question-btn" onclick="showModal('question83')">Qu’est-ce qui, selon toi, fait qu’une relation est vraiment épanouissante ? </button>
+        <button class="question-btn" onclick="showModal('question84')">Si tu devais décrire ce que tu recherches dans un homme, quelles seraient les trois qualités essentielles ? </button>
+        <button class="question-btn" onclick="showModal('question85')">Qu’est-ce qui te fait vraiment sentir à l’aise et heureuse dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question86')">Qu’est-ce qui, selon toi, est la clé pour vivre une relation saine et joyeuse ? </button>
+        <button class="question-btn" onclick="showModal('question87')">Si tu pouvais offrir un moment spécial à quelqu’un, ce serait quoi ? </button>
+        <button class="question-btn" onclick="showModal('question88')">Qu’est-ce qui te ferait sourire sans que tu t’en rendes compte ? </button>
+        <button class="question-btn" onclick="showModal('question89')">Quand tu te vois dans le futur, quel rôle imagines-tu pour quelqu’un de spécial à tes côtés ? </button>
+        <button class="question-btn" onclick="showModal('question90')">Qu’est-ce qui te ferait te sentir honorée et appréciée ? </button>
+        <button class="question-btn" onclick="showModal('question91')">Quelle est la plus belle chose que tu voudrais qu’on fasse pour toi ? </button>
+        <button class="question-btn" onclick="showModal('question92')">Si tu pouvais décrire ton homme idéal, comment il serait ? </button>
+        <button class="question-btn" onclick="showModal('question93')">Si je te demandais de me décrire en trois mots, quels seraient-ils ? </button>
+        <button class="question-btn" onclick="showModal('question94')">Qu’est-ce qui te fait sentir que tu pourrais aimer quelqu’un pour toujours ? </button>
+        <button class="question-btn" onclick="showModal('question95')">Quand tu imagines ta vie dans quelques années, quelle place aimerais-tu que j'y aie ? </button>
+        <button class="question-btn" onclick="showModal('question96')">Quelle est la chose la plus tendre que tu voudrais qu’un homme fasse pour toi ? </button>
+        <button class="question-btn" onclick="showModal('question97')">Qu’est-ce qui te ferait te sentir plus proche de quelqu’un ? </button>
+        <button class="question-btn" onclick="showModal('question98')">Si tu te projetais à long terme, qu'est-ce qui te rendrait heureuse dans une relation ? </button>
+        <button class="question-btn" onclick="showModal('question99')">Qu'est-ce qui te donne envie de donner de l'amour à quelqu'un ? </button>
+        <button class="question-btn" onclick="showModal('question100')">Quand tu penses à un futur amoureux, qu’est-ce qui t’inspire le plus ? </button>
+    </div>
+
+    <!-- Modal (Boîte de dialogue pour afficher chaque question) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Question du jour</h2>
+            <p id="questionText"></p>
+            <div class="button-container">
+                <button onclick="closeModal()">Fermer</button>
+                <button onclick="copyQuestion()">Copier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message de copie -->
+    <div id="copyMessage" class="copy-message">
+        Question copiée dans le presse-papier !
+    </div>
+
+    <script>
+        // Liste des questions
+        const questions = {
+    question1: "Qu'est-ce qui te fait sourire immédiatement, même après une longue journée ?",
+    question2: "Quel est le plus beau compliment que l'on puisse te faire, à part sur ton apparence ?",
+    question3: "Si tu pouvais passer une journée avec une personne que tu admires, qui serait-ce et pourquoi ?",
+    question4: "Quel est ton plus grand rêve, celui que tu n'oses peut-être pas dire à voix haute ?",
+    question5: "Quand tu penses à ton futur, comment tu t’imagines dans 5 ou 10 ans ?",
+    question6: "Est-ce que tu crois à l'âme sœur ? Si oui, qu'est-ce que cela signifie pour toi ?",
+    question7: "Qu’est-ce qui te fait te sentir aimée et appréciée dans une relation ?",
+    question8: "Quel est le geste romantique le plus beau que l’on puisse faire pour toi ?",
+    question9: "Qu'est-ce qui te ferait tomber sous le charme d’un homme ?",
+    question10: "Si tu devais choisir un endroit magique pour passer du temps en amoureux, où irais-tu ?",
+    question11: "Qu'est-ce que tu aimerais qu’on fasse ensemble dans un an ?",
+    question12: "Quand tu penses à l’amour, quelle est la première image qui te vient à l’esprit ?",
+    question13: "Quelle est la chose la plus importante pour toi dans une relation ?",
+    question14: "Est-ce que tu préfères vivre des aventures imprévues ou avoir un futur bien planifié ?",
+    question15: "Quand tu te sens proche de quelqu’un, qu’est-ce qui te fait vraiment t'ouvrir à lui ?",
+    question16: "Quelle est ta plus belle expérience amoureuse jusqu’à maintenant ?",
+    question17: "Qu’est-ce que tu recherches vraiment chez un partenaire, au-delà de l’attirance physique ?",
+    question18: "Comment tu vois l’amour dans une relation à long terme ? Qu’est-ce qui selon toi est essentiel pour la maintenir ?",
+    question19: "Quelle est ta vision d'un couple parfait ?",
+    question20: "Comment un homme peut-il vraiment te faire sentir spéciale, au-delà des mots ?",
+    question21: "Qu’est-ce qui te fait vraiment fondre chez un homme, même si c’est juste un petit détail ?",
+    question22: "Qu'est-ce que tu aimerais qu'un homme fasse pour te montrer qu’il tient à toi ?",
+    question23: "Comment réagis-tu quand tu rencontres quelqu'un de vraiment spécial ?",
+    question24: "Qu’est-ce que tu penses qu’il faut pour que deux personnes restent amoureuses, même après des années ?",
+    question25: "Quelle est ta plus grande peur par rapport à une relation amoureuse ?",
+    question26: "Est-ce que tu as déjà ressenti une connexion instantanée avec quelqu'un ?",
+    question27: "Qu'est-ce qui te fait sentir en confiance avec quelqu'un ?",
+    question28: "Si tu pouvais vivre une expérience romantique de film, comment elle se déroulerait ?",
+    question29: "Qu’est-ce qui fait, selon toi, qu’une relation devient vraiment profonde et significative ?",
+    question30: "Qu'est-ce qui te ferait te sentir incroyablement spéciale dans une relation ?",
+    question31: "Qu'est-ce qui est important pour toi lors de tes premières rencontres avec quelqu’un ?",
+    question32: "Si tu devais me dire ce que tu ressens, comment me le dirais-tu ?",
+    question33: "Qu'est-ce qui te ferait hésiter à t'engager dans une relation sérieuse ?",
+    question34: "Comment tu te vois dans une relation à long terme, et qu’est-ce que tu voudrais apporter à celle-ci ?",
+    question35: "Qu’est-ce qui est selon toi le plus important à construire avec quelqu’un avant de se dire \"je t’aime\" ?",
+    question36: "Est-ce que tu crois que l’amour peut vraiment changer une personne ?",
+    question37: "Si tu devais décrire ton amour idéal, comment tu le décrirais ?",
+    question38: "Est-ce que tu préfères les surprises ou avoir une idée claire de ce que l’on va faire ensemble ?",
+    question39: "Quel genre de moments te fait te sentir le plus proche de quelqu'un ?",
+    question40: "Quelle est la chose la plus importante que tu recherches dans une personne pour que tu veuilles passer toute ta vie avec elle ?",
+    question41: "Qu’est-ce qui t'attire le plus chez quelqu’un au-delà de l’apparence ?",
+    question42: "Est-ce que tu penses que l'amour peut commencer par une simple conversation ?",
+    question43: "Qu’est-ce qui te fait te sentir protégée et en sécurité dans une relation ?",
+    question44: "Si tu devais définir ce qui te rendrait heureuse dans une relation, qu'est-ce que ce serait ?",
+    question45: "Si tu étais amoureuse, comment tu voudrais qu’on montre cet amour au quotidien ?",
+    question46: "Qu’est-ce qui, selon toi, est la plus belle façon de dire \"je t’aime\" ?",
+    question47: "Quand tu penses à l'avenir, avec qui aimerais-tu le partager ?",
+    question48: "Quel est ton plus grand désir quand tu te projettes dans l’avenir ?",
+    question49: "Qu’est-ce qui te fait croire qu’une relation pourrait vraiment durer pour toujours ?",
+    question50: "Quelles petites attentions te touchent le plus dans une relation ?",
+    question51: "Est-ce que tu te vois dans une relation sérieuse, et quel genre de partenaire imagines-tu avoir ?",
+    question52: "Qu’est-ce qui fait selon toi que l’on sait que l’on est amoureux ?",
+    question53: "Si tu pouvais passer toute ta vie à explorer une seule chose, ce serait quoi ?",
+    question54: "Qu’est-ce qui te rend heureuse dans une relation même dans les petits moments du quotidien ?",
+    question55: "Quand tu te laisses aller à la rêverie, quel genre de futur imagines-tu pour toi et une personne spéciale ?",
+    question56: "Qu’est-ce que tu aimerais que quelqu’un sache avant de te connaître plus profondément ?",
+    question57: "Si tu devais partager une passion avec quelqu’un de spécial, qu’est-ce que ce serait ?",
+    question58: "Qu’est-ce qui te ferait te sentir incroyablement valorisée et aimée dans une relation ?",
+    question59: "Quelle est la chose qui te fait perdre ton cœur, même sans t’en rendre compte ?",
+    question60: "Qu’est-ce qui, selon toi, fait qu’une relation peut devenir le \"meilleur voyage de toute une vie\" ?",
+    question61: "Est-ce que tu crois qu’on peut savoir immédiatement quand quelqu’un est fait pour toi ?",
+    question62: "Si tu pouvais décrire ton amour idéal, ce serait une aventure ou une stabilité confortable ?",
+    question63: "Quel est le souvenir qui te réchauffe le cœur à chaque fois que tu y penses ?",
+    question64: "Quelle est la chose que tu aimerais faire avec un partenaire que tu n’as jamais faite ?",
+    question65: "Comment définirais-tu la complicité dans une relation ?",
+    question66: "Quelle est la chose que tu veux absolument faire avec quelqu’un qui te fait vibrer ?",
+    question67: "Qu’est-ce qui, selon toi, définit un amour profond et inébranlable ?",
+    question68: "Quel est ton plus grand rêve d’amour que tu n’as jamais osé dire ?",
+    question69: "Quand tu penses à ton avenir, quelle est la chose la plus importante pour toi ?",
+    question70: "Si tu avais la possibilité de vivre ta meilleure vie amoureuse, à quoi cela ressemblerait-il ?",
+    question71: "Qu’est-ce que tu crois qu'il faut pour vraiment faire durer l’amour ?",
+    question72: "Est-ce que tu imagines déjà ton mariage, ou tu préfères que cela vienne naturellement ?",
+    question73: "Quelle serait ta réaction si je te disais que j'aimerais être celui qui t’accompagne à travers tous tes rêves ?",
+    question74: "Qu’est-ce qui te fait sourire même quand tu te sens un peu perdue ?",
+    question75: "Qu'est-ce qui te ferait te sentir vraiment comprise et aimée dans une relation ?",
+    question76: "Quelle est la qualité que tu recherches en premier chez un homme que tu aimerais rendre heureux ?",
+    question77: "Qu’est-ce qui te ferait fondre en un clin d'œil, même si tu es dure à impressionner ?",
+    question78: "Si tu devais choisir une qualité parfaite chez un partenaire, laquelle serait-ce ?",
+    question79: "Qu’est-ce qui te fait vraiment te sentir proche de quelqu’un ?",
+    question80: "Quand tu penses à ton partenaire idéal, qu’est-ce qu’il devrait absolument avoir ?",
+    question81: "Quel type d’amour te semble le plus sincère et authentique pour toi ?",
+    question82: "Quand tu es amoureuse, comment te comportes-tu ?",
+    question83: "Qu’est-ce qui, selon toi, fait qu’une relation est vraiment épanouissante ?",
+    question84: "Si tu devais décrire ce que tu recherches dans un homme, quelles seraient les trois qualités essentielles ?",
+    question85: "Qu’est-ce qui te fait vraiment sentir à l’aise et heureuse dans une relation ?",
+    question86: "Qu’est-ce qui, selon toi, est la clé pour vivre une relation saine et joyeuse ?",
+    question87: "Si tu pouvais offrir un moment spécial à quelqu’un, ce serait quoi ?",
+    question88: "Qu’est-ce qui te ferait sourire sans que tu t’en rendes compte ?",
+    question89: "Quand tu te vois dans le futur, quel rôle imagines-tu pour quelqu’un de spécial à tes côtés ?",
+    question90: "Qu’est-ce qui te ferait te sentir honorée et appréciée ?",
+    question91: "Quelle est la plus belle chose que tu voudrais qu’on fasse pour toi ?",
+    question92: "Si tu pouvais décrire ton homme idéal, comment il serait ?",
+    question93: "Si je te demandais de me décrire en trois mots, quels seraient-ils ?",
+    question94: "Qu’est-ce qui te fait sentir que tu pourrais aimer quelqu’un pour toujours ?",
+    question95: "Quand tu imagines ta vie dans quelques années, quelle place aimerais-tu que j'y aie ?",
+    question96: "Quelle est la chose la plus tendre que tu voudrais qu’un homme fasse pour toi ?",
+    question97: "Qu’est-ce qui te ferait te sentir plus proche de quelqu’un ?",
+    question98: "Si tu te projetais à long terme, qu'est-ce qui te rendrait heureuse dans une relation ?",
+    question99: "Qu'est-ce qui te donne envie de donner de l'amour à quelqu'un ?",
+    question100: "Quand tu penses à un futur amoureux, qu’est-ce qui t’inspire le plus ?"
+};
+
+
+        // Afficher la modale avec la question correspondante
+        function showModal(questionId) {
+            document.getElementById('questionText').innerText = questions[questionId];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Copier la question dans le presse-papier
+        function copyQuestion() {
+            const text = document.getElementById('questionText').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                document.getElementById('copyMessage').style.display = "block";
+                setTimeout(function() {
+                    document.getElementById('copyMessage').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

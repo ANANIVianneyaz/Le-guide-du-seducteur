@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Questions pour démarrer la journée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-btn {
+            background-color: #4b0082;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .question-btn:focus {
+            outline: none;
+        }
+
+        /* Modal (boîte de dialogue) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        .modal-content {
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            margin: 15px 0;
+            word-wrap: break-word;
+        }
+
+        .modal-content button {
+            background-color: #9b4bcd;
+            color: white;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #4b0082;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Message de copie */
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-btn {
+                padding: 14px;
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>100 questions pour la taquiner côté amusement</h1>
+
+    <div class="question-container">
+        <!-- List of questions -->
+        <button class="question-btn" onclick="showModal('question1')">Si tu étais un super-héros, quel serait ton pouvoir et pourquoi ? (Je parie que ce serait un pouvoir pour m’embêter !) </button>
+        <button class="question-btn" onclick="showModal('question2')">Qu’est-ce que tu ferais si je te volais un baiser sans prévenir ? </button>
+        <button class="question-btn" onclick="showModal('question3')">Si tu devais me donner un surnom rigolo, lequel tu choisirais ? </button>
+        <button class="question-btn" onclick="showModal('question4')">Tu préfères être une ninja ou un détective ? Parce que je parie que tu serais la ninja la plus mignonne. </button>
+        <button class="question-btn" onclick="showModal('question5')">Quel est ton talent caché que je ne connais pas encore ? </button>
+        <button class="question-btn" onclick="showModal('question6')">Si tu étais un animal, lequel serais-tu ? Et comment je pourrais t'apprivoiser ? </button>
+        <button class="question-btn" onclick="showModal('question7')">Quelle est la chose la plus embarrassante qui te soit arrivée, mais dont tu rigoles aujourd’hui ? </button>
+        <button class="question-btn" onclick="showModal('question8')">Si on faisait un pari et que je gagnais, quelle "punition" tu serais prête à subir ? </button>
+        <button class="question-btn" onclick="showModal('question9')">Si je te disais que tu as un sourire qui peut rendre n’importe qui fou, comment tu réagirais ? </button>
+        <button class="question-btn" onclick="showModal('question10')">Quel est ton défaut secret que tu veux me dévoiler ? (J’espère que c’est un petit défaut mignon !) </button>
+        <button class="question-btn" onclick="showModal('question11')">Si tu devais choisir entre me donner ton chocolat préféré ou me donner une claque amicale, tu choisirais quoi ? </button>
+        <button class="question-btn" onclick="showModal('question12')">Est-ce que tu es du genre à dire "je suis trop fatiguée" juste pour éviter un plan que tu n’aimes pas ? </button>
+        <button class="question-btn" onclick="showModal('question13')">Si tu devais chanter une chanson en public, laquelle choisirais-tu ? (Je parie que tu serais incroyable même avec une chanson ridicule !) </button>
+        <button class="question-btn" onclick="showModal('question14')">Quel est le truc le plus étrange que tu aies fait par pure curiosité ? </button>
+        <button class="question-btn" onclick="showModal('question15')">Si tu pouvais échanger de corps avec quelqu’un pour une journée, qui choisirais-tu et pourquoi ? </button>
+        <button class="question-btn" onclick="showModal('question16')">Si je te donnais un rôle dans un film d’action, quel serait ton rôle et quel serait ton arme secrète ? </button>
+        <button class="question-btn" onclick="showModal('question17')">Est-ce que tu es plus du genre à perdre ton téléphone ou tes clés ? </button>
+        <button class="question-btn" onclick="showModal('question18')">Si tu étais une super-méchante dans un film, quel serait ton plan diabolique ? </button>
+        <button class="question-btn" onclick="showModal('question19')">Est-ce que tu te considères comme une bonne cuisinière ou tu préfères appeler une pizza ? </button>
+        <button class="question-btn" onclick="showModal('question20')">Si tu devais me donner un super-pouvoir, ce serait quoi et pourquoi ? (J’espère que ça ne serait pas pour me rendre plus taquin !) </button>
+        <button class="question-btn" onclick="showModal('question21')">Quel est ton pêché mignon que tu ne veux absolument pas que quelqu’un sache ? </button>
+        <button class="question-btn" onclick="showModal('question22')">Si tu pouvais être un personnage de dessin animé, lequel serais-tu et pourquoi ? </button>
+        <button class="question-btn" onclick="showModal('question23')">Si tu devais me décrire comme un personnage de film, comment me décrirais-tu ? (Je parie que tu dirais "très charismatique" !) </button>
+        <button class="question-btn" onclick="showModal('question24')">Tu préfères être surprise avec une déclaration romantique ou une blague drôle ? (Je peux très bien faire les deux, tu sais !) </button>
+        <button class="question-btn" onclick="showModal('question25')">Si tu devais me donner un défi absurde à faire, ce serait quoi ? </button>
+        <button class="question-btn" onclick="showModal('question26')">Si tu devais choisir entre des vacances à la plage ou une expédition dans la neige, tu choisis quoi ? (Je parie que tu as une préférence secrète !) </button>
+        <button class="question-btn" onclick="showModal('question27')">Si je te disais que je t’ai battue à un jeu, comment réagirais-tu ? (Tu ferais semblant de ne pas être jalouse, je parie !) </button>
+        <button class="question-btn" onclick="showModal('question28')">Quelle est la chose la plus ridicule que tu aies jamais achetée ? </button>
+        <button class="question-btn" onclick="showModal('question29')">Quel est ton plus grand talent secret que tu n’as jamais montré à personne ? </button>
+        <button class="question-btn" onclick="showModal('question30')">Si tu pouvais rencontrer un extraterrestre, quel genre de questions tu lui poserais ? </button>
+        <button class="question-btn" onclick="showModal('question31')">Si je te proposais de faire une soirée pyjama, mais en mode compétition de films de peur, tu accepterais ? </button>
+        <button class="question-btn" onclick="showModal('question32')">Quel est le dernier truc drôle qui t’a fait éclater de rire, mais que personne ne comprendrait ? </button>
+        <button class="question-btn" onclick="showModal('question33')">Est-ce que tu as déjà essayé de danser comme dans un clip vidéo et que tu t'es sentie ridicule ? </button>
+        <button class="question-btn" onclick="showModal('question34')">Si tu pouvais être un expert en n’importe quoi instantanément, qu’est-ce que tu choisirais ? </button>
+        <button class="question-btn" onclick="showModal('question35')">Si je te disais qu’on doit faire une course en sac ensemble, tu te sens prête à me battre ? </button>
+        <button class="question-btn" onclick="showModal('question36')">Est-ce que tu as un mot ou une expression que tu utilises tout le temps et que tu ne réalises même pas ? </button>
+        <button class="question-btn" onclick="showModal('question37')">Quelle est ta plus grande phobie, mais une phobie tellement ridicule que ça me ferait rire ? </button>
+        <button class="question-btn" onclick="showModal('question38')">Si je te disais que je suis le meilleur en blagues nulles, tu me croirais ? </button>
+        <button class="question-btn" onclick="showModal('question39')">Est-ce que tu as déjà eu un moment où tu as fait une gaffe énorme et tu n’as pas pu t’arrêter de rire ? </button>
+        <button class="question-btn" onclick="showModal('question40')">Si tu étais le/la chef d’un pays imaginaire, quelle règle étrange tu imposerais à tout le monde ? </button>
+        <button class="question-btn" onclick="showModal('question41')">Quel est ton surnom enfant que tu détestais, mais que tu te souviens avec nostalgie maintenant ? </button>
+        <button class="question-btn" onclick="showModal('question42')">Si je t’amenais à un match de foot, tu crierais pour l’équipe ou tu resterais calme ? </button>
+        <button class="question-btn" onclick="showModal('question43')">Est-ce que tu t'es déjà retrouvée dans une situation où tu ne pouvais pas t’arrêter de rire, mais tu devais garder ton sérieux ? </button>
+        <button class="question-btn" onclick="showModal('question44')">Si on se retrouvait coincés dans un ascenseur, qu’est-ce que tu ferais pour garder l’ambiance fun ? </button>
+        <button class="question-btn" onclick="showModal('question45')">Quel est ton film d'horreur préféré, mais que tu adores regarder même en ayant peur ? </button>
+        <button class="question-btn" onclick="showModal('question46')">Si tu devais me faire une surprise, mais complètement inattendue, ce serait quoi ? </button>
+        <button class="question-btn" onclick="showModal('question47')">Si on se déguisait pour Halloween, quel costume tu choisirais pour moi ? </button>
+        <button class="question-btn" onclick="showModal('question48')">Quelle est la dernière fois que tu as ri à un moment inapproprié, et que tu as dû t'excuser ? </button>
+        <button class="question-btn" onclick="showModal('question49')">Si tu pouvais passer une journée entière à faire ce que tu veux, mais totalement ridicule, qu’est-ce que tu ferais ? </button>
+        <button class="question-btn" onclick="showModal('question50')">Est-ce que tu as déjà eu une "conversation secrète" avec quelqu’un que personne d’autre ne comprenait ? </button>
+        <button class="question-btn" onclick="showModal('question51')">Quel est ton plat le plus bizarre que tu adores manger, même si les autres trouvent ça dégoûtant ? </button>
+        <button class="question-btn" onclick="showModal('question52')">Est-ce que tu es une bonne "perdante" ou tu prends toujours les choses très au sérieux ? </button>
+        <button class="question-btn" onclick="showModal('question53')">Si on faisait un concours de danse ridicule, penses-tu que tu me battras ? </button>
+        <button class="question-btn" onclick="showModal('question54')">Quel est ton talent caché que tu pourrais exploiter pour me surprendre ? </button>
+        <button class="question-btn" onclick="showModal('question55')">Si tu pouvais avoir un animal imaginaire comme compagnon, quel serait-il ? </button>
+        <button class="question-btn" onclick="showModal('question56')">Quelle est ta chanson guilty pleasure que tu écoutes en cachette ? </button>
+        <button class="question-btn" onclick="showModal('question57')">Si tu devais me donner un indice pour un jeu de rôle, mais que ce soit super difficile, quel indice tu donnerais ? </button>
+        <button class="question-btn" onclick="showModal('question58')">Si tu pouvais avoir un super-pouvoir ridicule, ce serait quoi ? </button>
+        <button class="question-btn" onclick="showModal('question59')">Est-ce que tu as déjà fait quelque chose de complètement fou et irréfléchi juste pour le fun ? </button>
+        <button class="question-btn" onclick="showModal('question60')">Si tu devais affronter une situation embarrassante en public, comment tu t’en sortirais avec ton humour ? </button>
+        <button class="question-btn" onclick="showModal('question61')">Si je te demandais de me donner une note sur mon sens de l’humour, quelle serait-elle ? </button>
+        <button class="question-btn" onclick="showModal('question62')">Quel est ton jeu de société préféré, même si tu es la plus mauvaise à y jouer ? </button>
+        <button class="question-btn" onclick="showModal('question63')">Si on devait créer une chanson ridicule ensemble, quel serait le thème ? </button>
+        <button class="question-btn" onclick="showModal('question64')">Quelle est la chose la plus mignonne et ridicule que tu aies faite pour quelqu’un ? </button>
+        <button class="question-btn" onclick="showModal('question65')">Si je te demandais de me donner une note sur ma danse, tu dirais quoi ? </button>
+        <button class="question-btn" onclick="showModal('question66')">Si on avait une compétition de blagues nulles, qui serait la plus drôle entre nous deux ? </button>
+        <button class="question-btn" onclick="showModal('question67')">Quel est ton plus grand moment de gêne, mais tu trouves ça marrant maintenant ? </button>
+        <button class="question-btn" onclick="showModal('question68')">Si on devait faire un challenge ensemble, quel serait le défi le plus drôle à réaliser ? </button>
+        <button class="question-btn" onclick="showModal('question69')">Si tu étais un personnage de manga, comment tu m’agacerais avec ton humour ? </button>
+        <button class="question-btn" onclick="showModal('question70')">Est-ce que tu as déjà essayé de faire des imitations de célébrités et de rater totalement ? </button>
+        <button class="question-btn" onclick="showModal('question71')">Quelle est la blague la plus nulle que tu racontes toujours, même si tout le monde la connaît ? </button>
+        <button class="question-btn" onclick="showModal('question72')">Si je te demandais de me faire une chanson, mais qu’elle soit super ridicule, tu serais partante ? </button>
+        <button class="question-btn" onclick="showModal('question73')">Quelle est la dernière fois que tu t’es faite surprendre dans une situation gênante, mais qui te fait encore rire ? </button>
+        <button class="question-btn" onclick="showModal('question74')">Si tu devais être un personnage de film d’animation, lequel serais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question75')">Est-ce que tu sais quel est mon "talent" le plus ridicule ? </button>
+        <button class="question-btn" onclick="showModal('question76')">Quelle est la pire excuse que tu as donnée pour ne pas faire quelque chose, mais que tu as utilisée ? </button>
+        <button class="question-btn" onclick="showModal('question77')">Si on jouait à un jeu de société, tu choisirais lequel pour me faire perdre ? </button>
+        <button class="question-btn" onclick="showModal('question78')">Si on faisait une bataille de blagues nulles, qui gagnerait ? </button>
+        <button class="question-btn" onclick="showModal('question79')">Si tu avais le pouvoir de transformer n’importe quel objet en une "arme de destruction massive", quel objet choisirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question80')">Si tu devais choisir entre me donner une claque gentille ou un câlin surprise, quel serait ton choix ? </button>
+        <button class="question-btn" onclick="showModal('question81')">Quel est ton plus grand talent que tu te caches à toi-même ? </button>
+        <button class="question-btn" onclick="showModal('question82')">Si tu avais à inventer une danse ridicule, comment ça serait ? </button>
+        <button class="question-btn" onclick="showModal('question83')">Quel est ton film le plus honteux que tu adores malgré tout ? </button>
+        <button class="question-btn" onclick="showModal('question84')">Si je t’embêtais avec une blague stupide, comment tu réagirais ? </button>
+        <button class="question-btn" onclick="showModal('question85')">Est-ce que tu as un talent caché pour les imitations ? </button>
+        <button class="question-btn" onclick="showModal('question86')">Si tu devais créer un super-héros complètement ridicule, à quoi ressemblerait-il ? </button>
+        <button class="question-btn" onclick="showModal('question87')">Quelle est la dernière fois où tu t’es fait surprendre en faisant quelque chose d’étrange ? </button>
+        <button class="question-btn" onclick="showModal('question88')">Quelle est ta plus grande honte, mais qui te fait encore rire aujourd’hui ? </button>
+        <button class="question-btn" onclick="showModal('question89')">Quelle serait la meilleure "punition" pour quelqu’un qui te vole ton dessert ? </button>
+        <button class="question-btn" onclick="showModal('question90')">Si on jouait à un jeu de rôle un peu décalé, quel personnage tu serais ? </button>
+        <button class="question-btn" onclick="showModal('question91')">Quelle est la dernière fois où tu t’es sentie super ridicule, mais tu as adoré ? </button>
+        <button class="question-btn" onclick="showModal('question92')">Quel est ton "super-pouvoir" ridicule que personne ne connaît ? </button>
+        <button class="question-btn" onclick="showModal('question93')">Si tu pouvais créer une règle de jeu complètement absurde, quelle serait-elle ? </button>
+        <button class="question-btn" onclick="showModal('question94')">Si tu étais une super-héroïne de dessin animé, comment tu sauverais le monde ? </button>
+        <button class="question-btn" onclick="showModal('question95')">Quelle est la blague la plus nulle que tu t’es faite raconter, mais que tu as quand même adorée ? </button>
+        <button class="question-btn" onclick="showModal('question96')">Si tu pouvais changer ton prénom pour quelque chose de totalement ridicule, que choisirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question97')">Quelle est la dernière fois où tu as ris tellement fort que tu as fait rire tout le monde ? </button>
+        <button class="question-btn" onclick="showModal('question98')">Si tu devais choisir entre rigoler à une blague nulle ou faire semblant de ne pas comprendre, quel serait ton choix ? </button>
+        <button class="question-btn" onclick="showModal('question99')">Quelle est la chose la plus absurde que tu aies faite et que tu ne regrets pas ? </button>
+        <button class="question-btn" onclick="showModal('question100')">Si on faisait une bataille de compliments ridicules, comment tu me complimenterais ? </button>
+    </div>
+
+    <!-- Modal (Boîte de dialogue pour afficher chaque question) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Question du jour</h2>
+            <p id="questionText"></p>
+            <div class="button-container">
+                <button onclick="closeModal()">Fermer</button>
+                <button onclick="copyQuestion()">Copier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message de copie -->
+    <div id="copyMessage" class="copy-message">
+        Question copiée dans le presse-papier !
+    </div>
+
+    <script>
+        // Liste des questions
+        const questions = {
+    question1: "Si tu étais un super-héros, quel serait ton pouvoir et pourquoi ? (Je parie que ce serait un pouvoir pour m’embêter !)",
+    question2: "Qu’est-ce que tu ferais si je te volais un baiser sans prévenir ?",
+    question3: "Si tu devais me donner un surnom rigolo, lequel tu choisirais ?",
+    question4: "Tu préfères être une ninja ou un détective ? Parce que je parie que tu serais la ninja la plus mignonne.",
+    question5: "Quel est ton talent caché que je ne connais pas encore ?",
+    question6: "Si tu étais un animal, lequel serais-tu ? Et comment je pourrais t'apprivoiser ?",
+    question7: "Quelle est la chose la plus embarrassante qui te soit arrivée, mais dont tu rigoles aujourd’hui ?",
+    question8: "Si on faisait un pari et que je gagnais, quelle \"punition\" tu serais prête à subir ?",
+    question9: "Si je te disais que tu as un sourire qui peut rendre n’importe qui fou, comment tu réagirais ?",
+    question10: "Quel est ton défaut secret que tu veux me dévoiler ? (J’espère que c’est un petit défaut mignon !)",
+    question11: "Si tu devais choisir entre me donner ton chocolat préféré ou me donner une claque amicale, tu choisirais quoi ?",
+    question12: "Est-ce que tu es du genre à dire \"je suis trop fatiguée\" juste pour éviter un plan que tu n’aimes pas ?",
+    question13: "Si tu devais chanter une chanson en public, laquelle choisirais-tu ? (Je parie que tu serais incroyable même avec une chanson ridicule !)",
+    question14: "Quel est le truc le plus étrange que tu aies fait par pure curiosité ?",
+    question15: "Si tu pouvais échanger de corps avec quelqu’un pour une journée, qui choisirais-tu et pourquoi ?",
+    question16: "Si je te donnais un rôle dans un film d’action, quel serait ton rôle et quel serait ton arme secrète ?",
+    question17: "Est-ce que tu es plus du genre à perdre ton téléphone ou tes clés ?",
+    question18: "Si tu étais une super-méchante dans un film, quel serait ton plan diabolique ?",
+    question19: "Est-ce que tu te considères comme une bonne cuisinière ou tu préfères appeler une pizza ?",
+    question20: "Si tu devais me donner un super-pouvoir, ce serait quoi et pourquoi ? (J’espère que ça ne serait pas pour me rendre plus taquin !)",
+    question21: "Quel est ton pêché mignon que tu ne veux absolument pas que quelqu’un sache ?",
+    question22: "Si tu pouvais être un personnage de dessin animé, lequel serais-tu et pourquoi ?",
+    question23: "Si tu devais me décrire comme un personnage de film, comment me décrirais-tu ? (Je parie que tu dirais \"très charismatique\" !)",
+    question24: "Tu préfères être surprise avec une déclaration romantique ou une blague drôle ? (Je peux très bien faire les deux, tu sais !)",
+    question25: "Si tu devais me donner un défi absurde à faire, ce serait quoi ?",
+    question26: "Si tu devais choisir entre des vacances à la plage ou une expédition dans la neige, tu choisis quoi ? (Je parie que tu as une préférence secrète !)",
+    question27: "Si je te disais que je t’ai battue à un jeu, comment réagirais-tu ? (Tu ferais semblant de ne pas être jalouse, je parie !)",
+    question28: "Quelle est la chose la plus ridicule que tu aies jamais achetée ?",
+    question29: "Quel est ton plus grand talent secret que tu n’as jamais montré à personne ?",
+    question30: "Si tu pouvais rencontrer un extraterrestre, quel genre de questions tu lui poserais ?",
+    question31: "Si je te proposais de faire une soirée pyjama, mais en mode compétition de films de peur, tu accepterais ?",
+    question32: "Quel est le dernier truc drôle qui t’a fait éclater de rire, mais que personne ne comprendrait ?",
+    question33: "Est-ce que tu as déjà essayé de danser comme dans un clip vidéo et que tu t'es sentie ridicule ?",
+    question34: "Si tu pouvais être un expert en n’importe quoi instantanément, qu’est-ce que tu choisirais ?",
+    question35: "Si je te disais qu’on doit faire une course en sac ensemble, tu te sens prête à me battre ?",
+    question36: "Est-ce que tu as un mot ou une expression que tu utilises tout le temps et que tu ne réalises même pas ?",
+    question37: "Quelle est ta plus grande phobie, mais une phobie tellement ridicule que ça me ferait rire ?",
+    question38: "Si je te disais que je suis le meilleur en blagues nulles, tu me croirais ?",
+    question39: "Est-ce que tu as déjà eu un moment où tu as fait une gaffe énorme et tu n’as pas pu t’arrêter de rire ?",
+    question40: "Si tu étais le/la chef d’un pays imaginaire, quelle règle étrange tu imposerais à tout le monde ?",
+    question41: "Quel est ton surnom enfant que tu détestais, mais que tu te souviens avec nostalgie maintenant ?",
+    question42: "Si je t’amenais à un match de foot, tu crierais pour l’équipe ou tu resterais calme ?",
+    question43: "Est-ce que tu t'es déjà retrouvée dans une situation où tu ne pouvais pas t’arrêter de rire, mais tu devais garder ton sérieux ?",
+    question44: "Si on se retrouvait coincés dans un ascenseur, qu’est-ce que tu ferais pour garder l’ambiance fun ?",
+    question45: "Quel est ton film d'horreur préféré, mais que tu adores regarder même en ayant peur ?",
+    question46: "Si tu devais me faire une surprise, mais complètement inattendue, ce serait quoi ?",
+    question47: "Si on se déguisait pour Halloween, quel costume tu choisirais pour moi ?",
+    question48: "Quelle est la dernière fois que tu as ri à un moment inapproprié, et que tu as dû t'excuser ?",
+    question49: "Si tu pouvais passer une journée entière à faire ce que tu veux, mais totalement ridicule, qu’est-ce que tu ferais ?",
+    question50: "Est-ce que tu as déjà eu une \"conversation secrète\" avec quelqu’un que personne d’autre ne comprenait ?",
+    question51: "Quel est ton plat le plus bizarre que tu adores manger, même si les autres trouvent ça dégoûtant ?",
+    question52: "Est-ce que tu es une bonne \"perdante\" ou tu prends toujours les choses très au sérieux ?",
+    question53: "Si on faisait un concours de danse ridicule, penses-tu que tu me battras ?",
+    question54: "Quel est ton talent caché que tu pourrais exploiter pour me surprendre ?",
+    question55: "Si tu pouvais avoir un animal imaginaire comme compagnon, quel serait-il ?",
+    question56: "Quelle est ta chanson guilty pleasure que tu écoutes en cachette ?",
+    question57: "Si tu devais me donner un indice pour un jeu de rôle, mais que ce soit super difficile, quel indice tu donnerais ?",
+    question58: "Si tu pouvais avoir un super-pouvoir ridicule, ce serait quoi ?",
+    question59: "Est-ce que tu as déjà fait quelque chose de complètement fou et irréfléchi juste pour le fun ?",
+    question60: "Si tu devais affronter une situation embarrassante en public, comment tu t’en sortirais avec ton humour ?",
+    question61: "Si je te demandais de me donner une note sur mon sens de l’humour, quelle serait-elle ?",
+    question62: "Quel est ton jeu de société préféré, même si tu es la plus mauvaise à y jouer ?",
+    question63: "Si on devait créer une chanson ridicule ensemble, quel serait le thème ?",
+    question64: "Quelle est la chose la plus mignonne et ridicule que tu aies faite pour quelqu’un ?",
+    question65: "Si je te demandais de me donner une note sur ma danse, tu dirais quoi ?",
+    question66: "Si on avait une compétition de blagues nulles, qui serait la plus drôle entre nous deux ?",
+    question67: "Quel est ton plus grand moment de gêne, mais tu trouves ça marrant maintenant ?",
+    question68: "Si on devait faire un challenge ensemble, quel serait le défi le plus drôle à réaliser ?",
+    question69: "Si tu étais un personnage de manga, comment tu m’agacerais avec ton humour ?",
+    question70: "Est-ce que tu as déjà essayé de faire des imitations de célébrités et de rater totalement ?",
+    question71: "Quelle est la blague la plus nulle que tu racontes toujours, même si tout le monde la connaît ?",
+    question72: "Si je te demandais de me faire une chanson, mais qu’elle soit super ridicule, tu serais partante ?",
+    question73: "Quelle est la dernière fois que tu t’es faite surprendre dans une situation gênante, mais qui te fait encore rire ?",
+    question74: "Si tu devais être un personnage de film d’animation, lequel serais-tu ?",
+    question75: "Est-ce que tu sais quel est mon \"talent\" le plus ridicule ?",
+    question76: "Quelle est la pire excuse que tu as donnée pour ne pas faire quelque chose, mais que tu as utilisée ?",
+    question77: "Si on jouait à un jeu de société, tu choisirais lequel pour me faire perdre ?",
+    question78: "Si on faisait une bataille de blagues nulles, qui gagnerait ?",
+    question79: "Si tu avais le pouvoir de transformer n’importe quel objet en une \"arme de destruction massive\", quel objet choisirais-tu ?",
+    question80: "Si tu devais choisir entre me donner une claque gentille ou un câlin surprise, quel serait ton choix ?",
+    question81: "Quel est ton plus grand talent que tu te caches à toi-même ?",
+    question82: "Si tu avais à inventer une danse ridicule, comment ça serait ?",
+    question83: "Quel est ton film le plus honteux que tu adores malgré tout ?",
+    question84: "Si je t’embêtais avec une blague stupide, comment tu réagirais ?",
+    question85: "Est-ce que tu as un talent caché pour les imitations ?",
+    question86: "Si tu devais créer un super-héros complètement ridicule, à quoi ressemblerait-il ?",
+    question87: "Quelle est la dernière fois où tu t’es fait surprendre en faisant quelque chose d’étrange ?",
+    question88: "Quelle est ta plus grande honte, mais qui te fait encore rire aujourd’hui ?",
+    question89: "Quelle serait la meilleure \"punition\" pour quelqu’un qui te vole ton dessert ?",
+    question90: "Si on jouait à un jeu de rôle un peu décalé, quel personnage tu serais ?",
+    question91: "Quelle est la dernière fois où tu t’es sentie super ridicule, mais tu as adoré ?",
+    question92: "Quel est ton \"super-pouvoir\" ridicule que personne ne connaît ?",
+    question93: "Si tu pouvais créer une règle de jeu complètement absurde, quelle serait-elle ?",
+    question94: "Si tu étais une super-héroïne de dessin animé, comment tu sauverais le monde ?",
+    question95: "Quelle est la blague la plus nulle que tu t’es faite raconter, mais que tu as quand même adorée ?",
+    question96: "Si tu pouvais changer ton prénom pour quelque chose de totalement ridicule, que choisirais-tu ?",
+    question97: "Quelle est la dernière fois où tu as ris tellement fort que tu as fait rire tout le monde ?",
+    question98: "Si tu devais choisir entre rigoler à une blague nulle ou faire semblant de ne pas comprendre, quel serait ton choix ?",
+    question99: "Quelle est la chose la plus absurde que tu aies faite et que tu ne regrettes pas ?",
+    question100: "Si on faisait une bataille de compliments ridicules, comment tu me complimenterais ?",
+};
+
+
+        // Afficher la modale avec la question correspondante
+        function showModal(questionId) {
+            document.getElementById('questionText').innerText = questions[questionId];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Copier la question dans le presse-papier
+        function copyQuestion() {
+            const text = document.getElementById('questionText').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                document.getElementById('copyMessage').style.display = "block";
+                setTimeout(function() {
+                    document.getElementById('copyMessage').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

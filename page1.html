@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Questions pour démarrer la journée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-btn {
+            background-color: #4b0082;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .question-btn:focus {
+            outline: none;
+        }
+
+        /* Modal (boîte de dialogue) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        .modal-content {
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            margin: 15px 0;
+            word-wrap: break-word;
+        }
+
+        .modal-content button {
+            background-color: #9b4bcd;
+            color: white;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #4b0082;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Message de copie */
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-btn {
+                padding: 14px;
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>50 Questions pour démarrer la journée</h1>
+
+    <div class="question-container">
+        <!-- List of questions -->
+        <button class="question-btn" onclick="showModal('question1')">1. Qu'est-ce qui te met de bonne humeur dès le matin ?</button>
+        <button class="question-btn" onclick="showModal('question2')">2. Si tu pouvais choisir n'importe quelle destination pour un week-end, où irais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question3')">3. Quel est ton petit-déjeuner préféré ?</button>
+        <button class="question-btn" onclick="showModal('question4')">4. Si tu pouvais vivre n'importe où dans le monde, ce serait où ?</button>
+        <button class="question-btn" onclick="showModal('question5')">5. Qu'est-ce que tu attends le plus de cette journée ?</button>
+        <button class="question-btn" onclick="showModal('question6')">6. Quel est ton plus grand rêve, celui que tu n'as pas encore réalisé ?</button>
+        <button class="question-btn" onclick="showModal('question7')">7. T'as une habitude matinale que tu ne pourrais pas louper ?</button>
+        <button class="question-btn" onclick="showModal('question8')">8. Est-ce que tu préfères un réveil tranquille ou un matin plein d'énergie ?</button>
+        <button class="question-btn" onclick="showModal('question9')">9. Quelle est la dernière série ou film que tu as regardé et que tu as adoré ?</button>
+        <button class="question-btn" onclick="showModal('question10')">10. Si tu devais choisir une chanson pour commencer la journée, laquelle ce serait ?</button>
+        <button class="question-btn" onclick="showModal('question11')">11. Tu te considères plutôt du matin ou du soir ?</button>
+        <button class="question-btn" onclick="showModal('question12')">12. Si tu devais te réveiller avec un superpouvoir, lequel choisirais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question13')">13. Quelle est la première chose que tu fais dès que tu te lèves ?</button>
+        <button class="question-btn" onclick="showModal('question14')">14. Tu as une routine spécifique pour rester motivée pendant la journée ?</button>
+        <button class="question-btn" onclick="showModal('question15')">15. Plutôt café ou thé le matin ?</button>
+        <button class="question-btn" onclick="showModal('question16')">16. Quelle est la première pensée qui te traverse l'esprit le matin ?</button>
+        <button class="question-btn" onclick="showModal('question17')">17. Si tu pouvais passer ta journée avec une célébrité, qui choisirais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question18')">18. Tu préfères démarrer ta journée avec une bonne session de sport ou une promenade ?</button>
+        <button class="question-btn" onclick="showModal('question19')">19. Quel est ton endroit préféré pour te détendre ?</button>
+        <button class="question-btn" onclick="showModal('question20')">20. Quelle est la dernière chose que tu fais avant de t'endormir ?</button>
+        <button class="question-btn" onclick="showModal('question21')">21. Si tu avais le choix entre une journée parfaite ou un week-end parfait, tu choisis quoi ?</button>
+        <button class="question-btn" onclick="showModal('question22')">22. Tu as des projets excitants pour cette semaine ?</button>
+        <button class="question-btn" onclick="showModal('question23')">23. Quelle est ta manière de te motiver quand tu n'as pas envie de commencer la journée ?</button>
+        <button class="question-btn" onclick="showModal('question24')">24. Est-ce que tu préfères faire une pause dans ta journée pour un petit café ou un déjeuner copieux ?</button>
+        <button class="question-btn" onclick="showModal('question25')">25. Tu as des habitudes matinales qui te font te sentir bien toute la journée ?</button>
+        <button class="question-btn" onclick="showModal('question26')">26. Tu te considères plutôt "planificatrice" ou "improvisée" dans tes journées ?</button>
+        <button class="question-btn" onclick="showModal('question27')">27. Quelle est la chose la plus audacieuse que tu aimerais essayer un jour ?</button>
+        <button class="question-btn" onclick="showModal('question28')">28. Si tu pouvais changer une chose dans ta routine quotidienne, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question29')">29. Qu'est-ce qui te fait sourire dès le matin ?</button>
+        <button class="question-btn" onclick="showModal('question30')">30. Tu es plutôt du genre à apprécier le calme du matin ou à aimer les bruits et l'agitation ?</button>
+        <button class="question-btn" onclick="showModal('question31')">31. Quel est ton endroit préféré dans la ville pour commencer la journée ?</button>
+        <button class="question-btn" onclick="showModal('question32')">32. Si tu pouvais te téléporter dans un endroit agréable maintenant, où irais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question33')">33. Qu'est-ce qui te booste lorsque tu sens que ta journée commence mal ?</button>
+        <button class="question-btn" onclick="showModal('question34')">34. As-tu un rituel du matin qui te fait te sentir plus énergique ?</button>
+        <button class="question-btn" onclick="showModal('question35')">35. Si tu avais une journée de repos totale, que ferais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question36')">36. Tu es plutôt de ceux qui planifient à l'avance ou qui aiment l’imprévu ?</button>
+        <button class="question-btn" onclick="showModal('question37')">37. Comment a été ta journée hier, en trois mots ?</button>
+        <button class="question-btn" onclick="showModal('question38')">38. Quelle est la chose la plus surprenante qui t'est arrivée aujourd'hui ?</button>
+        <button class="question-btn" onclick="showModal('question39')">39. Quel est ton endroit préféré pour commencer ta journée, que ce soit chez toi ou dehors ?</button>
+        <button class="question-btn" onclick="showModal('question40')">40. Quel est ton souvenir d'enfance préféré que tu aimerais revivre ?</button>
+        <button class="question-btn" onclick="showModal('question41')">41. Quelle est ta façon favorite de commencer une nouvelle semaine ?</button>
+        <button class="question-btn" onclick="showModal('question42')">42. Est-ce que tu aimes recevoir des messages surprenants dès le matin ?</button>
+        <button class="question-btn" onclick="showModal('question43')">43. Si tu avais un petit-déjeuner idéal, ce serait composé de quoi ?</button>
+        <button class="question-btn" onclick="showModal('question44')">44. Quand tu te sens fatiguée, comment tu recharges tes batteries ?</button>
+        <button class="question-btn" onclick="showModal('question45')">45. Quel est le meilleur conseil que tu aies reçu pour démarrer une journée ?</button>
+        <button class="question-btn" onclick="showModal('question46')">46. Quel est ton moyen préféré pour rester motivée pendant la journée ?</button>
+        <button class="question-btn" onclick="showModal('question47')">47. Si tu pouvais prendre une journée entière rien que pour toi, qu'est-ce que tu ferais ?</button>
+        <button class="question-btn" onclick="showModal('question48')">48. Quel est le meilleur souvenir de tes vacances ?</button>
+        <button class="question-btn" onclick="showModal('question49')">49. T'as des petits trucs pour faire face aux journées chargées ?</button>
+        <button class="question-btn" onclick="showModal('question50')">50. Quelle est la chose la plus importante que tu aimerais accomplir aujourd'hui ?</button>
+    </div>
+
+    <!-- Modal (Boîte de dialogue pour afficher chaque question) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Question du jour</h2>
+            <p id="questionText"></p>
+            <div class="button-container">
+                <button onclick="closeModal()">Fermer</button>
+                <button onclick="copyQuestion()">Copier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message de copie -->
+    <div id="copyMessage" class="copy-message">
+        Question copiée dans le presse-papier !
+    </div>
+
+    <script>
+        // Liste des questions
+        const questions = {
+            question1: "Qu'est-ce qui te met de bonne humeur dès le matin ?",
+            question2: "Si tu pouvais choisir n'importe quelle destination pour un week-end, où irais-tu ?",
+            question3: "Quel est ton petit-déjeuner préféré ?",
+            question4: "Si tu pouvais vivre n'importe où dans le monde, ce serait où ?",
+            question5: "Qu'est-ce que tu attends le plus de cette journée ?",
+            question6: "Quel est ton plus grand rêve, celui que tu n'as pas encore réalisé ?",
+            question7: "T'as une habitude matinale que tu ne pourrais pas louper ?",
+            question8: "Est-ce que tu préfères un réveil tranquille ou un matin plein d'énergie ?",
+            question9: "Quelle est la dernière série ou film que tu as regardé et que tu as adoré ?",
+            question10: "Si tu devais choisir une chanson pour commencer la journée, laquelle ce serait ?",
+            question11: "Tu te considères plutôt du matin ou du soir ?",
+            question12: "Si tu devais te réveiller avec un superpouvoir, lequel choisirais-tu ?",
+            question13: "Quelle est la première chose que tu fais dès que tu te lèves ?",
+            question14: "Tu as une routine spécifique pour rester motivée pendant la journée ?",
+            question15: "Plutôt café ou thé le matin ?",
+            question16: "Quelle est la première pensée qui te traverse l'esprit le matin ?",
+            question17: "Si tu pouvais passer ta journée avec une célébrité, qui choisirais-tu ?",
+            question18: "Tu préfères démarrer ta journée avec une bonne session de sport ou une promenade ?",
+            question19: "Quel est ton endroit préféré pour te détendre ?",
+            question20: "Quelle est la dernière chose que tu fais avant de t'endormir ?",
+            question21: "Si tu avais le choix entre une journée parfaite ou un week-end parfait, tu choisis quoi ?",
+            question22: "Tu as des projets excitants pour cette semaine ?",
+            question23: "Quelle est ta manière de te motiver quand tu n'as pas envie de commencer la journée ?",
+            question24: "Est-ce que tu préfères faire une pause dans ta journée pour un petit café ou un déjeuner copieux ?",
+            question25: "Tu as des habitudes matinales qui te font te sentir bien toute la journée ?",
+            question26: "Tu te considères plutôt \"planificatrice\" ou \"improvisée\" dans tes journées ?",
+            question27: "Quelle est la chose la plus audacieuse que tu aimerais essayer un jour ?",
+            question28: "Si tu pouvais changer une chose dans ta routine quotidienne, ce serait quoi ?",
+            question29: "Qu'est-ce qui te fait sourire dès le matin ?",
+            question30: "Tu es plutôt du genre à apprécier le calme du matin ou à aimer les bruits et l'agitation ?",
+            question31: "Quel est ton endroit préféré dans la ville pour commencer la journée ?",
+            question32: "Si tu pouvais te téléporter dans un endroit agréable maintenant, où irais-tu ?",
+            question33: "Qu'est-ce qui te booste lorsque tu sens que ta journée commence mal ?",
+            question34: "As-tu un rituel du matin qui te fait te sentir plus énergique ?",
+            question35: "Si tu avais une journée de repos totale, que ferais-tu ?",
+            question36: "Tu es plutôt de ceux qui planifient à l'avance ou qui aiment l’imprévu ?",
+            question37: "Comment a été ta journée hier, en trois mots ?",
+            question38: "Quelle est la chose la plus surprenante qui t'est arrivée aujourd'hui ?",
+            question39: "Quel est ton endroit préféré pour commencer ta journée, que ce soit chez toi ou dehors ?",
+            question40: "Quel est ton souvenir d'enfance préféré que tu aimerais revivre ?",
+            question41: "Quelle est ta façon favorite de commencer une nouvelle semaine ?",
+            question42: "Est-ce que tu aimes recevoir des messages surprenants dès le matin ?",
+            question43: "Si tu avais un petit-déjeuner idéal, ce serait composé de quoi ?",
+            question44: "Quand tu te sens fatiguée, comment tu recharges tes batteries ?",
+            question45: "Quel est le meilleur conseil que tu aies reçu pour démarrer une journée ?",
+            question46: "Quel est ton moyen préféré pour rester motivée pendant la journée ?",
+            question47: "Si tu pouvais prendre une journée entière rien que pour toi, qu'est-ce que tu ferais ?",
+            question48: "Quel est le meilleur souvenir de tes vacances ?",
+            question49: "T'as des petits trucs pour faire face aux journées chargées ?",
+            question50: "Quelle est la chose la plus importante que tu aimerais accomplir aujourd'hui ?"
+        };
+
+        // Afficher la modale avec la question correspondante
+        function showModal(questionId) {
+            document.getElementById('questionText').innerText = questions[questionId];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Copier la question dans le presse-papier
+        function copyQuestion() {
+            const text = document.getElementById('questionText').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                document.getElementById('copyMessage').style.display = "block";
+                setTimeout(function() {
+                    document.getElementById('copyMessage').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

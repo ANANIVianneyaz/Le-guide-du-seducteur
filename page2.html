@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Questions pour démarrer la journée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-btn {
+            background-color: #4b0082;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .question-btn:focus {
+            outline: none;
+        }
+
+        /* Modal (boîte de dialogue) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        .modal-content {
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            margin: 15px 0;
+            word-wrap: break-word;
+        }
+
+        .modal-content button {
+            background-color: #9b4bcd;
+            color: white;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #4b0082;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Message de copie */
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-btn {
+                padding: 14px;
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>100 questions pour la séduire</h1>
+
+    <div class="question-container">
+        <!-- List of questions -->
+        <button class="question-btn" onclick="showModal('question1')">Qu'est-ce qui t'attire le plus chez une personne, physiquement ou intellectuellement ?</button>
+        <button class="question-btn" onclick="showModal('question2')">Si tu pouvais choisir n'importe quel type de rendez-vous pour nous, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question3')">Qu'est-ce qui te fait sourire instantanément chez quelqu'un ?</button>
+        <button class="question-btn" onclick="showModal('question4')">Est-ce que tu crois au coup de foudre ou à l'amour à première vue ?</button>
+        <button class="question-btn" onclick="showModal('question5')">Quelle est la première chose que tu remarques chez quelqu’un quand tu le rencontres ?</button>
+        <button class="question-btn" onclick="showModal('question6')">Quand tu penses à un moment parfait, quel genre d’ambiance tu imagines ?</button>
+        <button class="question-btn" onclick="showModal('question7')">Si tu devais me décrire en un mot, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question8')">Tu préfères les conversations profondes ou légères au début d’une relation ?</button>
+        <button class="question-btn" onclick="showModal('question9')">Est-ce que tu es du genre à jouer au jeu du chat et de la souris, ou tu préfères être plus directe ?</button>
+        <button class="question-btn" onclick="showModal('question10')">Quelle est la chose la plus sexy chez une personne selon toi ?</button>
+        <button class="question-btn" onclick="showModal('question11')">Comment définirais-tu un homme qui te plaît vraiment ?</button>
+        <button class="question-btn" onclick="showModal('question12')">Qu’est-ce qui te fait te sentir spéciale dans une relation ?</button>
+        <button class="question-btn" onclick="showModal('question13')">Si on se retrouvait dans un endroit secret juste pour nous deux, que ferions-nous ?</button>
+        <button class="question-btn" onclick="showModal('question14')">Est-ce que tu aimes prendre des risques ou préfères jouer la sécurité ?</button>
+        <button class="question-btn" onclick="showModal('question15')">Tu es plutôt du genre à te laisser surprendre ou à tout contrôler ?</button>
+        <button class="question-btn" onclick="showModal('question16')">Comment te sentirais-tu si je te surprenais avec une petite attention rien que pour toi ?</button>
+        <button class="question-btn" onclick="showModal('question17')">Qu’est-ce qui te fait fondre chez quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question18')">Si tu pouvais partager une passion avec quelqu’un, qu’est-ce que ce serait ?</button>
+        <button class="question-btn" onclick="showModal('question19')">Est-ce que tu préfères être séduite par un regard ou par les mots ?</button>
+        <button class="question-btn" onclick="showModal('question20')">Quand tu rencontres quelqu’un qui te plaît, comment tu réagis généralement ?</button>
+        <button class="question-btn" onclick="showModal('question21')">Quelle est la chose la plus inattendue que tu aies faite par attirance pour quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question22')">Qu’est-ce qui te fait rire quand tu es avec quelqu’un qui te plaît ?</button>
+        <button class="question-btn" onclick="showModal('question23')">Est-ce que tu te laisses souvent guider par ton instinct ou tu réfléchis beaucoup avant d’agir ?</button>
+        <button class="question-btn" onclick="showModal('question24')">Quel genre de flirt te fait fondre ?</button>
+        <button class="question-btn" onclick="showModal('question25')">Si je te faisais un compliment sur quelque chose que tu n’as pas l’habitude d’entendre, tu aimerais ?</button>
+        <button class="question-btn" onclick="showModal('question26')">Est-ce que tu penses qu’une complicité mentale est plus importante qu’une complicité physique ?</button>
+        <button class="question-btn" onclick="showModal('question27')">Si on partait ensemble en vacances, où aimerais-tu qu’on aille ?</button>
+        <button class="question-btn" onclick="showModal('question28')">Comment aimerais-tu qu’une personne te fasse sentir désirée sans mots ?</button>
+        <button class="question-btn" onclick="showModal('question29')">Est-ce que tu es du genre à te laisser envahir par tes émotions, ou tu es plus rationnelle ?</button>
+        <button class="question-btn" onclick="showModal('question30')">Qu’est-ce qui te plaît chez un homme dès qu’il ouvre la bouche ?</button>
+        <button class="question-btn" onclick="showModal('question31')">Si je devais te surprendre pour un rendez-vous, quel genre de surprise tu aimerais ?</button>
+        <button class="question-btn" onclick="showModal('question32')">Tu préfères qu’un homme soit mystérieux ou ouvert ?</button>
+        <button class="question-btn" onclick="showModal('question33')">Est-ce que tu trouves plus sexy un homme qui sait ce qu’il veut ou celui qui reste un peu incertain ?</button>
+        <button class="question-btn" onclick="showModal('question34')">Qu’est-ce qui te fait sentir que quelqu’un est vraiment intéressé par toi ?</button>
+        <button class="question-btn" onclick="showModal('question35')">Est-ce que tu préfères prendre ton temps pour découvrir quelqu’un ou tu aimes l’intensité rapide ?</button>
+        <button class="question-btn" onclick="showModal('question36')">Si on se retrouvait à un dîner, quel genre de conversation aimerais-tu avoir ?</button>
+        <button class="question-btn" onclick="showModal('question37')">Est-ce que tu préfères que l’on te fasse des compliments sur ton apparence ou ta personnalité ?</button>
+        <button class="question-btn" onclick="showModal('question38')">Qu’est-ce qui, selon toi, rend une relation vraiment excitante ?</button>
+        <button class="question-btn" onclick="showModal('question39')">Est-ce que tu es attirée par les gens qui ont une certaine confiance en eux ?</button>
+        <button class="question-btn" onclick="showModal('question40')">Si je te tenais dans mes bras pendant un moment, comment tu te sentirais ?</button>
+        <button class="question-btn" onclick="showModal('question41')">Quel est le genre de gestes tendres qui te touchent le plus ?</button>
+        <button class="question-btn" onclick="showModal('question42')">Est-ce que tu es plus attirée par l'humour ou la profondeur d'une personne ?</button>
+        <button class="question-btn" onclick="showModal('question43')">Si tu pouvais ressentir une seule émotion avec moi, quelle serait-elle ?</button>
+        <button class="question-btn" onclick="showModal('question44')">Quand tu penses à une soirée romantique, à quoi penses-tu ?</button>
+        <button class="question-btn" onclick="showModal('question45')">Est-ce que tu crois que les gestes valent plus que les mots ?</button>
+        <button class="question-btn" onclick="showModal('question46')">Quand tu es avec quelqu’un qui te plaît, tu es plutôt calme ou tu te sens nerveuse ?</button>
+        <button class="question-btn" onclick="showModal('question47')">Si je devais te préparer un dîner parfait, que serait-il ?</button>
+        <button class="question-btn" onclick="showModal('question48')">Qu’est-ce que tu aimerais qu’un homme fasse pour te faire sentir unique ?</button>
+        <button class="question-btn" onclick="showModal('question49')">Est-ce que tu crois que la séduction peut être subtile ou est-ce toujours évident ?</button>
+        <button class="question-btn" onclick="showModal('question50')">Qu’est-ce qui te plaît le plus chez un homme pendant un rendez-vous ?</button>
+        <button class="question-btn" onclick="showModal('question51')">Tu préfères un rendez-vous tranquille à deux ou un peu plus aventureux ?</button>
+        <button class="question-btn" onclick="showModal('question52')">Si je te demandais de me surprendre, tu ferais quoi ?</button>
+        <button class="question-btn" onclick="showModal('question53')">Qu’est-ce qui te fait perdre tous tes repères dans une relation ?</button>
+        <button class="question-btn" onclick="showModal('question54')">Est-ce que tu penses que l’attirance physique est aussi importante que la connexion mentale ?</button>
+        <button class="question-btn" onclick="showModal('question55')">Qu’est-ce qui te rend impatiente quand tu es avec quelqu’un qui te plaît ?</button>
+        <button class="question-btn" onclick="showModal('question56')">Tu préfères les soirées calmes à deux ou un peu de folie et d’imprévu ?</button>
+        <button class="question-btn" onclick="showModal('question57')">Quel type de relation te donne envie de t’investir totalement ?</button>
+        <button class="question-btn" onclick="showModal('question58')">Qu’est-ce qui te fait ressentir une vraie connexion avec quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question59')">Quand tu rencontres un homme qui te plaît, qu’est-ce que tu attends de lui ?</button>
+        <button class="question-btn" onclick="showModal('question60')">Quel est l’aspect le plus séduisant chez un homme ?</button>
+        <button class="question-btn" onclick="showModal('question61')">Si je devais te poser une question qui te ferait sourire immédiatement, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question62')">Est-ce que tu crois qu’on peut séduire quelqu’un sans trop en faire ?</button>
+        <button class="question-btn" onclick="showModal('question63')">Qu’est-ce qui te fait sentir que tu as une véritable complicité avec quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question64')">Si je t’invitais à sortir quelque part, qu’est-ce que tu voudrais faire ?</button>
+        <button class="question-btn" onclick="showModal('question65')">Qu’est-ce qui te fait réellement vibrer dans une relation ?</button>
+        <button class="question-btn" onclick="showModal('question66')">Quel genre de surprise te ferait vraiment plaisir ?</button>
+        <button class="question-btn" onclick="showModal('question67')">Qu’est-ce qui, selon toi, rend une personne vraiment irrésistible ?</button>
+        <button class="question-btn" onclick="showModal('question68')">Si tu devais choisir entre un baiser doux ou un baiser passionné, lequel choisirais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question69')">Est-ce que tu te sens plus séduite par un homme qui te comprend ou un homme qui te surprend ?</button>
+        <button class="question-btn" onclick="showModal('question70')">Quand tu t’imagines avec quelqu’un, quel genre d’avenir imagines-tu ?</button>
+        <button class="question-btn" onclick="showModal('question71')">Qu’est-ce qui te touche le plus dans les relations amoureuses ?</button>
+        <button class="question-btn" onclick="showModal('question72')">Qu’est-ce que tu recherches en premier chez une personne qui pourrait t’intéresser ?</button>
+        <button class="question-btn" onclick="showModal('question73')">Si on se retrouvait à marcher sous la pluie ensemble, comment tu te sentirais ?</button>
+        <button class="question-btn" onclick="showModal('question74')">Qu’est-ce que tu aimerais ressentir en étant proche de moi ?</button>
+        <button class="question-btn" onclick="showModal('question75')">Est-ce que tu es du genre à être plus tactile ou plus discrète dans une relation ?</button>
+        <button class="question-btn" onclick="showModal('question76')">Quel genre de situation te ferait te sentir pleinement attirée par quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question77')">Si tu devais choisir entre sécurité et excitation, quel côté de la balance tu choisirais ?</button>
+        <button class="question-btn" onclick="showModal('question78')">Comment tu te sens quand on te fait de l’attention sans vraiment le dire ?</button>
+        <button class="question-btn" onclick="showModal('question79')">Est-ce que tu es attirée par quelqu’un qui te fait un peu courir ?</button>
+        <button class="question-btn" onclick="showModal('question80')">Si je devais te montrer un côté de moi que tu n’as jamais vu, que voudrais-tu voir ?</button>
+        <button class="question-btn" onclick="showModal('question81')">Qu’est-ce qui, pour toi, rend une relation passionnante et en constante évolution ?</button>
+        <button class="question-btn" onclick="showModal('question82')">Quel type de flirt te fait le plus craquer ?</button>
+        <button class="question-btn" onclick="showModal('question83')">Est-ce que tu préfères les moments de tendresse ou ceux un peu plus électriques ?</button>
+        <button class="question-btn" onclick="showModal('question84')">Si je devais te faire une déclaration, quelle serait la meilleure manière de le faire ?</button>
+        <button class="question-btn" onclick="showModal('question85')">Qu’est-ce qui te plaît le plus dans le fait d’apprendre à connaître quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question86')">Comment tu te sentirais si tu savais que tu es vraiment désirée par quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question87')">Si je te faisais une surprise juste pour toi, quel genre de surprise aimerais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question88')">Quand tu te sens attirée par quelqu’un, quel genre de geste subtil est-ce que tu attends de lui ?</button>
+        <button class="question-btn" onclick="showModal('question89')">Si tu avais la chance de passer une journée à deux, quel serait ton programme idéal ?</button>
+        <button class="question-btn" onclick="showModal('question90')">Qu’est-ce qui te plaît dans l’idée de découvrir peu à peu une personne ?</button>
+        <button class="question-btn" onclick="showModal('question91')">Quand tu te sens attirée par quelqu’un, comment tu réagis ?</button>
+        <button class="question-btn" onclick="showModal('question92')">Si tu pouvais vivre une journée parfaite à deux, ce serait comment ?</button>
+        <button class="question-btn" onclick="showModal('question93')">Quel est ton fantasme de rendez-vous idéal ?</button>
+        <button class="question-btn" onclick="showModal('question94')">Comment tu te sentirais si je te disais qu’on pourrait avoir une connexion vraiment spéciale ?</button>
+        <button class="question-btn" onclick="showModal('question95')">Si tu devais faire le premier pas, comment le ferais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question96')">Quelle est la chose qui te fait te sentir belle et désirée ?</button>
+        <button class="question-btn" onclick="showModal('question97')">Si tu devais choisir entre un dîner romantique ou une aventure spontanée, quel serait ton choix ?</button>
+        <button class="question-btn" onclick="showModal('question98')">Qu’est-ce qui te fait réellement craquer chez un homme ?</button>
+        <button class="question-btn" onclick="showModal('question99')">Comment tu réagirais si je te faisais une déclaration inattendue ?</button>
+        <button class="question-btn" onclick="showModal('question100')">Qu’est-ce qui, selon toi, serait un vrai test pour voir si une relation peut fonctionner ?</button>
+        
+    </div>
+
+    <!-- Modal (Boîte de dialogue pour afficher chaque question) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Question du jour</h2>
+            <p id="questionText"></p>
+            <div class="button-container">
+                <button onclick="closeModal()">Fermer</button>
+                <button onclick="copyQuestion()">Copier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message de copie -->
+    <div id="copyMessage" class="copy-message">
+        Question copiée dans le presse-papier !
+    </div>
+
+    <script>
+    // Liste des questions
+    const questions = {
+        question1: "Qu'est-ce qui t'attire le plus chez une personne, physiquement ou intellectuellement ?",
+        question2: "Si tu pouvais choisir n'importe quel type de rendez-vous pour nous, ce serait quoi ?",
+        question3: "Qu'est-ce qui te fait sourire instantanément chez quelqu'un ?",
+        question4: "Est-ce que tu crois au coup de foudre ou à l'amour à première vue ?",
+        question5: "Quelle est la première chose que tu remarques chez quelqu’un quand tu le rencontres ?",
+        question6: "Quand tu penses à un moment parfait, quel genre d’ambiance tu imagines ?",
+        question7: "Si tu devais me décrire en un mot, ce serait quoi ?",
+        question8: "Tu préfères les conversations profondes ou légères au début d’une relation ?",
+        question9: "Est-ce que tu es du genre à jouer au jeu du chat et de la souris, ou tu préfères être plus directe ?",
+        question10: "Quelle est la chose la plus sexy chez une personne selon toi ?",
+        question11: "Comment définirais-tu un homme qui te plaît vraiment ?",
+        question12: "Qu’est-ce qui te fait te sentir spéciale dans une relation ?",
+        question13: "Si on se retrouvait dans un endroit secret juste pour nous deux, que ferions-nous ?",
+        question14: "Est-ce que tu aimes prendre des risques ou préfères jouer la sécurité ?",
+        question15: "Tu es plutôt du genre à te laisser surprendre ou à tout contrôler ?",
+        question16: "Comment te sentirais-tu si je te surprenais avec une petite attention rien que pour toi ?",
+        question17: "Qu’est-ce qui te fait fondre chez quelqu’un ?",
+        question18: "Si tu pouvais partager une passion avec quelqu’un, qu’est-ce que ce serait ?",
+        question19: "Est-ce que tu préfères être séduite par un regard ou par les mots ?",
+        question20: "Quand tu rencontres quelqu’un qui te plaît, comment tu réagis généralement ?",
+        question21: "Quelle est la chose la plus inattendue que tu aies faite par attirance pour quelqu’un ?",
+        question22: "Qu’est-ce qui te fait rire quand tu es avec quelqu’un qui te plaît ?",
+        question23: "Est-ce que tu te laisses souvent guider par ton instinct ou tu réfléchis beaucoup avant d’agir ?",
+        question24: "Quel genre de flirt te fait fondre ?",
+        question25: "Si je te faisais un compliment sur quelque chose que tu n’as pas l’habitude d’entendre, tu aimerais ?",
+        question26: "Est-ce que tu penses qu’une complicité mentale est plus importante qu’une complicité physique ?",
+        question27: "Si on partait ensemble en vacances, où aimerais-tu qu’on aille ?",
+        question28: "Comment aimerais-tu qu’une personne te fasse sentir désirée sans mots ?",
+        question29: "Est-ce que tu es du genre à te laisser envahir par tes émotions, ou tu es plus rationnelle ?",
+        question30: "Qu’est-ce qui te plaît chez un homme dès qu’il ouvre la bouche ?",
+        question31: "Si je devais te surprendre pour un rendez-vous, quel genre de surprise tu aimerais ?",
+        question32: "Tu préfères qu’un homme soit mystérieux ou ouvert ?",
+        question33: "Est-ce que tu trouves plus sexy un homme qui sait ce qu’il veut ou celui qui reste un peu incertain ?",
+        question34: "Qu’est-ce qui te fait sentir que quelqu’un est vraiment intéressé par toi ?",
+        question35: "Est-ce que tu préfères prendre ton temps pour découvrir quelqu’un ou tu aimes l’intensité rapide ?",
+        question36: "Si on se retrouvait à un dîner, quel genre de conversation aimerais-tu avoir ?",
+        question37: "Est-ce que tu préfères que l’on te fasse des compliments sur ton apparence ou ta personnalité ?",
+        question38: "Qu’est-ce qui, selon toi, rend une relation vraiment excitante ?",
+        question39: "Est-ce que tu es attirée par les gens qui ont une certaine confiance en eux ?",
+        question40: "Si je te tenais dans mes bras pendant un moment, comment tu te sentirais ?",
+        question41: "Quel est le genre de gestes tendres qui te touchent le plus ?",
+        question42: "Est-ce que tu es plus attirée par l'humour ou la profondeur d'une personne ?",
+        question43: "Si tu pouvais ressentir une seule émotion avec moi, quelle serait-elle ?",
+        question44: "Quand tu penses à une soirée romantique, à quoi penses-tu ?",
+        question45: "Est-ce que tu crois que les gestes valent plus que les mots ?",
+        question46: "Quand tu es avec quelqu’un qui te plaît, tu es plutôt calme ou tu te sens nerveuse ?",
+        question47: "Si je devais te préparer un dîner parfait, que serait-il ?",
+        question48: "Qu’est-ce que tu aimerais qu’un homme fasse pour te faire sentir unique ?",
+        question49: "Est-ce que tu crois que la séduction peut être subtile ou est-ce toujours évident ?",
+        question50: "Qu’est-ce qui te plaît le plus chez un homme pendant un rendez-vous ?",
+        question51: "Tu préfères un rendez-vous tranquille à deux ou un peu plus aventureux ?",
+        question52: "Si je te demandais de me surprendre, tu ferais quoi ?",
+        question53: "Qu’est-ce qui te fait perdre tous tes repères dans une relation ?",
+        question54: "Est-ce que tu penses que l’attirance physique est aussi importante que la connexion mentale ?",
+        question55: "Qu’est-ce qui te rend impatiente quand tu es avec quelqu’un qui te plaît ?",
+        question56: "Tu préfères les soirées calmes à deux ou un peu de folie et d’imprévu ?",
+        question57: "Quel type de relation te donne envie de t’investir totalement ?",
+        question58: "Qu’est-ce qui te fait ressentir une vraie connexion avec quelqu’un ?",
+        question59: "Quand tu rencontres un homme qui te plaît, qu’est-ce que tu attends de lui ?",
+        question60: "Quel est l’aspect le plus séduisant chez un homme ?",
+        question61: "Si je devais te poser une question qui te ferait sourire immédiatement, ce serait quoi ?",
+        question62: "Est-ce que tu crois qu’on peut séduire quelqu’un sans trop en faire ?",
+        question63: "Qu’est-ce qui te fait sentir que tu as une véritable complicité avec quelqu’un ?",
+        question64: "Si je t’invitais à sortir quelque part, qu’est-ce que tu voudrais faire ?",
+        question65: "Qu’est-ce qui te fait réellement vibrer dans une relation ?",
+        question66: "Quel genre de surprise te ferait vraiment plaisir ?",
+        question67: "Qu’est-ce qui, selon toi, rend une personne vraiment irrésistible ?",
+        question68: "Si tu devais choisir entre un baiser doux ou un baiser passionné, lequel choisirais-tu ?",
+        question69: "Est-ce que tu te sens plus séduite par un homme qui te comprend ou un homme qui te surprend ?",
+        question70: "Quand tu t’imagines avec quelqu’un, quel genre d’avenir imagines-tu ?",
+        question71: "Qu’est-ce qui te touche le plus dans les relations amoureuses ?",
+        question72: "Qu’est-ce que tu recherches en premier chez une personne qui pourrait t’intéresser ?",
+        question73: "Si on se retrouvait à marcher sous la pluie ensemble, comment tu te sentirais ?",
+        question74: "Qu’est-ce que tu aimerais ressentir en étant proche de moi ?",
+        question75: "Est-ce que tu es du genre à être plus tactile ou plus discrète dans une relation ?",
+        question76: "Quel genre de situation te ferait te sentir pleinement attirée par quelqu’un ?",
+        question77: "Si tu devais choisir entre sécurité et excitation, quel côté de la balance tu choisirais ?",
+        question78: "Comment tu te sens quand on te fait de l’attention sans vraiment le dire ?",
+        question79: "Est-ce que tu es attirée par quelqu’un qui te fait un peu courir ?",
+        question80: "Si je devais te montrer un côté de moi que tu n’as jamais vu, que voudrais-tu voir ?",
+        question81: "Qu’est-ce qui, pour toi, rend une relation passionnante et en constante évolution ?",
+        question82: "Quel type de flirt te fait le plus craquer ?",
+        question83: "Est-ce que tu préfères les moments de tendresse ou ceux un peu plus électriques ?",
+        question84: "Si je devais te faire une déclaration, quelle serait la meilleure manière de le faire ?",
+        question85: "Qu’est-ce qui te plaît le plus dans le fait d’apprendre à connaître quelqu’un ?",
+        question86: "Comment tu te sentirais si tu savais que tu es vraiment désirée par quelqu’un ?",
+        question87: "Si je te faisais une surprise juste pour toi, quel genre de surprise aimerais-tu ?",
+        question88: "Quand tu te sens attirée par quelqu’un, quel genre de geste subtil est-ce que tu attends de lui ?",
+        question89: "Si tu avais la chance de passer une journée à deux, quel serait ton programme idéal ?",
+        question90: "Qu’est-ce qui te plaît dans l’idée de découvrir peu à peu une personne ?",
+        question91: "Quand tu te sens attirée par quelqu’un, comment tu réagis ?",
+        question92: "Si tu pouvais vivre une journée parfaite à deux, ce serait comment ?",
+        question93: "Quel est ton fantasme de rendez-vous idéal ?",
+        question94: "Comment tu te sentirais si je te disais qu’on pourrait avoir une connexion vraiment spéciale ?",
+        question95: "Si tu devais faire le premier pas, comment le ferais-tu ?",
+        question96: "Quelle est la chose qui te fait te sentir belle et désirée ?",
+        question97: "Si tu devais choisir entre un dîner romantique ou une aventure spontanée, quel serait ton choix ?",
+        question98: "Qu’est-ce qui te fait réellement craquer chez un homme ?",
+        question99: "Comment tu réagirais si je te faisais une déclaration inattendue ?",
+        question100: "Qu’est-ce qui, selon toi, serait un vrai test pour voir si une relation peut fonctionner ?"
+    };
+
+        // Afficher la modale avec la question correspondante
+        function showModal(questionId) {
+            document.getElementById('questionText').innerText = questions[questionId];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Copier la question dans le presse-papier
+        function copyQuestion() {
+            const text = document.getElementById('questionText').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                document.getElementById('copyMessage').style.display = "block";
+                setTimeout(function() {
+                    document.getElementById('copyMessage').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

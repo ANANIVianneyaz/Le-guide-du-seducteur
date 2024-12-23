@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Guide du Séducteur</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px; /* Ajouter une marge sur les côtés */
+        }
+
+        h1 {
+            margin-top: 30px;
+            font-size: 3em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            font-family: 'Helvetica', sans-serif;
+            margin-bottom: 30px;
+        }
+
+        /* Container for the menu */
+        .menu-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 columns by default */
+            gap: 15px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        /* Button styling */
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            margin: 10px 0;
+            background-color: #4b0082;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .menu-btn:focus {
+            outline: none;
+        }
+
+        /* Centered last button in the grid */
+        .menu-btn-full-width {
+            grid-column: span 2; /* Spans across both columns */
+            margin-top: 15px; /* Space above the centered button */
+            font-size: 1.2em;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr 1fr; /* Keep 2 columns on tablets */
+                gap: 15px; /* Keep gap */
+            }
+
+            .menu-btn {
+                padding: 16px; /* Smaller padding on mobile */
+                font-size: 1em; /* Slightly smaller font */
+            }
+
+            .menu-btn-full-width {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr 1fr; /* Keep 2 columns on small screens */
+                gap: 12px; /* Keep gap small */
+            }
+
+            .menu-btn {
+                padding: 14px; /* Smaller padding on small screens */
+                font-size: 0.9em; /* Smaller font for smaller screens */
+            }
+
+            .menu-btn-full-width {
+                font-size: 1.1em; /* Slightly larger font for the last button */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Le Guide du Séducteur</h1>
+
+    <!-- Container for the menu -->
+    <div class="menu-container">
+        <!-- Menu Column 1 -->
+        <div>
+            <button class="menu-btn" onclick="window.location.href='page1.html'">50 Questions pour démarrer la journée</button>
+            <button class="menu-btn" onclick="window.location.href='page2.html'">100 Questions pour la séduire</button>
+            <button class="menu-btn" onclick="window.location.href='page3.html'">100 Questions pour projeter l'avenir</button>
+            <button class="menu-btn" onclick="window.location.href='page4.html'">100 Questions pour la taquiner</button>
+        </div>
+
+        <!-- Menu Column 2 -->
+        <div>
+            <button class="menu-btn" onclick="window.location.href='page5.html'">100 Questions pour la faire tomber amoureuse</button>
+            <button class="menu-btn" onclick="window.location.href='page6.html'">100 Questions pour faire monter la tension sexuelle</button>
+            <button class="menu-btn" onclick="window.location.href='page7.html'">100 Questions pour l'exciter</button>
+            <button class="menu-btn" onclick="window.location.href='page8.html'">100 Questions pour la rendre dingue</button>
+        </div>
+
+        <!-- Last centered button -->
+        <button class="menu-btn menu-btn-full-width" onclick="window.location.href='page9.html'">100 Questions pour pimenter la conversation</button>
+    </div>
+
+</body>
+</html>

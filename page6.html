@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Questions pour démarrer la journée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-btn {
+            background-color: #4b0082;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .question-btn:focus {
+            outline: none;
+        }
+
+        /* Modal (boîte de dialogue) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        .modal-content {
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            margin: 15px 0;
+            word-wrap: break-word;
+        }
+
+        .modal-content button {
+            background-color: #9b4bcd;
+            color: white;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #4b0082;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Message de copie */
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-btn {
+                padding: 14px;
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>100 questions pour faire monter la tension sexuelle et l'adrénaline en elle</h1>
+
+    <div class="question-container">
+        <!-- List of questions -->
+        <button class="question-btn" onclick="showModal('question1')">Qu'est-ce qui te fait frissonner de plaisir, même dans les moments les plus inattendus ? </button>
+        <button class="question-btn" onclick="showModal('question2')">Quand tu te sens vraiment attirée par quelqu’un, qu’est-ce qui te fait perdre le contrôle ? </button>
+        <button class="question-btn" onclick="showModal('question3')">Quelle est la première chose qui te vient à l’esprit quand tu penses à une soirée passionnée ? </button>
+        <button class="question-btn" onclick="showModal('question4')">Si je te murmurais quelque chose de très intime à l'oreille, qu'aimerais-tu que ce soit ? </button>
+        <button class="question-btn" onclick="showModal('question5')">Quand tu imagines un baiser parfait, à quoi ressemble-t-il ? </button>
+        <button class="question-btn" onclick="showModal('question6')">Qu’est-ce qui te fait perdre ton calme et t’envoyer une vague d'adrénaline ? </button>
+        <button class="question-btn" onclick="showModal('question7')">Qu'est-ce que tu aimerais qu’un homme fasse pour te faire frémir de désir ? </button>
+        <button class="question-btn" onclick="showModal('question8')">Quelle est la sensation que tu apprécies le plus quand quelqu’un te touche ? </button>
+        <button class="question-btn" onclick="showModal('question9')">Si je te disais que je suis pressé de te retrouver, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question10')">Quelle est la chose la plus sensuelle qu’un homme puisse faire pour toi sans aller trop loin ? </button>
+        <button class="question-btn" onclick="showModal('question11')">Qu’est-ce qui te fait te sentir intensément désirée ? </button>
+        <button class="question-btn" onclick="showModal('question12')">Quel est le plus grand fantasme que tu aimerais explorer avec quelqu'un de spécial ? </button>
+        <button class="question-btn" onclick="showModal('question13')">Quand tu imagines un moment intime, est-ce que tu préfères la lenteur ou la passion immédiate ? </button>
+        <button class="question-btn" onclick="showModal('question14')">Si je te donnais un massage, où aimerais-tu qu’il commence pour te détendre ? </button>
+        <button class="question-btn" onclick="showModal('question15')">Qu'est-ce qui te rend particulièrement vulnérable à un regard, à un geste ou à une parole ? </button>
+        <button class="question-btn" onclick="showModal('question16')">Quand tu es avec quelqu'un qui te plaît, qu’est-ce que tu ressens en te rapprochant de lui ? </button>
+        <button class="question-btn" onclick="showModal('question17')">Si tu me regardais dans les yeux en silence, qu'est-ce que tu voudrais qu'on se dise sans mots ? </button>
+        <button class="question-btn" onclick="showModal('question18')">Est-ce que tu préfères des moments de flirt subtils ou des gestes plus audacieux ? </button>
+        <button class="question-btn" onclick="showModal('question19')">Quelle est la chose la plus excitante que tu pourrais imaginer faire dans un endroit secret ? </button>
+        <button class="question-btn" onclick="showModal('question20')">Quand tu as un désir, quel genre de sensations te traversent l'esprit ? </button>
+        <button class="question-btn" onclick="showModal('question21')">Est-ce que tu crois que l’attirance physique peut se transformer en quelque chose de bien plus intense ? </button>
+        <button class="question-btn" onclick="showModal('question22')">Quel genre de touché te fait frissonner et te rend presque folle ? </button>
+        <button class="question-btn" onclick="showModal('question23')">Si je t’invitais à une soirée très intime, comment t’y préparerais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question24')">Quelle est ta partie du corps que tu préfères qu'on explore doucement ? </button>
+        <button class="question-btn" onclick="showModal('question25')">Qu’est-ce qui te fait sentir comme si tu ne pouvais plus attendre de passer à l’étape suivante ? </button>
+        <button class="question-btn" onclick="showModal('question26')">Quand tu imagines un moment où tu es pleinement dévouée à quelqu’un, qu'est-ce que tu ressens ? </button>
+        <button class="question-btn" onclick="showModal('question27')">Qu’est-ce qui te fait monter la température, même en étant juste proche de quelqu’un ? </button>
+        <button class="question-btn" onclick="showModal('question28')">Quel genre de baiser te fait oublier tout ce qui se passe autour de toi ? </button>
+        <button class="question-btn" onclick="showModal('question29')">Comment te sens-tu quand quelqu’un te frôle de manière douce mais irrésistible ? </button>
+        <button class="question-btn" onclick="showModal('question30')">Si tu pouvais imaginer une nuit parfaite, à quoi ressemblerait-elle ? </button>
+        <button class="question-btn" onclick="showModal('question31')">Est-ce qu’il y a un endroit en toi où tu aimes que l’on s'attarde un peu plus ? </button>
+        <button class="question-btn" onclick="showModal('question32')">Quel est le geste qui te fait perdre tous tes repères, un geste inattendu et délicieux ? </button>
+        <button class="question-btn" onclick="showModal('question33')">Est-ce que tu as une manière particulière de te sentir sexy même sans faire exprès ? </button>
+        <button class="question-btn" onclick="showModal('question34')">Quand tu es proche de quelqu'un que tu désires, qu'est-ce qui te fait vraiment te sentir "vivante" ? </button>
+        <button class="question-btn" onclick="showModal('question35')">Quelle est la chose la plus sexy qu’un homme puisse faire sans être trop pressé ? </button>
+        <button class="question-btn" onclick="showModal('question36')">Quand tu penses à une soirée passionnée, que voudrait-tu qu’on fasse ensemble ? </button>
+        <button class="question-btn" onclick="showModal('question37')">Qu’est-ce qui te fait vraiment te sentir sensuelle dans un moment privé ? </button>
+        <button class="question-btn" onclick="showModal('question38')">Si je te regardais intensément sans dire un mot, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question39')">Qu’est-ce qui, selon toi, rend un câlin tellement plus excitant ? </button>
+        <button class="question-btn" onclick="showModal('question40')">Quand tu imagines une étreinte, qu'est-ce que tu préfères : la douceur ou la chaleur qui brûle ? </button>
+        <button class="question-btn" onclick="showModal('question41')">Si je te demandais ce que tu aimerais qu'on fasse ensemble en ce moment, que répondrais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question42')">Quelle est la chose la plus provocante que quelqu’un puisse faire avec son regard ? </button>
+        <button class="question-btn" onclick="showModal('question43')">Qu'est-ce qui te rend complètement folle de désir, même si tu essaies de le cacher ? </button>
+        <button class="question-btn" onclick="showModal('question44')">Est-ce que tu es plus excitée par un flirt intense ou par une attention plus calme mais persistante ? </button>
+        <button class="question-btn" onclick="showModal('question45')">Quand tu es seule avec quelqu’un, quel genre de tension veux-tu créer ? </button>
+        <button class="question-btn" onclick="showModal('question46')">Qu’est-ce que tu penses de l’idée de laisser quelqu'un prendre totalement le contrôle ? </button>
+        <button class="question-btn" onclick="showModal('question47')">Comment te sens-tu quand tu es dans une pièce avec quelqu’un et que les regards s’intensifient ? </button>
+        <button class="question-btn" onclick="showModal('question48')">Qu’est-ce qui te rend prête à te laisser aller à un moment de folie douce ? </button>
+        <button class="question-btn" onclick="showModal('question49')">Quand quelqu’un te murmure des mots doux, quels types de mots t’excitent vraiment ? </button>
+        <button class="question-btn" onclick="showModal('question50')">Si je te donnais un baiser au cou, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question51')">Comment te sens-tu lorsqu’un homme te regarde avec envie et que tu le sens profondément attiré par toi ? </button>
+        <button class="question-btn" onclick="showModal('question52')">Quand tu te laisses aller à l’imaginaire, qu’est-ce qui t'excite le plus ? </button>
+        <button class="question-btn" onclick="showModal('question53')">Quelle est la partie de toi que tu préfères qu’on explore lentement ? </button>
+        <button class="question-btn" onclick="showModal('question54')">Est-ce que tu crois que l’intensité d’un baiser peut véritablement changer l’ambiance d’un moment ? </button>
+        <button class="question-btn" onclick="showModal('question55')">Si tu pouvais choisir une manière de créer une tension excitante, qu’est-ce que tu ferais ? </button>
+        <button class="question-btn" onclick="showModal('question56')">Qu'est-ce qui te donne envie de t'abandonner totalement dans un moment intime ? </button>
+        <button class="question-btn" onclick="showModal('question57')">Quel genre de situation t’incite à être un peu plus audacieuse que d’habitude ? </button>
+        <button class="question-btn" onclick="showModal('question58')">Quand quelqu’un effleure ta peau, quel est le geste qui te fait fondre instantanément ? </button>
+        <button class="question-btn" onclick="showModal('question59')">Quelle est la sensation qui te fait sentir la plus vivante ? </button>
+        <button class="question-btn" onclick="showModal('question60')">Est-ce que tu préfères l'idée de la passion débridée ou du désir lentement entretenu ? </button>
+        <button class="question-btn" onclick="showModal('question61')">Qu’est-ce qui, selon toi, crée une tension parfaite entre deux corps ? </button>
+        <button class="question-btn" onclick="showModal('question62')">Est-ce que tu penses que l’excitation grandit plus avec le temps ou de manière spontanée ? </button>
+        <button class="question-btn" onclick="showModal('question63')">Quand tu penses à l’intimité, quel est le détail que tu considères comme un véritable aphrodisiaque ? </button>
+        <button class="question-btn" onclick="showModal('question64')">Si quelqu’un effleurait tes lèvres avec douceur, quelle sensation cela te ferait-il ? </button>
+        <button class="question-btn" onclick="showModal('question65')">Qu’est-ce qui, à ton avis, est la clé pour rendre un baiser encore plus intense ? </button>
+        <button class="question-btn" onclick="showModal('question66')">Si tu étais dans une situation où la passion serait à son comble, qu’est-ce qui te ferait encore plus craquer ? </button>
+        <button class="question-btn" onclick="showModal('question67')">Qu'est-ce qui te rend irremplaçable dans un moment intime ? </button>
+        <button class="question-btn" onclick="showModal('question68')">Quelle est la sensation que tu apprécies le plus lorsqu’un homme t’effleure sans te toucher vraiment ? </button>
+        <button class="question-btn" onclick="showModal('question69')">Comment réagirais-tu si quelqu’un te dit de manière excitante ce qu’il veut faire avec toi ? </button>
+        <button class="question-btn" onclick="showModal('question70')">Si tu pouvais choisir entre un désir qui brûle tout de suite ou une anticipation qui dure, lequel choisirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question71')">Quelle est la meilleure manière pour quelqu’un de faire monter la température entre vous ? </button>
+        <button class="question-btn" onclick="showModal('question72')">Si je te disais que je voulais t'embrasser, où voudrais-tu que ce soit ? </button>
+        <button class="question-btn" onclick="showModal('question73')">Quel est le genre de regard qui te fait craquer et te donner envie de t’abandonner ? </button>
+        <button class="question-btn" onclick="showModal('question74')">Quand tu penses à l’intensité d’un moment passionné, qu'est-ce qui te fait frissonner d'anticipation ? </button>
+        <button class="question-btn" onclick="showModal('question75')">Quelle est ta façon de te laisser séduire de manière subtile mais irrésistible ? </button>
+        <button class="question-btn" onclick="showModal('question76')">Qu’est-ce qui te fait perdre tous tes inhibitions en présence de quelqu’un que tu désires ? </button>
+        <button class="question-btn" onclick="showModal('question77')">Quand tu imagines un baiser dans un endroit intime, comment veux-tu qu'il se déroule ? </button>
+        <button class="question-btn" onclick="showModal('question78')">Qu’est-ce qui te fait penser à un moment passionné que tu voudrais partager avec quelqu'un ? </button>
+        <button class="question-btn" onclick="showModal('question79')">Qu'est-ce qui, selon toi, rend un câlin ou une caresse encore plus excitante ? </button>
+        <button class="question-btn" onclick="showModal('question80')">Quelle est la chose la plus excitante qu’un homme puisse dire dans un moment de flirt ? </button>
+        <button class="question-btn" onclick="showModal('question81')">Est-ce que tu crois que l’anticipation d’un moment intime peut rendre la situation encore plus chaude ? </button>
+        <button class="question-btn" onclick="showModal('question82')">Quel est l’endroit idéal où tu te sens incroyablement désirable ? </button>
+        <button class="question-btn" onclick="showModal('question83')">Qu’est-ce qui te fait oublier le monde autour de toi et te concentrer sur l’intensité de l’instant ? </button>
+        <button class="question-btn" onclick="showModal('question84')">Comment décrirais-tu l’impact d’un simple regard échangé dans un moment intime ? </button>
+        <button class="question-btn" onclick="showModal('question85')">Quelle est la manière la plus excitante pour toi de provoquer un désir qui ne cesse de croître ? </button>
+        <button class="question-btn" onclick="showModal('question86')">Qu’est-ce qui te fait vraiment t’abandonner au moment présent sans penser à rien d’autre ? </button>
+        <button class="question-btn" onclick="showModal('question87')">Quelle est la chose que tu aimerais qu’un homme fasse pour te faire perdre la tête ? </button>
+        <button class="question-btn" onclick="showModal('question88')">Quand tu imagines la tentation, qu'est-ce qui te fait perdre complètement le contrôle ? </button>
+        <button class="question-btn" onclick="showModal('question89')">Qu’est-ce qui te fait frissonner rien qu’en y pensant ? </button>
+        <button class="question-btn" onclick="showModal('question90')">Quel genre de moments te font totalement fondre, et pourquoi ? </button>
+        <button class="question-btn" onclick="showModal('question91')">Si je voulais vraiment t’exciter, quel genre de geste ou de parole me conseillerais-tu de faire ? </button>
+        <button class="question-btn" onclick="showModal('question92')">Quel est le genre de tension que tu préfères ressentir quand tu te sens attirée par quelqu’un ? </button>
+        <button class="question-btn" onclick="showModal('question93')">Qu’est-ce qui te fait le plus frissonner, entre un baiser et une caresse ? </button>
+        <button class="question-btn" onclick="showModal('question94')">Comment réagirais-tu si un baiser était l’élément déclencheur d’une passion inattendue ? </button>
+        <button class="question-btn" onclick="showModal('question95')">Qu’est-ce qui te ferait te sentir totalement désirée et inoubliable ? </button>
+        <button class="question-btn" onclick="showModal('question96')">Quand tu es dans un moment où tout devient plus intense, que ressens-tu vraiment ? </button>
+        <button class="question-btn" onclick="showModal('question97')">Qu’est-ce qui, selon toi, rend l'excitation encore plus irrésistible ? </button>
+        <button class="question-btn" onclick="showModal('question98')">Quelle est la sensation que tu veux ressentir avant de te donner à quelqu'un ? </button>
+        <button class="question-btn" onclick="showModal('question99')">Est-ce que tu es attirée par la lenteur d’un moment intime, ou préfères-tu l’intensité immédiate ? </button>
+        <button class="question-btn" onclick="showModal('question100')">Qu'est-ce qui, selon toi, est le vrai pouvoir de l'attirance entre deux personnes ? </button>
+    </div>
+
+    <!-- Modal (Boîte de dialogue pour afficher chaque question) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Question du jour</h2>
+            <p id="questionText"></p>
+            <div class="button-container">
+                <button onclick="closeModal()">Fermer</button>
+                <button onclick="copyQuestion()">Copier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message de copie -->
+    <div id="copyMessage" class="copy-message">
+        Question copiée dans le presse-papier !
+    </div>
+
+    <script>
+        // Liste des questions
+        const questions = {
+    question1: "Qu'est-ce qui te fait frissonner de plaisir, même dans les moments les plus inattendus ?",
+    question2: "Quand tu te sens vraiment attirée par quelqu’un, qu’est-ce qui te fait perdre le contrôle ?",
+    question3: "Quelle est la première chose qui te vient à l’esprit quand tu penses à une soirée passionnée ?",
+    question4: "Si je te murmurais quelque chose de très intime à l'oreille, qu'aimerais-tu que ce soit ?",
+    question5: "Quand tu imagines un baiser parfait, à quoi ressemble-t-il ?",
+    question6: "Qu’est-ce qui te fait perdre ton calme et t’envoyer une vague d'adrénaline ?",
+    question7: "Qu’est-ce que tu aimerais qu’un homme fasse pour te faire frémir de désir ?",
+    question8: "Quelle est la sensation que tu apprécies le plus quand quelqu’un te touche ?",
+    question9: "Si je te disais que je suis pressé de te retrouver, comment réagirais-tu ?",
+    question10: "Quelle est la chose la plus sensuelle qu’un homme puisse faire pour toi sans aller trop loin ?",
+    question11: "Qu’est-ce qui te fait te sentir intensément désirée ?",
+    question12: "Quel est le plus grand fantasme que tu aimerais explorer avec quelqu'un de spécial ?",
+    question13: "Quand tu imagines un moment intime, est-ce que tu préfères la lenteur ou la passion immédiate ?",
+    question14: "Si je te donnais un massage, où aimerais-tu qu’il commence pour te détendre ?",
+    question15: "Qu'est-ce qui te rend particulièrement vulnérable à un regard, à un geste ou à une parole ?",
+    question16: "Quand tu es avec quelqu'un qui te plaît, qu’est-ce que tu ressens en te rapprochant de lui ?",
+    question17: "Si tu me regardais dans les yeux en silence, qu'est-ce que tu voudrais qu'on se dise sans mots ?",
+    question18: "Est-ce que tu préfères des moments de flirt subtils ou des gestes plus audacieux ?",
+    question19: "Quelle est la chose la plus excitante que tu pourrais imaginer faire dans un endroit secret ?",
+    question20: "Quand tu as un désir, quel genre de sensations te traversent l'esprit ?",
+    question21: "Est-ce que tu crois que l’attirance physique peut se transformer en quelque chose de bien plus intense ?",
+    question22: "Quel genre de touché te fait frissonner et te rend presque folle ?",
+    question23: "Si je t’invitais à une soirée très intime, comment t’y préparerais-tu ?",
+    question24: "Quelle est ta partie du corps que tu préfères qu'on explore doucement ?",
+    question25: "Qu’est-ce qui te fait sentir comme si tu ne pouvais plus attendre de passer à l’étape suivante ?",
+    question26: "Quand tu imagines un moment où tu es pleinement dévouée à quelqu’un, qu'est-ce que tu ressens ?",
+    question27: "Qu’est-ce qui te fait monter la température, même en étant juste proche de quelqu’un ?",
+    question28: "Quel genre de baiser te fait oublier tout ce qui se passe autour de toi ?",
+    question29: "Comment te sens-tu quand quelqu’un te frôle de manière douce mais irrésistible ?",
+    question30: "Si tu pouvais imaginer une nuit parfaite, à quoi ressemblerait-elle ?",
+    question31: "Est-ce qu’il y a un endroit en toi où tu aimes que l’on s'attarde un peu plus ?",
+    question32: "Quel est le geste qui te fait perdre tous tes repères, un geste inattendu et délicieux ?",
+    question33: "Est-ce que tu as une manière particulière de te sentir sexy même sans faire exprès ?",
+    question34: "Quand tu es proche de quelqu'un que tu désires, qu'est-ce qui te fait vraiment te sentir 'vivante' ?",
+    question35: "Quelle est la chose la plus sexy qu’un homme puisse faire sans être trop pressé ?",
+    question36: "Quand tu penses à une soirée passionnée, que voudrait-tu qu’on fasse ensemble ?",
+    question37: "Qu’est-ce qui te fait vraiment te sentir sensuelle dans un moment privé ?",
+    question38: "Si je te regardais intensément sans dire un mot, comment réagirais-tu ?",
+    question39: "Qu’est-ce qui, selon toi, rend un câlin tellement plus excitant ?",
+    question40: "Quand tu imagines une étreinte, qu'est-ce que tu préfères : la douceur ou la chaleur qui brûle ?",
+    question41: "Si je te demandais ce que tu aimerais qu'on fasse ensemble en ce moment, que répondrais-tu ?",
+    question42: "Quelle est la chose la plus provocante que quelqu’un puisse faire avec son regard ?",
+    question43: "Qu'est-ce qui te rend complètement folle de désir, même si tu essaies de le cacher ?",
+    question44: "Est-ce que tu es plus excitée par un flirt intense ou par une attention plus calme mais persistante ?",
+    question45: "Quand tu es seule avec quelqu’un, quel genre de tension veux-tu créer ?",
+    question46: "Qu’est-ce que tu penses de l’idée de laisser quelqu'un prendre totalement le contrôle ?",
+    question47: "Comment te sens-tu quand tu es dans une pièce avec quelqu’un et que les regards s’intensifient ?",
+    question48: "Qu’est-ce qui te rend prête à te laisser aller à un moment de folie douce ?",
+    question49: "Quand quelqu’un te murmure des mots doux, quels types de mots t’excitent vraiment ?",
+    question50: "Si je te donnais un baiser au cou, comment réagirais-tu ?",
+    question51: "Comment te sens-tu lorsqu’un homme te regarde avec envie et que tu le sens profondément attiré par toi ?",
+    question52: "Quand tu te laisses aller à l’imaginaire, qu’est-ce qui t'excite le plus ?",
+    question53: "Quelle est la partie de toi que tu préfères qu’on explore lentement ?",
+    question54: "Est-ce que tu crois que l’intensité d’un baiser peut véritablement changer l’ambiance d’un moment ?",
+    question55: "Si tu pouvais choisir une manière de créer une tension excitante, qu’est-ce que tu ferais ?",
+    question56: "Qu'est-ce qui te donne envie de t'abandonner totalement dans un moment intime ?",
+    question57: "Quel genre de situation t’incite à être un peu plus audacieuse que d’habitude ?",
+    question58: "Quand quelqu’un effleure ta peau, quel est le geste qui te fait fondre instantanément ?",
+    question59: "Quelle est la sensation qui te fait sentir la plus vivante ?",
+    question60: "Est-ce que tu préfères l'idée de la passion débridée ou du désir lentement entretenu ?",
+    question61: "Qu’est-ce qui, selon toi, crée une tension parfaite entre deux corps ?",
+    question62: "Est-ce que tu penses que l’excitation grandit plus avec le temps ou de manière spontanée ?",
+    question63: "Quand tu penses à l’intimité, quel est le détail que tu considères comme un véritable aphrodisiaque ?",
+    question64: "Si quelqu’un effleurait tes lèvres avec douceur, quelle sensation cela te ferait-il ?",
+    question65: "Qu’est-ce qui, à ton avis, est la clé pour rendre un baiser encore plus intense ?",
+    question66: "Si tu étais dans une situation où la passion serait à son comble, qu’est-ce qui te ferait encore plus craquer ?",
+    question67: "Qu'est-ce qui te rend irremplaçable dans un moment intime ?",
+    question68: "Quelle est la sensation que tu apprécies le plus lorsqu’un homme t’effleure sans te toucher vraiment ?",
+    question69: "Comment réagirais-tu si quelqu’un te dit de manière excitante ce qu’il veut faire avec toi ?",
+    question70: "Si tu pouvais choisir entre un désir qui brûle tout de suite ou une anticipation qui dure, lequel choisirais-tu ?",
+    question71: "Quelle est la meilleure manière pour quelqu’un de faire monter la température entre vous ?",
+    question72: "Si je te disais que je voulais t'embrasser, où voudrais-tu que ce soit ?",
+    question73: "Quel est le genre de regard qui te fait craquer et te donner envie de t’abandonner ?",
+    question74: "Quand tu penses à l’intensité d’un moment passionné, qu'est-ce qui te fait frissonner d'anticipation ?",
+    question75: "Quelle est ta façon de te laisser séduire de manière subtile mais irrésistible ?",
+    question76: "Qu’est-ce qui te fait perdre tous tes inhibitions en présence de quelqu’un que tu désires ?",
+    question77: "Quand tu imagines un baiser dans un endroit intime, comment veux-tu qu'il se déroule ?",
+    question78: "Qu’est-ce qui te fait penser à un moment passionné que tu voudrais partager avec quelqu'un ?",
+    question79: "Qu'est-ce qui, selon toi, rend un câlin ou une caresse encore plus excitante ?",
+    question80: "Quelle est la chose la plus excitante qu’un homme puisse dire dans un moment de flirt ?",
+    question81: "Est-ce que tu crois que l’anticipation d’un moment intime peut rendre la situation encore plus chaude ?",
+    question82: "Quel est l’endroit idéal où tu te sens incroyablement désirable ?",
+    question83: "Qu’est-ce qui te fait oublier le monde autour de toi et te concentrer sur l’intensité de l’instant ?",
+    question84: "Comment décrirais-tu l’impact d’un simple regard échangé dans un moment intime ?",
+    question85: "Quelle est la manière la plus excitante pour toi de provoquer un désir qui ne cesse de croître ?",
+    question86: "Qu’est-ce qui te fait vraiment t’abandonner au moment présent sans penser à rien d’autre ?",
+    question87: "Quelle est la chose que tu aimerais qu’un homme fasse pour te faire perdre la tête ?",
+    question88: "Quand tu imagines la tentation, qu'est-ce qui te fait perdre complètement le contrôle ?",
+    question89: "Qu’est-ce qui te fait frissonner rien qu’en y pensant ?",
+    question90: "Quel genre de moments te font totalement fondre, et pourquoi ?",
+    question91: "Si je voulais vraiment t’exciter, quel genre de geste ou de parole me conseillerais-tu de faire ?",
+    question92: "Quel est le genre de tension que tu préfères ressentir quand tu te sens attirée par quelqu’un ?",
+    question93: "Qu’est-ce qui te fait le plus frissonner, entre un baiser et une caresse ?",
+    question94: "Comment réagirais-tu si un baiser était l’élément déclencheur d’une passion inattendue ?",
+    question95: "Qu’est-ce qui te ferait te sentir totalement désirée et inoubliable ?",
+    question96: "Quand tu es dans un moment où tout devient plus intense, que ressens-tu vraiment ?",
+    question97: "Qu’est-ce qui, selon toi, rend l'excitation encore plus irrésistible ?",
+    question98: "Quelle est la sensation que tu veux ressentir avant de te donner à quelqu'un ?",
+    question99: "Est-ce que tu es attirée par la lenteur d’un moment intime, ou préfères-tu l’intensité immédiate ?",
+    question100: "Qu'est-ce qui, selon toi, est le vrai pouvoir de l'attirance entre deux personnes ?"
+};
+
+
+        // Afficher la modale avec la question correspondante
+        function showModal(questionId) {
+            document.getElementById('questionText').innerText = questions[questionId];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Copier la question dans le presse-papier
+        function copyQuestion() {
+            const text = document.getElementById('questionText').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                document.getElementById('copyMessage').style.display = "block";
+                setTimeout(function() {
+                    document.getElementById('copyMessage').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

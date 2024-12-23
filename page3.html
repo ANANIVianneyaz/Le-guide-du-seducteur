@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Questions pour démarrer la journée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-btn {
+            background-color: #4b0082;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .question-btn:focus {
+            outline: none;
+        }
+
+        /* Modal (boîte de dialogue) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        .modal-content {
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            margin: 15px 0;
+            word-wrap: break-word;
+        }
+
+        .modal-content button {
+            background-color: #9b4bcd;
+            color: white;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #4b0082;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Message de copie */
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-btn {
+                padding: 14px;
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>100 questions pour la faire projeter l'avenir avec toi et savoir ce qu'elle pense de toi</h1>
+
+    <div class="question-container">
+        <!-- List of questions -->
+        <button class="question-btn" onclick="showModal('question1')">Comment tu te vois dans cinq ans, et quel rôle tu imagines que je pourrais jouer dans ta vie ?</button>
+        <button class="question-btn" onclick="showModal('question2')">Si on vivait ensemble, comment imagines-tu notre quotidien ?</button>
+        <button class="question-btn" onclick="showModal('question3')">Quelles qualités tu aimerais trouver chez quelqu’un pour envisager un futur à deux ?</button>
+        <button class="question-btn" onclick="showModal('question4')">Si tu devais te projeter dans une relation sérieuse, quel genre de personne aimerais-tu être à mes côtés ?</button>
+        <button class="question-btn" onclick="showModal('question5')">Qu’est-ce qui, selon toi, rendrait notre relation solide sur le long terme ?</button>
+        <button class="question-btn" onclick="showModal('question6')">Qu’est-ce qui te ferait te sentir prête à t’engager plus sérieusement dans une relation ?</button>
+        <button class="question-btn" onclick="showModal('question7')">Si on décidait de partir en voyage ensemble dans un an, où imagines-tu qu’on aille ?</button>
+        <button class="question-btn" onclick="showModal('question8')">Quelle serait, selon toi, la prochaine étape pour nous deux ?</button>
+        <button class="question-btn" onclick="showModal('question9')">Si je devais te demander de faire un projet à long terme avec moi, quel projet tu choisirais ?</button>
+        <button class="question-btn" onclick="showModal('question10')">Qu’est-ce qui te donne envie de t’investir dans une relation avec quelqu’un à long terme ?</button>
+        <button class="question-btn" onclick="showModal('question11')">Comment tu vois la vie de couple ? Plutôt simple ou avec beaucoup de défis ?</button>
+        <button class="question-btn" onclick="showModal('question12')">Si on se retrouvait dans quelques années, où imagines-tu qu’on soit dans notre relation ?</button>
+        <button class="question-btn" onclick="showModal('question13')">Est-ce que tu crois qu’on pourrait faire des projets ensemble, même à long terme ?</button>
+        <button class="question-btn" onclick="showModal('question14')">Si tu devais envisager de vivre une grande aventure avec moi, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question15')">Qu’est-ce qui te fait vraiment envie quand tu penses à une relation à long terme ?</button>
+        <button class="question-btn" onclick="showModal('question16')">Quelle vision de l’avenir t’inspire quand tu penses à nous deux ?</button>
+        <button class="question-btn" onclick="showModal('question17')">Si tu imagines une vie à deux dans cinq ans, quels sont les petits détails que tu vois ?</button>
+        <button class="question-btn" onclick="showModal('question18')">Qu’est-ce qui te ferait vraiment te projeter dans un futur à long terme avec quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question19')">Qu’est-ce qui te donnerait envie de t’engager dans une relation avec quelqu’un comme moi ?</button>
+        <button class="question-btn" onclick="showModal('question20')">Si tu imagines qu’on soit ensemble dans un an, comment tu nous vois ?</button>
+        <button class="question-btn" onclick="showModal('question21')">Que dirais-tu si je te proposais de planifier un projet commun pour l’avenir ?</button>
+        <button class="question-btn" onclick="showModal('question22')">Qu’est-ce qui, selon toi, renforcerait notre relation à long terme ?</button>
+        <button class="question-btn" onclick="showModal('question23')">Si tu devais imaginer notre première maison ensemble, à quoi ressemblerait-elle ?</button>
+        <button class="question-btn" onclick="showModal('question24')">Quand tu penses à la construction d’une vie commune, quels éléments te semblent essentiels ?</button>
+        <button class="question-btn" onclick="showModal('question25')">Si tu pensais à un futur à deux, qu’est-ce que tu aimerais vivre ensemble ?</button>
+        <button class="question-btn" onclick="showModal('question26')">Quelles sont les valeurs que tu penses essentielles pour construire une relation solide ?</button>
+        <button class="question-btn" onclick="showModal('question27')">Quand tu te vois avec quelqu’un à l’avenir, qu’est-ce qui te semble le plus important ?</button>
+        <button class="question-btn" onclick="showModal('question28')">Est-ce que tu crois que le temps passé ensemble pourrait définir notre avenir ?</button>
+        <button class="question-btn" onclick="showModal('question29')">Qu’est-ce qui te ferait t’investir pleinement dans un projet avec quelqu’un comme moi ?</button>
+        <button class="question-btn" onclick="showModal('question30')">Si tu me demandais de faire un choix pour notre futur, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question31')">Si on partait ensemble dans un avenir lointain, à quoi ressemblerait notre quotidien ?</button>
+        <button class="question-btn" onclick="showModal('question32')">Est-ce que tu imagines qu’on pourrait bâtir quelque chose d’unique, à long terme ?</button>
+        <button class="question-btn" onclick="showModal('question33')">Si tu te projetais à cinq ans dans une relation, qu’est-ce qui serait un rêve devenu réalité ?</button>
+        <button class="question-btn" onclick="showModal('question34')">Que dirais-tu si je te proposais de définir ensemble des objectifs pour notre avenir ?</button>
+        <button class="question-btn" onclick="showModal('question35')">Qu’est-ce qui, selon toi, pourrait renforcer la complicité entre nous sur le long terme ?</button>
+        <button class="question-btn" onclick="showModal('question36')">Si tu imagines qu’on ait un jour une famille, quel genre de famille tu aimerais ?</button>
+        <button class="question-btn" onclick="showModal('question37')">Comment imagines-tu le mariage ? Est-ce quelque chose que tu envisages un jour ?</button>
+        <button class="question-btn" onclick="showModal('question38')">Si je te proposais de construire un projet à deux, quel projet serait-il ?</button>
+        <button class="question-btn" onclick="showModal('question39')">Qu’est-ce qui te fait sentir que quelqu’un est prêt pour une relation à long terme ?</button>
+        <button class="question-btn" onclick="showModal('question40')">Comment tu vois la vie à deux dans un futur proche ? Qu’est-ce qui t’attire ?</button>
+        <button class="question-btn" onclick="showModal('question41')">Si je devais te demander de me suivre dans un projet à long terme, comment réagirais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question42')">Qu’est-ce qui te fait imaginer que notre relation pourrait durer longtemps ?</button>
+        <button class="question-btn" onclick="showModal('question43')">Quand tu penses à l’avenir, quel rôle aimerais-tu que je joue à tes côtés ?</button>
+        <button class="question-btn" onclick="showModal('question44')">Comment tu vois les relations à long terme ? Tu penses que ça demande beaucoup de travail ?</button>
+        <button class="question-btn" onclick="showModal('question45')">Si on se retrouvait dans un an, qu’est-ce qui serait un accomplissement pour nous deux ?</button>
+        <button class="question-btn" onclick="showModal('question46')">Comment vois-tu l’avenir de notre relation ? Qu’est-ce que tu aimerais qu’on vive ?</button>
+        <button class="question-btn" onclick="showModal('question47')">Qu’est-ce qui te ferait sentir qu’on forme un vrai duo, à la fois dans la vie et dans nos projets ?</button>
+        <button class="question-btn" onclick="showModal('question48')">Si tu devais imaginer un moment clé de notre relation dans l’avenir, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question49')">Comment tu te sens par rapport à l’idée de s’engager à long terme ensemble ?</button>
+        <button class="question-btn" onclick="showModal('question50')">Si on devait prendre une grande décision ensemble, quel genre de décision imagines-tu ?</button>
+        <button class="question-btn" onclick="showModal('question51')">Si tu imagines qu’on parte en voyage dans dix ans, à quoi ressemblerait notre destination ?</button>
+        <button class="question-btn" onclick="showModal('question52')">Si tu te projetais dans un futur où on vit ensemble, quelle serait la première chose qu’on ferait ?</button>
+        <button class="question-btn" onclick="showModal('question53')">Qu’est-ce qui te ferait imaginer qu’on a un avenir commun et fort ?</button>
+        <button class="question-btn" onclick="showModal('question54')">Si tu devais choisir entre une aventure spontanée et un projet de vie à deux, quel serait ton choix ?</button>
+        <button class="question-btn" onclick="showModal('question55')">Qu’est-ce qui te ferait imaginer que notre relation deviendrait une grande histoire ?</button>
+        <button class="question-btn" onclick="showModal('question56')">Si tu devais écrire une page de notre histoire future, comment elle commencerait-elle ?</button>
+        <button class="question-btn" onclick="showModal('question57')">Quand tu penses à nous deux à long terme, qu’est-ce qui te semble essentiel ?</button>
+        <button class="question-btn" onclick="showModal('question58')">Comment tu imagines un futur avec moi dans lequel on est heureux ensemble ?</button>
+        <button class="question-btn" onclick="showModal('question59')">Si tu pouvais planifier l’avenir de notre relation, par où commencerais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question60')">Est-ce que tu crois qu’on pourrait vivre une vie passionnante ensemble dans quelques années ?</button>
+        <button class="question-btn" onclick="showModal('question61')">Si tu devais imaginer un futur en couple, quel genre d’activités aimerais-tu qu’on fasse ?</button>
+        <button class="question-btn" onclick="showModal('question62')">Si tu me proposais un projet d’avenir, quel genre de projet serais-tu prête à entreprendre ?</button>
+        <button class="question-btn" onclick="showModal('question63')">Quand tu te projettes avec quelqu’un, tu penses à une stabilité ou à un quotidien excitant ?</button>
+        <button class="question-btn" onclick="showModal('question64')">Quel genre d’avenir aimerais-tu qu’on construise ensemble ?</button>
+        <button class="question-btn" onclick="showModal('question65')">Comment tu imagines que notre relation pourrait évoluer à mesure qu’on se connaît mieux ?</button>
+        <button class="question-btn" onclick="showModal('question66')">Si tu devais voir un avenir à deux, à quoi ressemblerait-il ?</button>
+        <button class="question-btn" onclick="showModal('question67')">Comment vois-tu les relations longues durées ? Tu crois qu’elles peuvent être durables ?</button>
+        <button class="question-btn" onclick="showModal('question68')">Si tu pouvais choisir de vivre à deux dans un endroit précis, ce serait où ?</button>
+        <button class="question-btn" onclick="showModal('question69')">Qu’est-ce qui te donnerait envie de construire un avenir à long terme avec moi ?</button>
+        <button class="question-btn" onclick="showModal('question70')">Si tu imagines une vie à deux dans l’avenir, quel genre de vie de couple idéal tu voudrais ?</button>
+        <button class="question-btn" onclick="showModal('question71')">Comment tu te verrais dans notre relation dans cinq ans ?</button>
+        <button class="question-btn" onclick="showModal('question72')">Qu’est-ce qui te fait dire qu’on pourrait vraiment construire quelque chose de durable ?</button>
+        <button class="question-btn" onclick="showModal('question73')">Si tu pouvais planifier une étape importante de notre futur à deux, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question74')">Comment tu vois l’avenir de notre relation ? Plutôt stable ou plein de surprises ?</button>
+        <button class="question-btn" onclick="showModal('question75')">Qu’est-ce qui te fait penser qu’on pourrait réussir à construire une vie commune ?</button>
+        <button class="question-btn" onclick="showModal('question76')">Si tu devais choisir entre un futur excitant et un futur calme, quel serait ton choix ?</button>
+        <button class="question-btn" onclick="showModal('question77')">Si on devait changer quelque chose dans notre quotidien ensemble, quel changement imaginerais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question78')">Si tu pensais à l’avenir, qu’est-ce que tu aimerais que je fasse pour qu’on soit heureux ensemble ?</button>
+        <button class="question-btn" onclick="showModal('question79')">Qu’est-ce qui te fait imaginer que notre relation pourrait vraiment tenir sur le long terme ?</button>
+        <button class="question-btn" onclick="showModal('question80')">Si tu devais rêver de notre avenir, quel genre de vie imaginerais-tu ?</button>
+        <button class="question-btn" onclick="showModal('question81')">Qu’est-ce qui te semble essentiel pour qu’on fasse évoluer notre relation ?</button>
+        <button class="question-btn" onclick="showModal('question82')">Quand tu imagines un futur à deux, qu’est-ce qui te fait rêver ?</button>
+        <button class="question-btn" onclick="showModal('question83')">Qu’est-ce qui, selon toi, rendrait notre relation plus forte dans le futur ?</button>
+        <button class="question-btn" onclick="showModal('question84')">Si tu devais imaginer notre vie à deux dans un an, à quoi ressemblerait-elle ?</button>
+        <button class="question-btn" onclick="showModal('question85')">Comment tu te vois à long terme avec moi ?</button>
+        <button class="question-btn" onclick="showModal('question86')">Quel genre de relation as-tu envie de vivre avec moi ?</button>
+        <button class="question-btn" onclick="showModal('question87')">Si tu devais choisir un grand projet à réaliser ensemble, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question88')">Si tu penses à l’avenir, comment tu imagines qu’on se soutienne dans nos projets ?</button>
+        <button class="question-btn" onclick="showModal('question89')">Qu’est-ce qui te ferait dire que notre histoire a un potentiel à long terme ?</button>
+        <button class="question-btn" onclick="showModal('question90')">Si tu pouvais faire un vœu pour notre futur, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question91')">Qu’est-ce qui te fait sentir qu’on pourrait faire de grandes choses ensemble ?</button>
+        <button class="question-btn" onclick="showModal('question92')">Si tu devais imaginer notre vie dans dix ans, comment tu la verrais ?</button>
+        <button class="question-btn" onclick="showModal('question93')">Qu’est-ce qui, selon toi, nous rapprocherait encore plus à long terme ?</button>
+        <button class="question-btn" onclick="showModal('question94')">Si tu devais imaginer notre vie à deux dans cinq ans, quel genre de choses aimerais-tu y voir ?</button>
+        <button class="question-btn" onclick="showModal('question95')">Comment tu te sens quand tu penses à un avenir avec quelqu’un ?</button>
+        <button class="question-btn" onclick="showModal('question96')">Si tu pouvais choisir notre prochaine aventure ensemble, ce serait quoi ?</button>
+        <button class="question-btn" onclick="showModal('question97')">Qu’est-ce qui te ferait croire qu’on pourrait vraiment réussir ensemble sur le long terme ?</button>
+        <button class="question-btn" onclick="showModal('question98')">Si tu devais imaginer un futur commun avec moi, qu’est-ce qui te rendrait heureuse ?</button>
+        <button class="question-btn" onclick="showModal('question99')">Comment tu te projettes dans une relation qui dure ?</button>
+        <button class="question-btn" onclick="showModal('question100')">Si tu devais me donner un conseil pour notre avenir ensemble, ce serait quoi ?</button>
+    </div>
+
+    <!-- Modal (Boîte de dialogue pour afficher chaque question) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Question du jour</h2>
+            <p id="questionText"></p>
+            <div class="button-container">
+                <button onclick="closeModal()">Fermer</button>
+                <button onclick="copyQuestion()">Copier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message de copie -->
+    <div id="copyMessage" class="copy-message">
+        Question copiée dans le presse-papier !
+    </div>
+
+    <script>
+        // Liste des questions
+        const questions = {
+    question1: "Comment tu te vois dans cinq ans, et quel rôle tu imagines que je pourrais jouer dans ta vie ?",
+    question2: "Si on vivait ensemble, comment imagines-tu notre quotidien ?",
+    question3: "Quelles qualités tu aimerais trouver chez quelqu’un pour envisager un futur à deux ?",
+    question4: "Si tu devais te projeter dans une relation sérieuse, quel genre de personne aimerais-tu être à mes côtés ?",
+    question5: "Qu’est-ce qui, selon toi, rendrait notre relation solide sur le long terme ?",
+    question6: "Qu’est-ce qui te ferait te sentir prête à t’engager plus sérieusement dans une relation ?",
+    question7: "Si on décidait de partir en voyage ensemble dans un an, où imagines-tu qu’on aille ?",
+    question8: "Quelle serait, selon toi, la prochaine étape pour nous deux ?",
+    question9: "Si je devais te demander de faire un projet à long terme avec moi, quel projet tu choisirais ?",
+    question10: "Qu’est-ce qui te donne envie de t’investir dans une relation avec quelqu’un à long terme ?",
+    question11: "Comment tu vois la vie de couple ? Plutôt simple ou avec beaucoup de défis ?",
+    question12: "Si on se retrouvait dans quelques années, où imagines-tu qu’on soit dans notre relation ?",
+    question13: "Est-ce que tu crois qu’on pourrait faire des projets ensemble, même à long terme ?",
+    question14: "Si tu devais envisager de vivre une grande aventure avec moi, ce serait quoi ?",
+    question15: "Qu’est-ce qui te fait vraiment envie quand tu penses à une relation à long terme ?",
+    question16: "Quelle vision de l’avenir t’inspire quand tu penses à nous deux ?",
+    question17: "Si tu imagines une vie à deux dans cinq ans, quels sont les petits détails que tu vois ?",
+    question18: "Qu’est-ce qui te ferait vraiment te projeter dans un futur à long terme avec quelqu’un ?",
+    question19: "Qu’est-ce qui te donnerait envie de t’engager dans une relation avec quelqu’un comme moi ?",
+    question20: "Si tu imagines qu’on soit ensemble dans un an, comment tu nous vois ?",
+    question21: "Que dirais-tu si je te proposais de planifier un projet commun pour l’avenir ?",
+    question22: "Qu’est-ce qui, selon toi, renforcerait notre relation à long terme ?",
+    question23: "Si tu devais imaginer notre première maison ensemble, à quoi ressemblerait-elle ?",
+    question24: "Quand tu penses à la construction d’une vie commune, quels éléments te semblent essentiels ?",
+    question25: "Si tu pensais à un futur à deux, qu’est-ce que tu aimerais vivre ensemble ?",
+    question26: "Quelles sont les valeurs que tu penses essentielles pour construire une relation solide ?",
+    question27: "Quand tu te vois avec quelqu’un à l’avenir, qu’est-ce qui te semble le plus important ?",
+    question28: "Est-ce que tu crois que le temps passé ensemble pourrait définir notre avenir ?",
+    question29: "Qu’est-ce qui te ferait t’investir pleinement dans un projet avec quelqu’un comme moi ?",
+    question30: "Si tu me demandais de faire un choix pour notre futur, ce serait quoi ?",
+    question31: "Si on partait ensemble dans un avenir lointain, à quoi ressemblerait notre quotidien ?",
+    question32: "Est-ce que tu imagines qu’on pourrait bâtir quelque chose d’unique, à long terme ?",
+    question33: "Si tu te projetais à cinq ans dans une relation, qu’est-ce qui serait un rêve devenu réalité ?",
+    question34: "Que dirais-tu si je te proposais de définir ensemble des objectifs pour notre avenir ?",
+    question35: "Qu’est-ce qui, selon toi, pourrait renforcer la complicité entre nous sur le long terme ?",
+    question36: "Si tu imagines qu’on ait un jour une famille, quel genre de famille tu aimerais ?",
+    question37: "Comment imagines-tu le mariage ? Est-ce quelque chose que tu envisages un jour ?",
+    question38: "Si je te proposais de construire un projet à deux, quel projet serait-il ?",
+    question39: "Qu’est-ce qui te fait sentir que quelqu’un est prêt pour une relation à long terme ?",
+    question40: "Comment tu vois la vie à deux dans un futur proche ? Qu’est-ce qui t’attire ?",
+    question41: "Si je devais te demander de me suivre dans un projet à long terme, comment réagirais-tu ?",
+    question42: "Qu’est-ce qui te fait imaginer que notre relation pourrait durer longtemps ?",
+    question43: "Quand tu penses à l’avenir, quel rôle aimerais-tu que je joue à tes côtés ?",
+    question44: "Comment tu vois les relations à long terme ? Tu penses que ça demande beaucoup de travail ?",
+    question45: "Si on se retrouvait dans un an, qu’est-ce qui serait un accomplissement pour nous deux ?",
+    question46: "Comment vois-tu l’avenir de notre relation ? Qu’est-ce que tu aimerais qu’on vive ?",
+    question47: "Qu’est-ce qui te ferait sentir qu’on forme un vrai duo, à la fois dans la vie et dans nos projets ?",
+    question48: "Si tu devais imaginer un moment clé de notre relation dans l’avenir, ce serait quoi ?",
+    question49: "Comment tu te sens par rapport à l’idée de s’engager à long terme ensemble ?",
+    question50: "Si on devait prendre une grande décision ensemble, quel genre de décision imagines-tu ?",
+    question51: "Si tu imagines qu’on parte en voyage dans dix ans, à quoi ressemblerait notre destination ?",
+    question52: "Si tu te projetais dans un futur où on vit ensemble, quelle serait la première chose qu’on ferait ?",
+    question53: "Qu’est-ce qui te ferait imaginer qu’on a un avenir commun et fort ?",
+    question54: "Si tu devais choisir entre une aventure spontanée et un projet de vie à deux, quel serait ton choix ?",
+    question55: "Qu’est-ce qui te ferait imaginer que notre relation deviendrait une grande histoire ?",
+    question56: "Si tu devais écrire une page de notre histoire future, comment elle commencerait-elle ?",
+    question57: "Quand tu penses à nous deux à long terme, qu’est-ce qui te semble essentiel ?",
+    question58: "Comment tu imagines un futur avec moi dans lequel on est heureux ensemble ?",
+    question59: "Si tu pouvais planifier l’avenir de notre relation, par où commencerais-tu ?",
+    question60: "Est-ce que tu crois qu’on pourrait vivre une vie passionnante ensemble dans quelques années ?",
+    question61: "Si tu devais imaginer un futur en couple, quel genre d’activités aimerais-tu qu’on fasse ?",
+    question62: "Si tu me proposais un projet d’avenir, quel genre de projet serais-tu prête à entreprendre ?",
+    question63: "Quand tu te projettes avec quelqu’un, tu penses à une stabilité ou à un quotidien excitant ?",
+    question64: "Quel genre d’avenir aimerais-tu qu’on construise ensemble ?",
+    question65: "Comment tu imagines que notre relation pourrait évoluer à mesure qu’on se connaît mieux ?",
+    question66: "Si tu devais voir un avenir à deux, à quoi ressemblerait-il ?",
+    question67: "Comment vois-tu les relations longues durées ? Tu crois qu’elles peuvent être durables ?",
+    question68: "Si tu pouvais choisir de vivre à deux dans un endroit précis, ce serait où ?",
+    question69: "Qu’est-ce qui te donnerait envie de construire un avenir à long terme avec moi ?",
+    question70: "Si tu imagines une vie à deux dans l’avenir, quel genre de vie de couple idéal tu voudrais ?",
+    question71: "Comment tu te verrais dans notre relation dans cinq ans ?",
+    question72: "Qu’est-ce qui te fait dire qu’on pourrait vraiment construire quelque chose de durable ?",
+    question73: "Si tu pouvais planifier une étape importante de notre futur à deux, ce serait quoi ?",
+    question74: "Comment tu vois l’avenir de notre relation ? Plutôt stable ou plein de surprises ?",
+    question75: "Qu’est-ce qui te fait penser qu’on pourrait réussir à construire une vie commune ?",
+    question76: "Si tu devais choisir entre un futur excitant et un futur calme, quel serait ton choix ?",
+    question77: "Si on devait changer quelque chose dans notre quotidien ensemble, quel changement imaginerais-tu ?",
+    question78: "Si tu pensais à l’avenir, qu’est-ce que tu aimerais que je fasse pour qu’on soit heureux ensemble ?",
+    question79: "Qu’est-ce qui te fait imaginer que notre relation pourrait vraiment tenir sur le long terme ?",
+    question80: "Si tu devais rêver de notre avenir, quel genre de vie imaginerais-tu ?",
+    question81: "Qu’est-ce qui te semble essentiel pour qu’on fasse évoluer notre relation ?",
+    question82: "Quand tu imagines un futur à deux, qu’est-ce qui te fait rêver ?",
+    question83: "Qu’est-ce qui, selon toi, rendrait notre relation plus forte dans le futur ?",
+    question84: "Si tu devais imaginer notre vie à deux dans un an, à quoi ressemblerait-elle ?",
+    question85: "Comment tu te vois à long terme avec moi ?",
+    question86: "Quel genre de relation as-tu envie de vivre avec moi ?",
+    question87: "Si tu devais choisir un grand projet à réaliser ensemble, ce serait quoi ?",
+    question88: "Si tu penses à l’avenir, comment tu imagines qu’on se soutienne dans nos projets ?",
+    question89: "Qu’est-ce qui te ferait dire que notre histoire a un potentiel à long terme ?",
+    question90: "Si tu pouvais faire un vœu pour notre futur, ce serait quoi ?",
+    question91: "Qu’est-ce qui te fait sentir qu’on pourrait faire de grandes choses ensemble ?",
+    question92: "Si tu devais imaginer notre vie dans dix ans, comment tu la verrais ?",
+    question93: "Qu’est-ce qui, selon toi, nous rapprocherait encore plus à long terme ?",
+    question94: "Si tu devais imaginer notre vie à deux dans cinq ans, quel genre de choses aimerais-tu y voir ?",
+    question95: "Comment tu te sens quand tu penses à un avenir avec quelqu’un ?",
+    question96: "Si tu pouvais choisir notre prochaine aventure ensemble, ce serait quoi ?",
+    question97: "Qu’est-ce qui te ferait croire qu’on pourrait vraiment réussir ensemble sur le long terme ?",
+    question98: "Si tu devais imaginer un futur commun avec moi, qu’est-ce qui te rendrait heureuse ?",
+    question99: "Comment tu te projettes dans une relation qui dure ?",
+    question100: "Si tu devais me donner un conseil pour notre avenir ensemble, ce serait quoi ?"
+};
+
+        // Afficher la modale avec la question correspondante
+        function showModal(questionId) {
+            document.getElementById('questionText').innerText = questions[questionId];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Copier la question dans le presse-papier
+        function copyQuestion() {
+            const text = document.getElementById('questionText').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                document.getElementById('copyMessage').style.display = "block";
+                setTimeout(function() {
+                    document.getElementById('copyMessage').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

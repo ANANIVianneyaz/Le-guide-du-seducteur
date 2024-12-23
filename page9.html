@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Questions pour démarrer la journée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-btn {
+            background-color: #4b0082;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .question-btn:focus {
+            outline: none;
+        }
+
+        /* Modal (boîte de dialogue) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        .modal-content {
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            margin: 15px 0;
+            word-wrap: break-word;
+        }
+
+        .modal-content button {
+            background-color: #9b4bcd;
+            color: white;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #4b0082;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Message de copie */
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-btn {
+                padding: 14px;
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>100 questions pour pimenter la conversation et la rendre dingue de toi</h1>
+
+    <div class="question-container">
+        <!-- List of questions -->
+        <button class="question-btn" onclick="showModal('question1')">Si je te disais que tu me rends complètement fou, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question2')">Qu’est-ce qui te fait sentir que tu ne peux pas m’échapper, même si tu voulais ? </button>
+        <button class="question-btn" onclick="showModal('question3')">Si je t’embrassais maintenant, qu’est-ce qui te ferait perdre tout contrôle ? </button>
+        <button class="question-btn" onclick="showModal('question4')">Quand tu me regardes, qu’est-ce qui te fait penser que je pourrais être celui qui te fait fondre ? </button>
+        <button class="question-btn" onclick="showModal('question5')">Si tu devais choisir un endroit où m'embrasser, quel serait-il ? </button>
+        <button class="question-btn" onclick="showModal('question6')">Qu’est-ce qui te ferait rougir si je t’en donnais un compliment sincère ? </button>
+        <button class="question-btn" onclick="showModal('question7')">Quand tu penses à l’attirance, qu’est-ce qui te fait craquer chez un homme ? </button>
+        <button class="question-btn" onclick="showModal('question8')">Si je me tenais près de toi, qu’est-ce qui te ferait ne plus pouvoir penser à autre chose ? </button>
+        <button class="question-btn" onclick="showModal('question9')">Si je t’avouais un secret brûlant, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question10')">Qu’est-ce qui, chez toi, me rendrait complètement fou si je m’y intéressais de plus près ? </button>
+        <button class="question-btn" onclick="showModal('question11')">Quand je souris, qu’est-ce qui te fait sentir que j’ai une intention cachée ? </button>
+        <button class="question-btn" onclick="showModal('question12')">Si je te tenais dans mes bras, qu’est-ce qui te ferait ne plus vouloir en sortir ? </button>
+        <button class="question-btn" onclick="showModal('question13')">Qu’est-ce qui, selon toi, pourrait rendre notre connexion encore plus intense ? </button>
+        <button class="question-btn" onclick="showModal('question14')">Si tu savais que je te désire, comment cela changerait-il notre relation ? </button>
+        <button class="question-btn" onclick="showModal('question15')">Quand tu es avec moi, qu’est-ce qui te fait sentir que tu pourrais me laisser faire ce que je veux ? </button>
+        <button class="question-btn" onclick="showModal('question16')">Si je t’invitais à une soirée où la tension serait à son comble, que ferais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question17')">Qu’est-ce qui te rend nerveuse à l’idée de me voir de plus près ? </button>
+        <button class="question-btn" onclick="showModal('question18')">Quand je te parle, qu’est-ce qui te fait avoir envie de me dire des choses que tu n’as jamais dites à personne ? </button>
+        <button class="question-btn" onclick="showModal('question19')">Si je te demandais de me suivre dans une aventure imprévisible, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question20')">Quand je t’embrasse doucement sur le cou, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question21')">Qu’est-ce qui te fait penser que tu pourrais succomber à un baiser volé ? </button>
+        <button class="question-btn" onclick="showModal('question22')">Si je te caressais doucement la main, qu’est-ce qui te ferait perdre la notion du temps ? </button>
+        <button class="question-btn" onclick="showModal('question23')">Qu’est-ce qui te ferait te sentir tellement excitée que tu ne pourrais plus penser à rien d’autre ? </button>
+        <button class="question-btn" onclick="showModal('question24')">Si je te disais que je peux te rendre folle de désir rien qu’en te regardant, y croirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question25')">Qu’est-ce qui te fait imaginer qu’un simple geste de ma part pourrait complètement te faire perdre le contrôle ? </button>
+        <button class="question-btn" onclick="showModal('question26')">Si je t’embrassais sur la joue, qu’est-ce qui te ferait vouloir plus ? </button>
+        <button class="question-btn" onclick="showModal('question27')">Qu’est-ce qui, dans ma manière de te regarder, te fait penser que je te désire vraiment ? </button>
+        <button class="question-btn" onclick="showModal('question28')">Si je te murmurais des mots doux à l’oreille, qu’est-ce qui te ferait frissonner ? </button>
+        <button class="question-btn" onclick="showModal('question29')">Quand tu me vois sourire, qu’est-ce qui te fait penser que j’ai une idée derrière la tête ? </button>
+        <button class="question-btn" onclick="showModal('question30')">Si je t’invitais à passer une soirée intime, qu’est-ce qui te ferait accepter ? </button>
+        <button class="question-btn" onclick="showModal('question31')">Qu’est-ce qui, chez moi, te donne envie de tester tes limites ? </button>
+        <button class="question-btn" onclick="showModal('question32')">Si je te proposais de vivre une aventure, qu’est-ce qui te ferait dire "oui" sans hésiter ? </button>
+        <button class="question-btn" onclick="showModal('question33')">Qu’est-ce qui te fait frémir quand je te touche la main, même par accident ? </button>
+        <button class="question-btn" onclick="showModal('question34')">Si je te disais que je pourrais t’embrasser à tout moment, comment cela te ferait-il réagir ? </button>
+        <button class="question-btn" onclick="showModal('question35')">Qu’est-ce qui te ferait imaginer qu’une nuit entière avec moi serait inoubliable ? </button>
+        <button class="question-btn" onclick="showModal('question36')">Quand tu me vois, qu’est-ce qui te fait penser que je peux faire naître chez toi des désirs inavoués ? </button>
+        <button class="question-btn" onclick="showModal('question37')">Si je te disais que je veux que tu sois à moi, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question38')">Qu’est-ce qui te ferait perdre tout contrôle si tu sentais mes lèvres près de ta peau ? </button>
+        <button class="question-btn" onclick="showModal('question39')">Si je te donnais un baiser long et passionné, comment cela te ferait-il vibrer ? </button>
+        <button class="question-btn" onclick="showModal('question40')">Quand tu penses à l’intimité, qu’est-ce qui te fait imaginer que je serais l’homme avec qui tu l’explorerais ? </button>
+        <button class="question-btn" onclick="showModal('question41')">Si je te proposais de ne rien faire d'autre que de profiter de l’instant avec moi, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question42')">Qu’est-ce qui te ferait céder à la tentation si je te faisais un compliment audacieux ? </button>
+        <button class="question-btn" onclick="showModal('question43')">Quand je te regarde intensément, qu’est-ce qui te fait penser que je suis sur le point de te séduire ? </button>
+        <button class="question-btn" onclick="showModal('question44')">Si je te susurrais un mot doux à l’oreille, qu’est-ce qui te ferait fondre ? </button>
+        <button class="question-btn" onclick="showModal('question45')">Qu’est-ce qui te ferait avoir envie de me toucher juste pour sentir ma réaction ? </button>
+        <button class="question-btn" onclick="showModal('question46')">Si je t'invitais à passer une nuit à explorer l'inconnu avec moi, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question47')">Qu’est-ce qui, selon toi, pourrait rendre un simple regard entre nous totalement inoubliable ? </button>
+        <button class="question-btn" onclick="showModal('question48')">Si je t’effleurais le cou, qu’est-ce qui te ferait frissonner de plaisir ? </button>
+        <button class="question-btn" onclick="showModal('question49')">Quand je te caresse les doigts, qu’est-ce qui te fait perdre la notion du temps ? </button>
+        <button class="question-btn" onclick="showModal('question50')">Si je te tenais dans mes bras, qu’est-ce qui te ferait ne pas vouloir partir ? </button>
+        <button class="question-btn" onclick="showModal('question51')">Qu’est-ce qui te ferait frissonner de désir si je te faisais un compliment osé ? </button>
+        <button class="question-btn" onclick="showModal('question52')">Quand tu penses à l’excitation, qu’est-ce qui te fait imaginer une soirée pleine de mystère et de passion ? </button>
+        <button class="question-btn" onclick="showModal('question53')">Si je te confiais un secret brûlant, qu’est-ce qui te ferait envie de le découvrir à ton tour ? </button>
+        <button class="question-btn" onclick="showModal('question54')">Qu’est-ce qui te fait penser que tu pourrais tout risquer pour moi ? </button>
+        <button class="question-btn" onclick="showModal('question55')">Quand je te touche doucement sur l’épaule, qu’est-ce qui te ferait te sentir complètement à l’aise ? </button>
+        <button class="question-btn" onclick="showModal('question56')">Si je te demandais de vivre une aventure inoubliable, quelle serait ta réponse ? </button>
+        <button class="question-btn" onclick="showModal('question57')">Qu’est-ce qui te ferait perdre tout contrôle si tu savais que je pouvais te satisfaire parfaitement ? </button>
+        <button class="question-btn" onclick="showModal('question58')">Si je t’offrais une nuit pleine de mystère et de plaisir, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question59')">Quand je te tiens par la taille, qu’est-ce qui te ferait te sentir protégée et désirée en même temps ? </button>
+        <button class="question-btn" onclick="showModal('question60')">Qu’est-ce qui te ferait te sentir encore plus attirée par moi si tu savais que je te désire secrètement ? </button>
+        <button class="question-btn" onclick="showModal('question61')">Quand tu penses à l’instant où nos lèvres se rencontreraient, qu’est-ce qui te fait imaginer une explosion de sensations ? </button>
+        <button class="question-btn" onclick="showModal('question62')">Si je te faisais un baiser délicat sur la nuque, comment cela te ferait-il réagir ? </button>
+        <button class="question-btn" onclick="showModal('question63')">Qu’est-ce qui te ferait vouloir t’abandonner complètement à moi sans hésiter ? </button>
+        <button class="question-btn" onclick="showModal('question64')">Quand tu me vois me rapprocher de toi, qu’est-ce qui te fait anticiper un baiser passionné ? </button>
+        <button class="question-btn" onclick="showModal('question65')">Si je te disais que tu es tout ce que je veux, comment cela te ferait-il réagir ? </button>
+        <button class="question-btn" onclick="showModal('question66')">Quand tu penses à un moment où on serait seuls, qu’est-ce qui te fait imaginer qu’il pourrait être brûlant ? </button>
+        <button class="question-btn" onclick="showModal('question67')">Qu’est-ce qui, dans mes gestes et mes paroles, te ferait penser que je veux te rendre folle de désir ? </button>
+        <button class="question-btn" onclick="showModal('question68')">Si je t’enlèvais tout doute et te prouvais que je peux te rendre heureuse, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question69')">Qu’est-ce qui te ferait désirer encore plus un moment intense avec moi ? </button>
+        <button class="question-btn" onclick="showModal('question70')">Quand je te parle de l’avenir, qu’est-ce qui te fait penser que je pourrais être la personne qui te fait vivre tous tes fantasmes ? </button>
+        <button class="question-btn" onclick="showModal('question71')">Si je te faisais une promesse passionnée, qu’est-ce qui te ferait croire que je suis sérieux ? </button>
+        <button class="question-btn" onclick="showModal('question72')">Qu’est-ce qui te fait imaginer que notre première nuit ensemble serait inoubliable ? </button>
+        <button class="question-btn" onclick="showModal('question73')">Si je t'embrassais lentement sur les lèvres, qu’est-ce qui te ferait frémir ? </button>
+        <button class="question-btn" onclick="showModal('question74')">Quand je te prends dans mes bras, qu’est-ce qui te fait penser que tout est possible ? </button>
+        <button class="question-btn" onclick="showModal('question75')">Qu’est-ce qui, selon toi, rend un moment comme celui-ci complètement unique et excitant ? </button>
+        <button class="question-btn" onclick="showModal('question76')">Si je te parlais de tes fantasmes, qu’est-ce qui te ferait réaliser que je suis celui qui les rendra réels ? </button>
+        <button class="question-btn" onclick="showModal('question77')">Quand je te touche le visage doucement, qu’est-ce qui te fait croire que tu veux plus ? </button>
+        <button class="question-btn" onclick="showModal('question78')">Si je t'offrais une expérience inédite, qu’est-ce qui te ferait sentir complètement libre ? </button>
+        <button class="question-btn" onclick="showModal('question79')">Qu’est-ce qui te ferait perdre tout contrôle si je te disais que tu m’attires plus que n’importe qui ? </button>
+        <button class="question-btn" onclick="showModal('question80')">Quand je t’embrasse dans le cou, qu’est-ce qui te fait sourire secrètement ? </button>
+        <button class="question-btn" onclick="showModal('question81')">Si je te regardais d’une manière particulière, qu’est-ce qui te ferait sentir que je veux plus ? </button>
+        <button class="question-btn" onclick="showModal('question82')">Quand tu me vois me rapprocher, qu’est-ce qui te fait avoir envie de t'abandonner ? </button>
+        <button class="question-btn" onclick="showModal('question83')">Si je te demandais de m’accompagner dans un moment à deux, qu’est-ce qui te ferait y aller sans hésiter ? </button>
+        <button class="question-btn" onclick="showModal('question84')">Quand je te serre contre moi, qu’est-ce qui te fait te sentir à la fois protégée et excitée ? </button>
+        <button class="question-btn" onclick="showModal('question85')">Si je te disais que je suis capable de te faire découvrir des sensations inédites, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question86')">Qu’est-ce qui te ferait penser que je peux te rendre totalement folle de désir ? </button>
+        <button class="question-btn" onclick="showModal('question87')">Quand je te fais un compliment intime, qu’est-ce qui te fait te sentir encore plus proche de moi ? </button>
+        <button class="question-btn" onclick="showModal('question88')">Si je te disais que je veux être celui qui t’apporte tout ce que tu désires, qu’est-ce qui te ferait croire en cette promesse ? </button>
+        <button class="question-btn" onclick="showModal('question89')">Qu’est-ce qui, dans mon regard, te ferait penser que tu es la seule qui compte ? </button>
+        <button class="question-btn" onclick="showModal('question90')">Si je te confiais que je ne peux pas m’arrêter de penser à toi, comment cela te ferait-il réagir ? </button>
+        <button class="question-btn" onclick="showModal('question91')">Qu’est-ce qui te ferait te sentir invincible si je te demandais de me suivre dans une aventure ? </button>
+        <button class="question-btn" onclick="showModal('question92')">Si je te disais que j’ai envie de te voir dans un autre état d’esprit, comment cela te ferait-il ? </button>
+        <button class="question-btn" onclick="showModal('question93')">Qu’est-ce qui, selon toi, pourrait être le plus excitant si je te faisais une proposition audacieuse ? </button>
+        <button class="question-btn" onclick="showModal('question94')">Si je te donnais la possibilité de m’avoir rien que pour toi, qu’est-ce qui te ferait dire "oui" ? </button>
+        <button class="question-btn" onclick="showModal('question95')">Quand je te prends par la taille, qu’est-ce qui te fait sentir que je te désire plus que tout ? </button>
+        <button class="question-btn" onclick="showModal('question96')">Si je te parlais de ce qui m’attire chez toi, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question97')">Qu’est-ce qui, selon toi, pourrait te rendre totalement accro à moi ? </button>
+        <button class="question-btn" onclick="showModal('question98')">Quand tu imagines que je me rapproche, qu’est-ce qui te ferait ne plus pouvoir réfléchir ? </button>
+        <button class="question-btn" onclick="showModal('question99')">Si je te disais que j’ai hâte de te rendre folle de plaisir, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question100')">Qu’est-ce qui te ferait désirer un baiser encore plus chaud si je te murmurais un mot à l’oreille ? </button>
+    </div>
+
+    <!-- Modal (Boîte de dialogue pour afficher chaque question) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Question du jour</h2>
+            <p id="questionText"></p>
+            <div class="button-container">
+                <button onclick="closeModal()">Fermer</button>
+                <button onclick="copyQuestion()">Copier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message de copie -->
+    <div id="copyMessage" class="copy-message">
+        Question copiée dans le presse-papier !
+    </div>
+
+    <script>
+        // Liste des questions
+        const questions = {
+    question1: "Si je te disais que tu me rends complètement fou, comment réagirais-tu ?",
+    question2: "Qu’est-ce qui te fait sentir que tu ne peux pas m’échapper, même si tu voulais ?",
+    question3: "Si je t’embrassais maintenant, qu’est-ce qui te ferait perdre tout contrôle ?",
+    question4: "Quand tu me regardes, qu’est-ce qui te fait penser que je pourrais être celui qui te fait fondre ?",
+    question5: "Si tu devais choisir un endroit où m'embrasser, quel serait-il ?",
+    question6: "Qu’est-ce qui te ferait rougir si je t’en donnais un compliment sincère ?",
+    question7: "Quand tu penses à l’attirance, qu’est-ce qui te fait craquer chez un homme ?",
+    question8: "Si je me tenais près de toi, qu’est-ce qui te ferait ne plus pouvoir penser à autre chose ?",
+    question9: "Si je t’avouais un secret brûlant, comment réagirais-tu ?",
+    question10: "Qu’est-ce qui, chez toi, me rendrait complètement fou si je m’y intéressais de plus près ?",
+    question11: "Quand je souris, qu’est-ce qui te fait sentir que j’ai une intention cachée ?",
+    question12: "Si je te tenais dans mes bras, qu’est-ce qui te ferait ne plus vouloir en sortir ?",
+    question13: "Qu’est-ce qui, selon toi, pourrait rendre notre connexion encore plus intense ?",
+    question14: "Si tu savais que je te désire, comment cela changerait-il notre relation ?",
+    question15: "Quand tu es avec moi, qu’est-ce qui te fait sentir que tu pourrais me laisser faire ce que je veux ?",
+    question16: "Si je t’invitais à une soirée où la tension serait à son comble, que ferais-tu ?",
+    question17: "Qu’est-ce qui te rend nerveuse à l’idée de me voir de plus près ?",
+    question18: "Quand je te parle, qu’est-ce qui te fait avoir envie de me dire des choses que tu n’as jamais dites à personne ?",
+    question19: "Si je te demandais de me suivre dans une aventure imprévisible, comment réagirais-tu ?",
+    question20: "Quand je t’embrasse doucement sur le cou, comment réagirais-tu ?",
+    question21: "Qu’est-ce qui te fait penser que tu pourrais succomber à un baiser volé ?",
+    question22: "Si je te caressais doucement la main, qu’est-ce qui te ferait perdre la notion du temps ?",
+    question23: "Qu’est-ce qui te ferait te sentir tellement excitée que tu ne pourrais plus penser à rien d’autre ?",
+    question24: "Si je te disais que je peux te rendre folle de désir rien qu’en te regardant, y croirais-tu ?",
+    question25: "Qu’est-ce qui te fait imaginer qu’un simple geste de ma part pourrait complètement te faire perdre le contrôle ?",
+    question26: "Si je t’embrassais sur la joue, qu’est-ce qui te ferait vouloir plus ?",
+    question27: "Qu’est-ce qui, dans ma manière de te regarder, te fait penser que je te désire vraiment ?",
+    question28: "Si je te murmurais des mots doux à l’oreille, qu’est-ce qui te ferait frissonner ?",
+    question29: "Quand tu me vois sourire, qu’est-ce qui te fait penser que j’ai une idée derrière la tête ?",
+    question30: "Si je t’invitais à passer une soirée intime, qu’est-ce qui te ferait accepter ?",
+    question31: "Qu’est-ce qui, chez moi, te donne envie de tester tes limites ?",
+    question32: "Si je te proposais de vivre une aventure, qu’est-ce qui te ferait dire \"oui\" sans hésiter ?",
+    question33: "Qu’est-ce qui te fait frémir quand je te touche la main, même par accident ?",
+    question34: "Si je te disais que je pourrais t’embrasser à tout moment, comment cela te ferait-il réagir ?",
+    question35: "Qu’est-ce qui te ferait imaginer qu’une nuit entière avec moi serait inoubliable ?",
+    question36: "Quand tu me vois, qu’est-ce qui te fait penser que je peux faire naître chez toi des désirs inavoués ?",
+    question37: "Si je te disais que je veux que tu sois à moi, comment réagirais-tu ?",
+    question38: "Qu’est-ce qui te ferait perdre tout contrôle si tu sentais mes lèvres près de ta peau ?",
+    question39: "Si je te donnais un baiser long et passionné, comment cela te ferait-il vibrer ?",
+    question40: "Quand tu penses à l’intimité, qu’est-ce qui te fait imaginer que je serais l’homme avec qui tu l’explorerais ?",
+    question41: "Si je te proposais de ne rien faire d'autre que de profiter de l’instant avec moi, comment réagirais-tu ?",
+    question42: "Qu’est-ce qui te ferait céder à la tentation si je te faisais un compliment audacieux ?",
+    question43: "Quand je te regarde intensément, qu’est-ce qui te fait penser que je suis sur le point de te séduire ?",
+    question44: "Si je te susurrais un mot doux à l’oreille, qu’est-ce qui te ferait fondre ?",
+    question45: "Qu’est-ce qui te ferait avoir envie de me toucher juste pour sentir ma réaction ?",
+    question46: "Si je t'invitais à passer une nuit à explorer l'inconnu avec moi, comment réagirais-tu ?",
+    question47: "Qu’est-ce qui, selon toi, pourrait rendre un simple regard entre nous totalement inoubliable ?",
+    question48: "Si je t’effleurais le cou, qu’est-ce qui te ferait frissonner de plaisir ?",
+    question49: "Quand je te caresse les doigts, qu’est-ce qui te fait perdre la notion du temps ?",
+    question50: "Si je te tenais dans mes bras, qu’est-ce qui te ferait ne pas vouloir partir ?",
+    question51: "Qu’est-ce qui te ferait frissonner de désir si je te faisais un compliment osé ?",
+    question52: "Quand tu penses à l’excitation, qu’est-ce qui te fait imaginer une soirée pleine de mystère et de passion ?",
+    question53: "Si je te confiais un secret brûlant, qu’est-ce qui te ferait envie de le découvrir à ton tour ?",
+    question54: "Qu’est-ce qui te fait penser que tu pourrais tout risquer pour moi ?",
+    question55: "Quand je te touche doucement sur l’épaule, qu’est-ce qui te ferait te sentir complètement à l’aise ?",
+    question56: "Si je te demandais de vivre une aventure inoubliable, quelle serait ta réponse ?",
+    question57: "Qu’est-ce qui te ferait perdre tout contrôle si tu savais que je pouvais te satisfaire parfaitement ?",
+    question58: "Si je t’offrais une nuit pleine de mystère et de plaisir, comment réagirais-tu ?",
+    question59: "Quand je te tiens par la taille, qu’est-ce qui te ferait te sentir protégée et désirée en même temps ?",
+    question60: "Qu’est-ce qui te ferait te sentir encore plus attirée par moi si tu savais que je te désire secrètement ?",
+    question61: "Quand tu penses à l’instant où nos lèvres se rencontreraient, qu’est-ce qui te fait imaginer une explosion de sensations ?",
+    question62: "Si je te faisais un baiser délicat sur la nuque, comment cela te ferait-il réagir ?",
+    question63: "Qu’est-ce qui te ferait vouloir t’abandonner complètement à moi sans hésiter ?",
+    question64: "Quand tu me vois me rapprocher de toi, qu’est-ce qui te fait anticiper un baiser passionné ?",
+    question65: "Si je te disais que tu es tout ce que je veux, comment cela te ferait-il réagir ?",
+    question66: "Quand tu penses à un moment où on serait seuls, qu’est-ce qui te fait imaginer qu’il pourrait être brûlant ?",
+    question67: "Qu’est-ce qui, dans mes gestes et mes paroles, te ferait penser que je veux te rendre folle de désir ?",
+    question68: "Si je t’enlèvais tout doute et te prouvais que je peux te rendre heureuse, comment réagirais-tu ?",
+    question69: "Qu’est-ce qui te ferait désirer encore plus un moment intense avec moi ?",
+    question70: "Quand je te parle de l’avenir, qu’est-ce qui te fait penser que je pourrais être la personne qui te fait vivre tous tes fantasmes ?",
+    question71: "Si je te faisais une promesse passionnée, qu’est-ce qui te ferait croire que je suis sérieux ?",
+    question72: "Qu’est-ce qui te fait imaginer que notre première nuit ensemble serait inoubliable ?",
+    question73: "Si je t'embrassais lentement sur les lèvres, qu’est-ce qui te ferait frémir ?",
+    question74: "Quand je te prends dans mes bras, qu’est-ce qui te fait penser que tout est possible ?",
+    question75: "Qu’est-ce qui, selon toi, rend un moment comme celui-ci complètement unique et excitant ?",
+    question76: "Si je te parlais de tes fantasmes, qu’est-ce qui te ferait réaliser que je suis celui qui les rendra réels ?",
+    question77: "Quand je te touche le visage doucement, qu’est-ce qui te fait croire que tu veux plus ?",
+    question78: "Si je t'offrais une expérience inédite, qu’est-ce qui te ferait sentir complètement libre ?",
+    question79: "Qu’est-ce qui te ferait perdre tout contrôle si je te disais que tu m’attires plus que n’importe qui ?",
+    question80: "Quand je t’embrasse dans le cou, qu’est-ce qui te fait sourire secrètement ?",
+    question81: "Si je te regardais d’une manière particulière, qu’est-ce qui te ferait sentir que je veux plus ?",
+    question82: "Quand tu me vois me rapprocher, qu’est-ce qui te fait avoir envie de t'abandonner ?",
+    question83: "Si je te demandais de m’accompagner dans un moment à deux, qu’est-ce qui te ferait y aller sans hésiter ?",
+    question84: "Quand je te serre contre moi, qu’est-ce qui te fait te sentir à la fois protégée et excitée ?",
+    question85: "Si je te disais que je suis capable de te faire découvrir des sensations inédites, comment réagirais-tu ?",
+    question86: "Qu’est-ce qui te ferait penser que je peux te rendre totalement folle de désir ?",
+    question87: "Quand je te fais un compliment intime, qu’est-ce qui te fait te sentir encore plus proche de moi ?",
+    question88: "Si je te disais que je veux être celui qui t’apporte tout ce que tu désires, qu’est-ce qui te ferait croire en cette promesse ?",
+    question89: "Qu’est-ce qui, dans mon regard, te ferait penser que tu es la seule qui compte ?",
+    question90: "Si je te confiais que je ne peux pas m’arrêter de penser à toi, comment cela te ferait-il réagir ?",
+    question91: "Qu’est-ce qui te ferait te sentir invincible si je te demandais de me suivre dans une aventure ?",
+    question92: "Si je te disais que j’ai envie de te voir dans un autre état d’esprit, comment cela te ferait-il ?",
+    question93: "Qu’est-ce qui, selon toi, pourrait être le plus excitant si je te faisais une proposition audacieuse ?",
+    question94: "Si je te donnais la possibilité de m’avoir rien que pour toi, qu’est-ce qui te ferait dire \"oui\" ?",
+    question95: "Quand je te prends par la taille, qu’est-ce qui te fait sentir que je te désire plus que tout ?",
+    question96: "Si je te parlais de ce qui m’attire chez toi, comment réagirais-tu ?",
+    question97: "Qu’est-ce qui, selon toi, pourrait te rendre totalement accro à moi ?",
+    question98: "Quand tu imagines que je me rapproche, qu’est-ce qui te ferait ne plus pouvoir réfléchir ?",
+    question99: "Si je te disais que j’ai hâte de te rendre folle de plaisir, comment réagirais-tu ?",
+    question100: "Qu’est-ce qui te ferait désirer un baiser encore plus chaud si je te murmurais un mot à l’oreille ?"
+};
+
+
+        // Afficher la modale avec la question correspondante
+        function showModal(questionId) {
+            document.getElementById('questionText').innerText = questions[questionId];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Copier la question dans le presse-papier
+        function copyQuestion() {
+            const text = document.getElementById('questionText').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                document.getElementById('copyMessage').style.display = "block";
+                setTimeout(function() {
+                    document.getElementById('copyMessage').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

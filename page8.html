@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Questions pour démarrer la journée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .question-btn {
+            background-color: #4b0082;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .question-btn:hover {
+            background-color: #9b4bcd;
+            transform: scale(1.05);
+        }
+
+        .question-btn:focus {
+            outline: none;
+        }
+
+        /* Modal (boîte de dialogue) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        .modal-content {
+            background-color: #6a0dad; /* Violet */
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content p {
+            font-size: 1.4em;
+            margin: 15px 0;
+            word-wrap: break-word;
+        }
+
+        .modal-content button {
+            background-color: #9b4bcd;
+            color: white;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #4b0082;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Message de copie */
+        .copy-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4b0082;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: none;
+            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .question-btn {
+                padding: 14px;
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>100 questions pour la rendre dingue de toi</h1>
+
+    <div class="question-container">
+        <!-- List of questions -->
+        <button class="question-btn" onclick="showModal('question1')">Quand tu me regardes dans les yeux, que ressens-tu vraiment à ce moment-là ? </button>
+        <button class="question-btn" onclick="showModal('question2')">Qu’est-ce qui te fait penser que je suis différent des autres ? </button>
+        <button class="question-btn" onclick="showModal('question3')">Qu’est-ce qui, selon toi, rend un homme vraiment irrésistible ? </button>
+        <button class="question-btn" onclick="showModal('question4')">Si je t’embrassais maintenant, qu’est-ce qui te ferait fondre immédiatement ? </button>
+        <button class="question-btn" onclick="showModal('question5')">Quand tu penses à nous deux, à quoi imagines-tu notre complicité ? </button>
+        <button class="question-btn" onclick="showModal('question6')">Qu’est-ce que tu vois quand tu penses à l’avenir avec quelqu’un comme moi ? </button>
+        <button class="question-btn" onclick="showModal('question7')">Est-ce que tu crois que la chimie entre deux personnes peut vraiment changer toute la dynamique ? </button>
+        <button class="question-btn" onclick="showModal('question8')">Quand tu me vois, qu’est-ce qui te fait penser que tu pourrais être avec quelqu’un comme moi ? </button>
+        <button class="question-btn" onclick="showModal('question9')">Est-ce qu’il y a quelque chose que tu aimerais que je fasse pour te rendre encore plus folle de moi ? </button>
+        <button class="question-btn" onclick="showModal('question10')">Qu’est-ce qui te ferait te sentir spéciale et désirée si on passait plus de temps ensemble ? </button>
+        <button class="question-btn" onclick="showModal('question11')">Si je devais te dire une chose sincère, qu’est-ce qui, selon toi, pourrait te faire complètement craquer ? </button>
+        <button class="question-btn" onclick="showModal('question12')">Qu’est-ce que tu ressens quand tu sais que quelqu’un pense à toi sans même que tu ne dises un mot ? </button>
+        <button class="question-btn" onclick="showModal('question13')">Si tu étais dans mes bras, qu’est-ce qui te ferait te sentir à l’aise et comblée ? </button>
+        <button class="question-btn" onclick="showModal('question14')">Quand je te parle, comment te sens-tu à chaque mot que je prononce ? </button>
+        <button class="question-btn" onclick="showModal('question15')">Qu’est-ce qui te fait penser qu'on pourrait bien s'entendre à long terme ? </button>
+        <button class="question-btn" onclick="showModal('question16')">Qu’est-ce qui te fait imaginer que nous avons une alchimie unique ? </button>
+        <button class="question-btn" onclick="showModal('question17')">Si je t’offrais une surprise inattendue, qu’est-ce qui te ferait te sentir comblée ? </button>
+        <button class="question-btn" onclick="showModal('question18')">Quand je souris, est-ce que ça te fait sentir que j’ai une connexion particulière avec toi ? </button>
+        <button class="question-btn" onclick="showModal('question19')">Qu’est-ce qui, selon toi, fait que tu es attirée par un homme sans même savoir pourquoi ? </button>
+        <button class="question-btn" onclick="showModal('question20')">Qu’est-ce qui te fait croire que je pourrais être celui avec qui tu pourrais tout partager ? </button>
+        <button class="question-btn" onclick="showModal('question21')">Quand tu es avec moi, qu’est-ce qui te fait te sentir plus vivante et libre ? </button>
+        <button class="question-btn" onclick="showModal('question22')">Qu’est-ce qui te fait penser que je pourrais être un homme différent des autres ? </button>
+        <button class="question-btn" onclick="showModal('question23')">Si je devais être un livre ouvert pour toi, que voudrais-tu découvrir ? </button>
+        <button class="question-btn" onclick="showModal('question24')">Si je te donnais la chance de me connaître encore plus, qu’est-ce que tu aimerais savoir ? </button>
+        <button class="question-btn" onclick="showModal('question25')">Quand tu imagines nos moments ensemble, qu’est-ce qui te fait sourire ? </button>
+        <button class="question-btn" onclick="showModal('question26')">Si je te faisais rire maintenant, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question27')">Qu’est-ce qui te fait sentir que tu pourrais passer des heures à me parler sans t’en lasser ? </button>
+        <button class="question-btn" onclick="showModal('question28')">Quand je t’écoute attentivement, qu’est-ce qui te fait croire que je m’intéresse vraiment à toi ? </button>
+        <button class="question-btn" onclick="showModal('question29')">Si on passait un moment calme ensemble, qu’est-ce qui te ferait te sentir profondément connectée à moi ? </button>
+        <button class="question-btn" onclick="showModal('question30')">Qu’est-ce qui, selon toi, fait que deux personnes peuvent se comprendre sans avoir besoin de mots ? </button>
+        <button class="question-btn" onclick="showModal('question31')">Si je t’écrivais une lettre sincère, que penses-tu qu’elle te ferait ressentir ? </button>
+        <button class="question-btn" onclick="showModal('question32')">Qu’est-ce qui, chez moi, te fait te sentir à l’aise et détendue ? </button>
+        <button class="question-btn" onclick="showModal('question33')">Si je t’invitais à une soirée intime, comment te sentirais-tu à l’idée de passer du temps seul avec moi ? </button>
+        <button class="question-btn" onclick="showModal('question34')">Quand tu imagines que tu es seule avec moi, qu’est-ce qui te ferait perdre le contrôle de tes pensées ? </button>
+        <button class="question-btn" onclick="showModal('question35')">Qu’est-ce qui, selon toi, rend notre connexion aussi particulière ? </button>
+        <button class="question-btn" onclick="showModal('question36')">Si tu me voyais me perdre dans un sourire en pensant à toi, qu’est-ce que cela te ferait ressentir ? </button>
+        <button class="question-btn" onclick="showModal('question37')">Quand je te touche doucement, qu’est-ce que cela te fait penser sur notre relation ? </button>
+        <button class="question-btn" onclick="showModal('question38')">Si je te montrais à quel point je me soucie de toi, qu’est-ce qui te toucherait le plus ? </button>
+        <button class="question-btn" onclick="showModal('question39')">Qu’est-ce qui te fait penser que tu pourrais vraiment t’investir avec moi dans quelque chose de sérieux ? </button>
+        <button class="question-btn" onclick="showModal('question40')">Si je t’accompagnais dans une aventure, comment te sentirais-tu en sachant que je serais là à chaque étape ? </button>
+        <button class="question-btn" onclick="showModal('question41')">Qu’est-ce qui te fait croire que notre alchimie pourrait évoluer et devenir quelque chose de plus fort ? </button>
+        <button class="question-btn" onclick="showModal('question42')">Quand je parle de l’avenir, qu’est-ce qui te fait imaginer que tu veux m’y inclure ? </button>
+        <button class="question-btn" onclick="showModal('question43')">Si tu me regardais vraiment, qu’est-ce qui te ferait sentir que je suis celui que tu cherches ? </button>
+        <button class="question-btn" onclick="showModal('question44')">Si tu me regardais vraiment, qu’est-ce qui te ferait sentir que je suis celui que tu cherches ? </button>
+        <button class="question-btn" onclick="showModal('question45')">Quand tu penses à des moments complices, qu’est-ce qui te fait imaginer que je serai toujours là ? </button>
+        <button class="question-btn" onclick="showModal('question46')">Qu’est-ce qui te ferait oublier tout le reste et me concentrer sur nous deux ? </button>
+        <button class="question-btn" onclick="showModal('question47')">Quand je partage mes pensées les plus sincères, qu’est-ce qui te fait sentir que tu veux savoir encore plus ? </button>
+        <button class="question-btn" onclick="showModal('question48')">Si je te prouvais que je suis quelqu’un de fiable, qu’est-ce qui te ferait te sentir totalement à l’aise avec moi ? </button>
+        <button class="question-btn" onclick="showModal('question49')">Si on partageait un moment intense, qu’est-ce qui te ferait tomber encore plus amoureuse de moi ? </button>
+        <button class="question-btn" onclick="showModal('question50')">Quand tu penses à un homme en qui tu pourrais avoir confiance, qu’est-ce qui te fait imaginer que je pourrais être celui-là ? </button>
+        <button class="question-btn" onclick="showModal('question51')">Si je te demandais de m’ouvrir ton cœur, qu’est-ce qui te ferait vouloir le faire ? </button>
+        <button class="question-btn" onclick="showModal('question52')">Qu’est-ce qui, dans mes gestes ou mes paroles, te fait sentir que tu pourrais m’aimer profondément ? </button>
+        <button class="question-btn" onclick="showModal('question53')">Quand tu te sens vraiment écoutée, qu’est-ce qui te fait penser que j’ai une attention particulière pour toi ? </button>
+        <button class="question-btn" onclick="showModal('question54')">Si je t’accompagnais dans un moment de doute, comment cela te ferait-il sentir par rapport à notre relation ? </button>
+        <button class="question-btn" onclick="showModal('question55')">Qu’est-ce qui, chez moi, te donne envie de connaître davantage et de te sentir encore plus connectée ? </button>
+        <button class="question-btn" onclick="showModal('question56')">Si je te faisais sentir que tu es la personne la plus importante dans ma vie, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question57')">Qu’est-ce qui te ferait vraiment ressentir que je pourrais être celui qui te comprenne entièrement ? </button>
+        <button class="question-btn" onclick="showModal('question58')">Quand je parle de nous deux, qu’est-ce qui te fait imaginer que notre histoire pourrait être exceptionnelle ? </button>
+        <button class="question-btn" onclick="showModal('question59')">Si je t’embrassais avec une tendresse profonde, comment cela te ferait-il te sentir ? </button>
+        <button class="question-btn" onclick="showModal('question60')">Qu’est-ce qui te fait penser que je pourrais être l’homme avec qui tu imagines un futur ? </button>
+        <button class="question-btn" onclick="showModal('question61')">Quand je t’offre mon attention entière, qu’est-ce qui te fait penser que tu es la seule à compter pour moi ? </button>
+        <button class="question-btn" onclick="showModal('question62')">Si je devais faire quelque chose de spécial juste pour toi, qu’est-ce qui te ferait fondre ? </button>
+        <button class="question-btn" onclick="showModal('question63')">Qu’est-ce qui te fait penser que, malgré tout, notre connexion pourrait grandir pour devenir indestructible ? </button>
+        <button class="question-btn" onclick="showModal('question64')">Si je te montrais toute la profondeur de mes sentiments, qu’est-ce qui te ferait croire que tu es la seule pour moi ? </button>
+        <button class="question-btn" onclick="showModal('question65')">Quand je te regarde dans les yeux, qu’est-ce qui te fait croire que je veux quelque chose de plus sérieux ? </button>
+        <button class="question-btn" onclick="showModal('question66')">Si tu me voyais faire un geste spontané pour te montrer combien tu es importante, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question67')">Qu’est-ce qui, selon toi, fait que je peux être celui qui te surprend chaque jour ? </button>
+        <button class="question-btn" onclick="showModal('question68')">Si je te faisais sentir comme la personne la plus précieuse à mes yeux, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question69')">Quand tu penses à une complicité parfaite, qu’est-ce qui te fait imaginer que nous pourrions être ce couple ? </button>
+        <button class="question-btn" onclick="showModal('question70')">Qu’est-ce qui te ferait vraiment te sentir aimé et désiré par moi ? </button>
+        <button class="question-btn" onclick="showModal('question71')">Quand je t’écoute vraiment, qu’est-ce qui te fait croire que tu pourrais être tout pour moi ? </button>
+        <button class="question-btn" onclick="showModal('question72')">Si tu me voyais m’investir complètement dans nous deux, qu’est-ce qui te ferait voir une véritable stabilité ? </button>
+        <button class="question-btn" onclick="showModal('question73')">Qu’est-ce qui, dans mes gestes et ma façon de te regarder, te fait sentir que je suis celui que tu attendais ? </button>
+        <button class="question-btn" onclick="showModal('question74')">Quand tu penses à un futur à deux, qu’est-ce qui te fait rêver de le vivre à mes côtés ? </button>
+        <button class="question-btn" onclick="showModal('question75')">Si je te montrais que je suis prêt à te soutenir à tout moment, qu’est-ce qui te ferait voir un avenir avec moi ? </button>
+        <button class="question-btn" onclick="showModal('question76')">Qu’est-ce qui, chez moi, te fait croire que je peux être un compagnon fiable pour tout ? </button>
+        <button class="question-btn" onclick="showModal('question77')">Si je te disais que tu es exactement ce que je recherche, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question78')">Qu’est-ce qui, dans ma façon d’être, te fait sentir que je suis celui qui pourrait te rendre heureuse ? </button>
+        <button class="question-btn" onclick="showModal('question79')">Si je te disais que tu es la personne à laquelle je pense tout le temps, comment cela te ferait-il sentir ? </button>
+        <button class="question-btn" onclick="showModal('question80')">Quand tu imagines un avenir à deux, qu’est-ce qui te fait penser que nous pourrions être heureux ensemble ? </button>
+        <button class="question-btn" onclick="showModal('question81')">Qu’est-ce qui te fait te sentir tellement attirée par moi que tu veux en savoir toujours plus ? </button>
+        <button class="question-btn" onclick="showModal('question82')">Si je te prouvais que tu es vraiment celle que je désire, qu’est-ce qui te ferait te sentir en confiance ? </button>
+        <button class="question-btn" onclick="showModal('question83')">Qu’est-ce qui te fait craquer quand je prends des initiatives pour que notre relation devienne plus forte ? </button>
+        <button class="question-btn" onclick="showModal('question84')">Si je te faisais sentir que tu peux tout partager avec moi, qu’est-ce qui te ferait me dévoiler encore plus ? </button>
+        <button class="question-btn" onclick="showModal('question85')">Qu’est-ce qui te fait croire que tu pourrais m’aimer encore plus chaque jour ? </button>
+        <button class="question-btn" onclick="showModal('question86')">Quand tu imagines un avenir avec un homme, qu’est-ce qui te fait penser que je pourrais être celui-là ? </button>
+        <button class="question-btn" onclick="showModal('question87')">Qu’est-ce qui te ferait vraiment me voir comme quelqu’un sur qui tu peux toujours compter ? </button>
+        <button class="question-btn" onclick="showModal('question88')">Si je te disais que tu es unique à mes yeux, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question89')">Qu’est-ce qui te fait penser que tu pourrais réellement t’investir avec moi à long terme ? </button>
+        <button class="question-btn" onclick="showModal('question90')">Quand tu imagines ton bonheur, qu’est-ce qui te fait penser que je pourrais en faire partie ? </button>
+        <button class="question-btn" onclick="showModal('question91')">Si je t’écrivais une lettre d’amour, qu’est-ce que tu voudrais y trouver ? </button>
+        <button class="question-btn" onclick="showModal('question92')">Quand je prends soin de toi, qu’est-ce qui te fait croire que tu es tout ce qui compte pour moi ? </button>
+        <button class="question-btn" onclick="showModal('question93')">Qu’est-ce qui te fait croire que je pourrais être l’homme qui te rendra heureuse à tout jamais ? </button>
+        <button class="question-btn" onclick="showModal('question94')">Quand je t’invite à partager ma vie, comment cela te ferait-il penser à un avenir à deux ? </button>
+        <button class="question-btn" onclick="showModal('question95')">Si je te montrais que je suis capable de tout pour toi, comment réagirais-tu ? </button>
+        <button class="question-btn" onclick="showModal('question96')">Qu’est-ce qui te ferait ressentir que tu es réellement la personne que j’attendais ? </button>
+        <button class="question-btn" onclick="showModal('question97')">Quand tu penses à moi, qu’est-ce qui te fait imaginer un futur à mes côtés ? </button>
+        <button class="question-btn" onclick="showModal('question98')">Si je te disais que tu es la seule qui compte pour moi, comment cela te ferait-il te sentir ? </button>
+        <button class="question-btn" onclick="showModal('question99')">Qu’est-ce qui te fait croire que nous pourrions être irrésistiblement attirés l’un par l’autre pour toujours ? </button>
+        <button class="question-btn" onclick="showModal('question100')">Quand je te dis que tu es incroyable, qu’est-ce que tu ressens à cet instant précis ? </button>
+    </div>
+
+    <!-- Modal (Boîte de dialogue pour afficher chaque question) -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2>Question du jour</h2>
+            <p id="questionText"></p>
+            <div class="button-container">
+                <button onclick="closeModal()">Fermer</button>
+                <button onclick="copyQuestion()">Copier</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message de copie -->
+    <div id="copyMessage" class="copy-message">
+        Question copiée dans le presse-papier !
+    </div>
+
+    <script>
+        // Liste des questions
+        const questions = {
+    question1: "Quand tu me regardes dans les yeux, que ressens-tu vraiment à ce moment-là ?",
+    question2: "Qu’est-ce qui te fait penser que je suis différent des autres ?",
+    question3: "Qu’est-ce qui, selon toi, rend un homme vraiment irrésistible ?",
+    question4: "Si je t’embrassais maintenant, qu’est-ce qui te ferait fondre immédiatement ?",
+    question5: "Quand tu penses à nous deux, à quoi imagines-tu notre complicité ?",
+    question6: "Qu’est-ce que tu vois quand tu penses à l’avenir avec quelqu’un comme moi ?",
+    question7: "Est-ce que tu crois que la chimie entre deux personnes peut vraiment changer toute la dynamique ?",
+    question8: "Quand tu me vois, qu’est-ce qui te fait penser que tu pourrais être avec quelqu’un comme moi ?",
+    question9: "Est-ce qu’il y a quelque chose que tu aimerais que je fasse pour te rendre encore plus folle de moi ?",
+    question10: "Qu’est-ce qui te ferait te sentir spéciale et désirée si on passait plus de temps ensemble ?",
+    question11: "Si je devais te dire une chose sincère, qu’est-ce qui, selon toi, pourrait te faire complètement craquer ?",
+    question12: "Qu’est-ce que tu ressens quand tu sais que quelqu’un pense à toi sans même que tu ne dises un mot ?",
+    question13: "Si tu étais dans mes bras, qu’est-ce qui te ferait te sentir à l’aise et comblée ?",
+    question14: "Quand je te parle, comment te sens-tu à chaque mot que je prononce ?",
+    question15: "Qu’est-ce qui te fait penser qu'on pourrait bien s'entendre à long terme ?",
+    question16: "Qu’est-ce qui te fait imaginer que nous avons une alchimie unique ?",
+    question17: "Si je t’offrais une surprise inattendue, qu’est-ce qui te ferait te sentir comblée ?",
+    question18: "Quand je souris, est-ce que ça te fait sentir que j’ai une connexion particulière avec toi ?",
+    question19: "Qu’est-ce qui, selon toi, fait que tu es attirée par un homme sans même savoir pourquoi ?",
+    question20: "Qu’est-ce qui te fait croire que je pourrais être celui avec qui tu pourrais tout partager ?",
+    question21: "Quand tu es avec moi, qu’est-ce qui te fait te sentir plus vivante et libre ?",
+    question22: "Qu’est-ce qui te fait penser que je pourrais être un homme différent des autres ?",
+    question23: "Si je devais être un livre ouvert pour toi, que voudrais-tu découvrir ?",
+    question24: "Si je te donnais la chance de me connaître encore plus, qu’est-ce que tu aimerais savoir ?",
+    question25: "Quand tu imagines nos moments ensemble, qu’est-ce qui te fait sourire ?",
+    question26: "Si je te faisais rire maintenant, comment réagirais-tu ?",
+    question27: "Qu’est-ce qui te fait sentir que tu pourrais passer des heures à me parler sans t’en lasser ?",
+    question28: "Quand je t’écoute attentivement, qu’est-ce qui te fait croire que je m’intéresse vraiment à toi ?",
+    question29: "Si on passait un moment calme ensemble, qu’est-ce qui te ferait te sentir profondément connectée à moi ?",
+    question30: "Qu’est-ce qui, selon toi, fait que deux personnes peuvent se comprendre sans avoir besoin de mots ?",
+    question31: "Si je t’écrivais une lettre sincère, que penses-tu qu’elle te ferait ressentir ?",
+    question32: "Qu’est-ce qui, chez moi, te fait te sentir à l’aise et détendue ?",
+    question33: "Si je t’invitais à une soirée intime, comment te sentirais-tu à l’idée de passer du temps seul avec moi ?",
+    question34: "Quand tu imagines que tu es seule avec moi, qu’est-ce qui te ferait perdre le contrôle de tes pensées ?",
+    question35: "Qu’est-ce qui, selon toi, rend notre connexion aussi particulière ?",
+    question36: "Si tu me voyais me perdre dans un sourire en pensant à toi, qu’est-ce que cela te ferait ressentir ?",
+    question37: "Quand je te touche doucement, qu’est-ce que cela te fait penser sur notre relation ?",
+    question38: "Si je te montrais à quel point je me soucie de toi, qu’est-ce qui te toucherait le plus ?",
+    question39: "Qu’est-ce qui te fait penser que tu pourrais vraiment t’investir avec moi dans quelque chose de sérieux ?",
+    question40: "Si je t’accompagnais dans une aventure, comment te sentirais-tu en sachant que je serais là à chaque étape ?",
+    question41: "Qu’est-ce qui te fait croire que notre alchimie pourrait évoluer et devenir quelque chose de plus fort ?",
+    question42: "Quand je parle de l’avenir, qu’est-ce qui te fait imaginer que tu veux m’y inclure ?",
+    question43: "Si tu me regardais vraiment, qu’est-ce qui te ferait sentir que je suis celui que tu cherches ?",
+    question44: "Qu’est-ce qui te fait penser que, même si nous ne nous connaissons pas encore totalement, nous avons quelque chose d’intrigant ?",
+    question45: "Quand tu penses à des moments complices, qu’est-ce qui te fait imaginer que je serai toujours là ?",
+    question46: "Qu’est-ce qui te ferait oublier tout le reste et me concentrer sur nous deux ?",
+    question47: "Quand je partage mes pensées les plus sincères, qu’est-ce qui te fait sentir que tu veux savoir encore plus ?",
+    question48: "Si je te prouvais que je suis quelqu’un de fiable, qu’est-ce qui te ferait te sentir totalement à l’aise avec moi ?",
+    question49: "Si on partageait un moment intense, qu’est-ce qui te ferait tomber encore plus amoureuse de moi ?",
+    question50: "Quand tu penses à un homme en qui tu pourrais avoir confiance, qu’est-ce qui te fait imaginer que je pourrais être celui-là ?",
+    question51: "Si je te demandais de m’ouvrir ton cœur, qu’est-ce qui te ferait vouloir le faire ?",
+    question52: "Qu’est-ce qui, dans mes gestes ou mes paroles, te fait sentir que tu pourrais m’aimer profondément ?",
+    question53: "Quand tu te sens vraiment écoutée, qu’est-ce qui te fait penser que j’ai une attention particulière pour toi ?",
+    question54: "Si je t’accompagnais dans un moment de doute, comment cela te ferait-il sentir par rapport à notre relation ?",
+    question55: "Qu’est-ce qui, chez moi, te donne envie de connaître davantage et de te sentir encore plus connectée ?",
+    question56: "Si je te faisais sentir que tu es la personne la plus importante dans ma vie, comment réagirais-tu ?",
+    question57: "Qu’est-ce qui te ferait vraiment ressentir que je pourrais être celui qui te comprenne entièrement ?",
+    question58: "Quand je parle de nous deux, qu’est-ce qui te fait imaginer que notre histoire pourrait être exceptionnelle ?",
+    question59: "Si je t’embrassais avec une tendresse profonde, comment cela te ferait-il te sentir ?",
+    question60: "Qu’est-ce qui te fait penser que je pourrais être l’homme avec qui tu imagines un futur ?",
+    question61: "Quand je t’offre mon attention entière, qu’est-ce qui te fait penser que tu es la seule à compter pour moi ?",
+    question62: "Si je devais faire quelque chose de spécial juste pour toi, qu’est-ce qui te ferait fondre ?",
+    question63: "Qu’est-ce qui te fait penser que, malgré tout, notre connexion pourrait grandir pour devenir indestructible ?",
+    question64: "Si je te montrais toute la profondeur de mes sentiments, qu’est-ce qui te ferait croire que tu es la seule pour moi ?",
+    question65: "Quand je te regarde dans les yeux, qu’est-ce qui te fait croire que je veux quelque chose de plus sérieux ?",
+    question66: "Si tu me voyais faire un geste spontané pour te montrer combien tu es importante, comment réagirais-tu ?",
+    question67: "Qu’est-ce qui, selon toi, fait que je peux être celui qui te surprend chaque jour ?",
+    question68: "Si je te faisais sentir comme la personne la plus précieuse à mes yeux, comment réagirais-tu ?",
+    question69: "Quand tu penses à une complicité parfaite, qu’est-ce qui te fait imaginer que nous pourrions être ce couple ?",
+    question70: "Qu’est-ce qui te ferait vraiment te sentir aimé et désiré par moi ?",
+    question71: "Quand je t’écoute vraiment, qu’est-ce qui te fait croire que tu pourrais être tout pour moi ?",
+    question72: "Si tu me voyais m’investir complètement dans nous deux, qu’est-ce qui te ferait voir une véritable stabilité ?",
+    question73: "Qu’est-ce qui, dans mes gestes et ma façon de te regarder, te fait sentir que je suis celui que tu attendais ?",
+    question74: "Quand tu penses à un futur à deux, qu’est-ce qui te fait rêver de le vivre à mes côtés ?",
+    question75: "Si je te montrais que je suis prêt à te soutenir à tout moment, qu’est-ce qui te ferait voir un avenir avec moi ?",
+    question76: "Qu’est-ce qui, chez moi, te fait croire que je peux être un compagnon fiable pour tout ?",
+    question77: "Si je te disais que tu es exactement ce que je recherche, comment réagirais-tu ?",
+    question78: "Qu’est-ce qui, dans ma façon d’être, te fait sentir que je suis celui qui pourrait te rendre heureuse ?",
+    question79: "Si je te disais que tu es la personne à laquelle je pense tout le temps, comment cela te ferait-il sentir ?",
+    question80: "Quand tu imagines un avenir à deux, qu’est-ce qui te fait penser que nous pourrions être heureux ensemble ?",
+    question81: "Qu’est-ce qui te fait te sentir tellement attirée par moi que tu veux en savoir toujours plus ?",
+    question82: "Si je te prouvais que tu es vraiment celle que je désire, qu’est-ce qui te ferait te sentir en confiance ?",
+    question83: "Qu’est-ce qui te fait craquer quand je prends des initiatives pour que notre relation devienne plus forte ?",
+    question84: "Si je te faisais sentir que tu peux tout partager avec moi, qu’est-ce qui te ferait me dévoiler encore plus ?",
+    question85: "Qu’est-ce qui te fait croire que tu pourrais m’aimer encore plus chaque jour ?",
+    question86: "Quand tu imagines un avenir avec un homme, qu’est-ce qui te fait penser que je pourrais être celui-là ?",
+    question87: "Qu’est-ce qui te ferait vraiment me voir comme quelqu’un sur qui tu peux toujours compter ?",
+    question88: "Si je te disais que tu es unique à mes yeux, comment réagirais-tu ?",
+    question89: "Qu’est-ce qui te fait penser que tu pourrais réellement t’investir avec moi à long terme ?",
+    question90: "Quand tu imagines ton bonheur, qu’est-ce qui te fait penser que je pourrais en faire partie ?",
+    question91: "Si je t’écrivais une lettre d’amour, qu’est-ce que tu voudrais y trouver ?",
+    question92: "Quand je prends soin de toi, qu’est-ce qui te fait croire que tu es tout ce qui compte pour moi ?",
+    question93: "Qu’est-ce qui te fait croire que je pourrais être l’homme qui te rendra heureuse à tout jamais ?",
+    question94: "Quand je t’invite à partager ma vie, comment cela te ferait-il penser à un avenir à deux ?",
+    question95: "Si je te montrais que je suis capable de tout pour toi, comment réagirais-tu ?",
+    question96: "Qu’est-ce qui te ferait ressentir que tu es réellement la personne que j’attendais ?",
+    question97: "Quand tu penses à moi, qu’est-ce qui te fait imaginer un futur à mes côtés ?",
+    question98: "Si je te disais que tu es la seule qui compte pour moi, comment cela te ferait-il te sentir ?",
+    question99: "Qu’est-ce qui te fait croire que nous pourrions être irrésistiblement attirés l’un par l’autre pour toujours ?",
+    question100: "Quand je te dis que tu es incroyable, qu’est-ce que tu ressens à cet instant précis ?"
+};
+
+
+        // Afficher la modale avec la question correspondante
+        function showModal(questionId) {
+            document.getElementById('questionText').innerText = questions[questionId];
+            document.getElementById('myModal').style.display = "block";
+        }
+
+        // Fermer la modale
+        function closeModal() {
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        // Copier la question dans le presse-papier
+        function copyQuestion() {
+            const text = document.getElementById('questionText').innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                document.getElementById('copyMessage').style.display = "block";
+                setTimeout(function() {
+                    document.getElementById('copyMessage').style.display = "none";
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
